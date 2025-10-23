@@ -17,7 +17,10 @@
           <h2 class="bbc-card__title">{{ .Title }}</h2>
           {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
           <span class="bbc-card__meta">
-            {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+            {{ $showDate := default true .Params.showdate }}
+            {{ if $showDate }}
+              {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+            {{ end }}
             {{ with .Params.category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
             {{ if .Params.live }}<span class="bbc-card__live">LIVE</span>{{ end }}
           </span>
@@ -39,7 +42,10 @@
             <h3 class="bbc-card__title">{{ .Title }}</h3>
             {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
             <span class="bbc-card__meta">
-              {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+              {{ $showDate := default true .Params.showdate }}
+              {{ if $showDate }}
+                {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+              {{ end }}
               {{ with .Params.category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
               {{ if .Params.live }}<span class="bbc-card__live">LIVE</span>{{ end }}
             </span>
@@ -62,7 +68,10 @@
             <h4 class="bbc-card__title">{{ .Title }}</h4>
             {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
             <span class="bbc-card__meta">
-              {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+              {{ $showDate := default true .Params.showdate }}
+              {{ if $showDate }}
+                {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
+              {{ end }}
               {{ with .Params.category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
               {{ if .Params.live }}<span class="bbc-card__live">LIVE</span>{{ end }}
             </span>

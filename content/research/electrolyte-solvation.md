@@ -7,6 +7,7 @@ live: false
 image: "/images/electrolyte.png"
 weight: 22
 date: 2024-01-22
+showdate: false
 ---
 
 The solvation structure of an electrolyte, i.e. the arrangement of ions and solvent molecules in the electrolyte, strongly governs its transport properties as well as its chemical and electrochemical stability. Through electrolyte simulations, we establish direct connections between experimentally measurable properties and local molecular-scale coordination environments.

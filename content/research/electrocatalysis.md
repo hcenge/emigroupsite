@@ -7,6 +7,7 @@ live: false
 image: "/images/operando_aem.JPG"
 weight: 15
 date: 2024-05-27
+showdate: false
 ---
 
 Electrocatalysis holds huge potential in driving the transition to net zero, particularly through the decarbonisation of industrial sectors that rely heavily on fossil fuels as energy sources and chemical feedstocks. We focus on three main electrocatalytic processes: water splitting for the generation of hydrogen and oxygen, carbon dioxide reduction (CO2RR) to produce carbon-based fuels and valuable chemical intermediates, and nitrate/nitrogen reduction for sustainable ammonia synthesis.

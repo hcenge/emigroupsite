@@ -7,6 +7,7 @@ live: false
 image: "/images/battery_degradation.png"
 weight: 20
 date: 2024-03-05
+showdate: false
 ---
 
 As the world shifts away from fossil fuels toward more sustainable energy solutions, the need for efficient and reliable energy storage has never been more urgent. This is especially true for mobile technologies like electric vehicles, where batteries must combine high energy density with long operational lifetimes.
