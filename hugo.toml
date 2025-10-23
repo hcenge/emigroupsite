@@ -1,0 +1,30 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'EMI Research Group'
+staticDir = ['static']
+
+[menu]
+  [[menu.main]]
+    name = 'Research'
+    pageRef = '/research'
+    weight = 10
+
+  [[menu.main]]
+    name = 'People'
+    pageRef = '/people'
+    weight = 20
+
+  [[menu.main]]
+    name = 'Facilities'
+    pageRef = '/facilities'
+    weight = 25
+
+  [[menu.main]]
+    name = 'Publications'
+    pageRef = '/publications'
+    weight = 30
+
+  [[menu.main]]
+    name = 'Positions'
+    pageRef = '/positions'
+    weight = 40

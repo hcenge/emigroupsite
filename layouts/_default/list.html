@@ -1,0 +1,23 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<section class="bbc-generic-list">
+  <h1 class="bbc-heading">{{ .Title }}</h1>
+  <div class="bbc-generic-content">
+    {{ .Content }}
+  </div>
+  {{ if .Pages }}
+  <div class="bbc-generic-grid">
+    {{ range .Pages }}
+    <article class="bbc-card small">
+      <a class="bbc-card__link" href="{{ .RelPermalink }}">
+        <div class="bbc-card__body">
+          <h2 class="bbc-card__title">{{ .Title }}</h2>
+          {{ with .Summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
+        </div>
+      </a>
+    </article>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
+{{ end }}

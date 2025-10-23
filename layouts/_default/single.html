@@ -1,0 +1,17 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<article class="bbc-article">
+  <header class="bbc-article__header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.category }}<p class="bbc-article__category">{{ . }}</p>{{ end }}
+  </header>
+  {{ with .Params.image }}
+  <figure class="bbc-article__media">
+    <img src="{{ . }}" alt="{{ $.Title }} image">
+  </figure>
+  {{ end }}
+  <div class="bbc-article__body">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

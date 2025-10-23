@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>EMI Group on EMI Research Group</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in EMI Group on EMI Research Group</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 May 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Operando X-ray Techniques</title>
+      <link>http://localhost:1313/research/operando-xray-techniques/</link>
+      <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/operando-xray-techniques/</guid>
+      <description>Observing reactions under operating conditions to understand how catalysts and functional materials transform during operation.</description>
+    </item>
+    <item>
+      <title>Electrocatalysis</title>
+      <link>http://localhost:1313/research/electrocatalysis/</link>
+      <pubDate>Mon, 27 May 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/electrocatalysis/</guid>
+      <description>Investigating electrocatalytic processes for water splitting, CO₂ conversion, and sustainable ammonia synthesis.</description>
+    </item>
+    <item>
+      <title>Li-ion Battery Degradation</title>
+      <link>http://localhost:1313/research/battery-degradation/</link>
+      <pubDate>Tue, 05 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/battery-degradation/</guid>
+      <description>Understanding degradation mechanisms in lithium-ion batteries through operando studies and advanced spectroscopy.</description>
+    </item>
+    <item>
+      <title>Electrolyte Solvation and Transport</title>
+      <link>http://localhost:1313/research/electrolyte-solvation/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/electrolyte-solvation/</guid>
+      <description>Understanding how electrolyte solvation structure affects transport properties and electrochemical stability.</description>
+    </item>
+    <item>
+      <title>Thermocatalysis</title>
+      <link>http://localhost:1313/research/thermocatalysis/</link>
+      <pubDate>Fri, 12 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/thermocatalysis/</guid>
+      <description>Redesigning chemical industry processes to use sustainable feedstocks instead of fossil fuels.</description>
+    </item>
+    <item>
+      <title>Electronic Structure Simulations</title>
+      <link>http://localhost:1313/research/electronic-structure/</link>
+      <pubDate>Sat, 17 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/electronic-structure/</guid>
+      <description>Computational research using DFT and CTM theory to predict properties and interpret experimental findings.</description>
+    </item>
+  </channel>
+</rss>
