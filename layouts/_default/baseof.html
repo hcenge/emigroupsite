@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>{{ block "title" . }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ $researchCSS := resources.Get "css/research.css" | minify | fingerprint }}
+    {{ $researchCSS := resources.Get "css/research.css" | fingerprint }}
     <link rel="stylesheet" href="{{ $researchCSS.RelPermalink }}" integrity="{{ $researchCSS.Data.Integrity }}">
     {{ block "head" . }}{{ end }}
   </head>

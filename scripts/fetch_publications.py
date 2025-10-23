@@ -33,6 +33,8 @@ def fetch_publications(scholar_id):
                 'scholar_url': pub_filled.get('author_pub_id', '')
             }
             publications.append(publication)
+            
+            print(f"Fetched publication: {publication['title']}")
 
         # Sort by year (newest first)
         publications.sort(key=lambda x: int(x['year']) if x['year'] else 0, reverse=True)

@@ -4,7 +4,7 @@ summary: "Understanding degradation mechanisms in lithium-ion batteries through 
 category: "Energy"
 featured: false
 live: false
-image: "/images/17B822B1-EB9C-4ECE-AC99-3E8E7A480421_1_105_c.jpeg"
+image: "/images/battery_degradation.png"
 weight: 20
 date: 2024-03-05
 ---

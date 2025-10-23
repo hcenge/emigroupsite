@@ -4,7 +4,7 @@ summary: "Understanding how electrolyte solvation structure affects transport pr
 category: "Energy"
 featured: false
 live: false
-image: "/images/99601A64-E288-43B2-BA20-F8195D3F50E5_1_105_c.jpeg"
+image: "/images/electrolyte.png"
 weight: 22
 date: 2024-01-22
 ---

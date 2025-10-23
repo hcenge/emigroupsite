@@ -2,6 +2,23 @@ baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'EMI Research Group'
 staticDir = ['static']
+ignoreLogs = ['warning-goldmark-raw-html']
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
+  [minify.tdewolff]
+    [minify.tdewolff.css]
+      keepCSS2 = true
+      precision = 2
+    [minify.tdewolff.html]
+      keepQuotes = false
+      keepWhitespace = false
 
 [menu]
   [[menu.main]]
