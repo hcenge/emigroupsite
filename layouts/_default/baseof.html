@@ -10,6 +10,11 @@
   </head>
   <body class="bbc-shell">
     <header class="bbc-topbar">
+      <button class="bbc-hamburger" id="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="bbc-brand">
         <a href="/" class="bbc-logo">
           <span class="bbc-logo__block">E</span>
@@ -22,7 +27,7 @@
       </div>
     </header>
     {{ with site.Menus.main }}
-    <nav class="bbc-nav">
+    <nav class="bbc-nav" id="main-nav">
       {{ range . }}
       <a href="{{ .URL }}">{{ .Name }}</a>
       {{ end }}
@@ -52,6 +57,26 @@
           }
 
           window.addEventListener('scroll', updateParallax, { passive: true });
+        }
+
+        // Hamburger menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        if (menuToggle && mainNav) {
+          menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+          });
+
+          // Close menu when clicking a link
+          const navLinks = mainNav.querySelectorAll('a');
+          navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              menuToggle.classList.remove('active');
+              mainNav.classList.remove('active');
+            });
+          });
         }
       });
     </script>
