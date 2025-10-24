@@ -1,0 +1,7 @@
+- make publications reading and updating more robust, or implement a different way of doing it eg through SSO or by pulling in a live html page of google scholar
+- add alumni and finish porting all content over from the original website
+- add data to facilities pages
+- decide if we would like a news page and implement it if so
+- Set up automated deploy once domain is chosen
+- Cron script to update publications weekly
+- Research slug & taxonomy list: document all valid research slugs (e.g., electrocatalysis,rechargeable-batteries) in one place so editors don’t invent mismatched names.

@@ -24,11 +24,11 @@
       </div>
 
       <div class="bbc-publication__meta">
-        {{ with .journal }}<span class="bbc-publication__venue">{{ . }}</span>{{ end }}
-        {{ if and (not .journal) .conference }}<span class="bbc-publication__venue">{{ .conference }}</span>{{ end }}
+        {{ with .journal }}<span class="bbc-publication__venue">{{ truncate 80 . }}</span>{{ end }}
+        {{ if and (not .journal) .conference }}<span class="bbc-publication__venue">{{ truncate 80 .conference }}</span>{{ end }}
         {{ with .year }}<span class="bbc-publication__year">{{ . }}</span>{{ end }}
-        <!-- {{ with .doi }}<span class="bbc-publication__doi"><a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">doi:{{ . }}</a></span>{{ end }} -->
         {{ with .citations }}<span class="bbc-publication__citations">{{ . }} citations</span>{{ end }}
+        {{ if eq .type "preprint" }}<span class="bbc-publication__preprint">Preprint</span>{{ end }}
       </div>
     </article>
     {{ end }}

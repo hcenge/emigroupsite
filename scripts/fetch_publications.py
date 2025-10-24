@@ -36,7 +36,9 @@ except ImportError as exc:
 GOOGLE_SCHOLAR_ID_DEFAULT = "DLUsdFkAAAAJ"  # Prof Robert Weatherup
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
-DATA_PATH = REPO_ROOT / "data" / "publications.json"
+DATA_DIR = REPO_ROOT / "data"
+DATA_PATH = DATA_DIR / "publications.json"
+BACKUP_DIR = DATA_DIR / "backups"
 BACKUP_SUFFIX = datetime.now().strftime(".%Y%m%d_%H%M%S.bak")
 CROSSREF_API = "https://api.crossref.org/works"
 USER_AGENT = {
@@ -66,7 +68,10 @@ def save_publications(path: Path, publications: Iterable[Dict]) -> None:
 def make_backup(path: Path) -> Optional[Path]:
     if not path.exists():
         return None
-    backup_path = path.with_suffix(path.suffix + BACKUP_SUFFIX)
+    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_name = f"publications.{timestamp}.json"
+    backup_path = BACKUP_DIR / backup_name
     shutil.copy(path, backup_path)
     print(f"✓ Backup created: {backup_path}")
     return backup_path
@@ -139,7 +144,7 @@ def fetch_from_scholar(
             pubs.append(
                 {
                     "title": title,
-                    "authors": authors or "",
+                    "authors": format_authors(authors) if authors else "",
                     "year": str(year) if year else "",
                     "journal": venue,
                     "conference": "",
@@ -238,11 +243,37 @@ def merge_publications(existing: List[Dict], new: List[Dict]) -> List[Dict]:
             continue
         combined[key] = pub
 
-    def sort_key(pub: Dict) -> float:
-        year = parse_year(pub.get("year"))
-        return -(year or 0) + (0.01 if pub.get("doi") else 0)
+    def sort_key(pub: Dict):
+        year = parse_year(pub.get("year")) or 0
+        title = pub.get("title", "")
+        return (-year, title.lower())
 
     return sorted(combined.values(), key=sort_key)
+
+
+def format_authors(authors: str) -> str:
+    if not authors:
+        return ""
+    formatted = authors.replace(" and ", ", ")
+    # collapse repeated commas/spaces
+    parts = [part.strip() for part in formatted.split(",") if part.strip()]
+    return ", ".join(parts)
+
+
+def mark_preprints(publications: List[Dict]) -> None:
+    for pub in publications:
+        journal = pub.get("journal", "")
+        conference = pub.get("conference", "")
+        if "arXiv" in journal or "arXiv" in conference:
+            pub["type"] = "preprint"
+        else:
+            pub.setdefault("type", "journal-article")
+
+
+def sanitize_publications(publications: List[Dict]) -> None:
+    for pub in publications:
+        pub["authors"] = format_authors(pub.get("authors", ""))
+    mark_preprints(publications)
 
 
 # ---------------------------------------------------------------------------
@@ -278,6 +309,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             merged = merge_publications([], new_publications)
         else:
             merged = merge_publications(existing, new_publications)
+
+        sanitize_publications(merged)
 
         if args.dry_run:
             print(f"Dry run: would write {len(merged)} publications to {DATA_PATH}")

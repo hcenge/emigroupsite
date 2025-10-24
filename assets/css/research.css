@@ -427,6 +427,17 @@ a:focus {
 }
 
 .bbc-publication__venue {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bbc-publication__preprint {
+  color: var(--bbc-red);
+}
+
+.bbc-publication__venue {
   font-style: italic;
 }
 

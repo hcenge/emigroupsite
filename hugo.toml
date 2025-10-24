@@ -20,6 +20,23 @@ ignoreLogs = ['warning-goldmark-raw-html']
       keepQuotes = false
       keepWhitespace = false
 
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+
+  [[module.mounts]]
+    source = "images"
+    target = "static"
+
 [menu]
   [[menu.main]]
     name = 'Research'
