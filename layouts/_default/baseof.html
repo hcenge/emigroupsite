@@ -34,5 +34,26 @@
     <footer class="bbc-footer">
       <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</p>
     </footer>
+    <script>
+      // Parallax scroll effect for hero banner
+      document.addEventListener('DOMContentLoaded', function() {
+        const banner = document.getElementById('hero-banner');
+        if (banner) {
+          const bg = banner.querySelector('.bbc-hero-banner-parallax__bg');
+
+          function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const bannerHeight = banner.offsetHeight;
+
+            if (scrolled < bannerHeight) {
+              const yPos = scrolled * 0.5;
+              bg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            }
+          }
+
+          window.addEventListener('scroll', updateParallax, { passive: true });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -7,7 +7,9 @@ email: "sirui.li@materials.ox.ac.uk"
 weight: 45
 research_interests: |
     Sirui’s research interest focuses on hydrogen production. Currently, her research is mainly around size-selected alloy nanoparticles for electrochemical water splitting. A newly acquired deposition method will be investigated in her research to synthesis optimized binary and ternary alloy nanoparticles with well-defined size and composition. Besides electronic spectroscopy and X-ray photoelectron spectroscopy, she will use advanced operando techniques to monitor changes of the optimized electrocatalysts in real electrochemical reaction environment.
-projects: []
+projects:
+  - electrocatalysis
+  - operando-xray-techniques
 showdate: false
 ---
 

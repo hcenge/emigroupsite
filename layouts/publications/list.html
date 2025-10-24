@@ -7,10 +7,10 @@
     {{ .Content }}
   </div>
 
-  {{ if site.Data.publications }}
+  {{ $pubs := site.Data.publications }}
+  {{ if $pubs }}
   <div class="bbc-publications__list">
-    {{ range site.Data.publications }}
-    {{ if eq .type "journal-article" }}
+    {{ range $pubs }}
     <article class="bbc-publication">
       <div>
         <h3 class="bbc-publication__title">
@@ -24,12 +24,13 @@
       </div>
 
       <div class="bbc-publication__meta">
-        {{ if .venue }}<span class="bbc-publication__venue">{{ .venue }}</span>{{ end }}
-        {{ if .year }}<span class="bbc-publication__year">{{ .year }}</span>{{ end }}
-        {{ if .citations }}<span class="bbc-publication__citations">{{ .citations }} citations</span>{{ end }}
+        {{ with .journal }}<span class="bbc-publication__venue">{{ . }}</span>{{ end }}
+        {{ if and (not .journal) .conference }}<span class="bbc-publication__venue">{{ .conference }}</span>{{ end }}
+        {{ with .year }}<span class="bbc-publication__year">{{ . }}</span>{{ end }}
+        <!-- {{ with .doi }}<span class="bbc-publication__doi"><a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">doi:{{ . }}</a></span>{{ end }} -->
+        {{ with .citations }}<span class="bbc-publication__citations">{{ . }} citations</span>{{ end }}
       </div>
     </article>
-    {{ end }}
     {{ end }}
   </div>
   {{ else }}

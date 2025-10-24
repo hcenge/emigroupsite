@@ -8,7 +8,8 @@ weight: 43
 research_interests: |
     To be updated.
 projects:
-  - rechargeable-batteries
+  - electrocatalysis
+  - operando-xray-techniques
 showdate: false
 ---
 

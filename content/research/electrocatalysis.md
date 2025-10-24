@@ -4,7 +4,7 @@ summary: "Investigating electrocatalytic processes for water splitting, CO₂ co
 category: "Catalysis"
 featured: false
 live: false
-image: "/images/operando_aem.JPG"
+image: "/images/projects/operando_aem.JPG"
 weight: 15
 date: 2024-05-27
 showdate: false

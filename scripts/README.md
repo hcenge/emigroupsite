@@ -1,6 +1,6 @@
 # Publications Fetcher
 
-This script fetches your publications from Google Scholar and saves them to Hugo's data directory.
+`fetch_publications.py` pulls publications from Google Scholar, enriches them with CrossRef metadata, and writes the unified list to `data/publications.json` for Hugo to consume. It supports both full initialization and incremental updates.
 
 ## Setup
 
@@ -15,29 +15,32 @@ This script fetches your publications from Google Scholar and saves them to Hugo
 
 ## Usage
 
-Run the script from the scripts directory:
+Run the script from the repository root (inside the Nix shell):
 
 ```bash
-cd scripts
-python fetch_publications.py YOUR_SCHOLAR_ID
+python scripts/fetch_publications.py [SCHOLAR_ID] [--init] [--dry-run]
 ```
 
-Example:
-```bash
-python fetch_publications.py abc123def456
-```
+### Common commands
 
-The script will:
-1. Fetch all publications from your Google Scholar profile
-2. Save them to `data/publications.json`
-3. Hugo will automatically use this data to display publications on the Publications page
+| Command | Description |
+| --- | --- |
+| `python scripts/fetch_publications.py` | Update mode. Loads the existing JSON, fetches only publications newer than the most recent entry, merges, sorts, and writes back. |
+| `python scripts/fetch_publications.py --init` | Initialization mode. Ignores the existing file, fetches every publication from Scholar, enriches with CrossRef, and overwrites `publications.json`. |
+| `python scripts/fetch_publications.py --dry-run` | Preview mode. Performs all network requests and merging logic but does **not** write files. |
+| `python scripts/fetch_publications.py SOME_ID --init` | Force a full rebuild using a custom Scholar profile. |
 
-## Updating Publications
+The script automatically creates a timestamped backup (e.g. `publications.json.20241024_173500.bak`) before writing an updated file.
 
-Simply re-run the script whenever you want to update the publications list. You can:
-- Run it manually when you publish new papers
-- Set up a cron job to run it automatically
-- Use a GitHub Action to run it on a schedule (see below)
+### What the script does
+
+1. Loads `data/publications.json` (if it exists) and determines the newest year present.
+2. Queries Google Scholar for the provided ID (Weatherup by default) and retrieves publications newer than the recorded max year (or all publications in `--init`).
+3. For each new publication, attempts to augment missing metadata (DOI, venue, year) via the CrossRef API.
+4. Merges the new records with the existing ones, removing duplicates (preferring entries with DOIs) and sorting by year, newest first.
+5. Writes the merged list back to `data/publications.json`.
+
+Re-run the script whenever you publish new work. Because the update mode only fetches publications newer than the most recent entry, this usually takes a few seconds.
 
 ## GitHub Action (Optional)
 

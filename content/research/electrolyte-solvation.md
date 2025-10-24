@@ -4,7 +4,7 @@ summary: "Understanding how electrolyte solvation structure affects transport pr
 category: "Energy"
 featured: false
 live: false
-image: "/images/electrolyte.png"
+image: "/images/projects/electrolyte.png"
 weight: 22
 date: 2024-01-22
 showdate: false
@@ -25,10 +25,4 @@ Specific areas of active research include:
 - Developing lattice fluid theories to elucidate how variations in solvation characteristics influence transport properties and the electrolyte's chemical potential.
 
 
-Collaborators: 
-
-Zac Goodwin 
-
-Chris Skylaris 
-
-Charles Monroe 
+Collaborators: [Zac Goodwin](https://www.materials.ox.ac.uk/peoplepages/goodwin.html), [Chris Skylaris](https://www.southampton.ac.uk/people/5x2r2f/professor-chris-skylaris), [Charles Monroe](https://eng.ox.ac.uk/people/charles-monroe)

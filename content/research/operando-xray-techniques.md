@@ -4,7 +4,7 @@ summary: "Observing reactions under operating conditions to understand how catal
 category: "Characterization"
 featured: true
 live: false
-image: "/images/operando_xrs.jpg"
+image: "/images/projects/operando_xrs.jpg"
 weight: 10
 date: 2024-05-01
 showdate: false

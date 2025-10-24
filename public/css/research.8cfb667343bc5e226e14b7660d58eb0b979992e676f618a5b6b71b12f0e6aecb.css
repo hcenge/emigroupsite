@@ -16,6 +16,15 @@ body.bbc-shell {
   line-height: 1.5;
 }
 
+a {
+  color: var(--bbc-red);
+}
+
+a:hover,
+a:focus {
+  color: var(--bbc-red);
+}
+
 .bbc-topbar {
   display: flex;
   justify-content: center;
@@ -503,6 +512,7 @@ body.bbc-shell {
   margin: 0;
   background: #000;
   display: flex;
+  height: 100%;
 }
 
 .bbc-people__pi-photo img {
@@ -606,6 +616,7 @@ body.bbc-shell {
 .bbc-profile-card:hover {
   transform: translateY(-4px);
   border-color: var(--bbc-red);
+  border-width: 3px;
 }
 
 .bbc-profile-card__link {
@@ -766,12 +777,22 @@ body.bbc-shell {
   color: #2c2c2c;
 }
 
+.bbc-person__projects ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .bbc-person__projects li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--bbc-grey);
   color: var(--bbc-black);
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .bbc-person__projects li a:hover {
@@ -783,6 +804,146 @@ body.bbc-shell {
   font-size: 1.05rem;
   line-height: 1.7;
   color: #2c2c2c;
+}
+
+.research-team {
+  margin-top: 2rem;
+}
+
+.research-team h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.research-team__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.research-team__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--bbc-grey);
+  color: var(--bbc-black);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.research-team__link:hover {
+  border-color: var(--bbc-red);
+  color: var(--bbc-red);
+}
+
+/* Positions */
+.bbc-positions__intro {
+  font-size: 1.05rem;
+  color: #2c2c2c;
+  line-height: 1.7;
+}
+
+.bbc-positions__section {
+  margin-top: 2.5rem;
+}
+
+.bbc-positions__section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.bbc-positions__section-head h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.bbc-positions__count {
+  background: var(--bbc-light-grey);
+  color: var(--bbc-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+}
+
+.bbc-positions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.bbc-project-card {
+  border: 1px solid var(--bbc-grey);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+
+.bbc-project-card__media {
+  margin: 0;
+  height: 160px;
+  overflow: hidden;
+  background: #000;
+}
+
+.bbc-project-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-project-card:hover {
+  border-color: var(--bbc-red);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.bbc-project-card__body {
+  padding: 1.2rem 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bbc-project-card__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.bbc-project-card__title a {
+  color: var(--bbc-black);
+  text-decoration: none;
+}
+
+.bbc-project-card__title a:hover {
+  color: var(--bbc-red);
+}
+
+.bbc-project-card__tag {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.bbc-project-card__collab {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
 }
 
 .bbc-home {
@@ -813,11 +974,174 @@ body.bbc-shell {
   line-height: 1.3;
 }
 
-.bbc-home__content {
+.bbc-hero-banner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.bbc-hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.bbc-hero-banner__overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.bbc-hero-banner__title {
+  margin: 0 0 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.bbc-hero-banner__tagline {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.3;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Parallax Banner */
+.bbc-hero-banner-parallax {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 500px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.bbc-hero-banner-parallax__bg {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  will-change: transform;
+}
+
+.bbc-hero-banner-parallax__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.bbc-hero-banner-parallax__logo {
+  margin-bottom: 2rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.bbc-hero-banner-parallax__logo img {
+  max-width: 200px;
+  height: auto;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.6));
+}
+
+.bbc-hero-banner-parallax__tagline {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.4;
+  text-align: center;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  max-width: 900px;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Research Pillars */
+.bbc-pillars {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  margin: 3rem 0;
+  padding: 2rem 0;
+}
+
+.bbc-pillar {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: transparent;
+}
+
+.bbc-pillar__icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.bbc-pillar__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--bbc-black);
+}
+
+.bbc-pillar__description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3d3d3d;
+}
+
+.bbc-home__content {
   padding: 0 2rem;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .bbc-home__main {
@@ -837,58 +1161,49 @@ body.bbc-shell {
   color: var(--bbc-black) !important;
 }
 
-.bbc-home__sidebar {
+.bbc-research-cta {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.bbc-sidebar-card {
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   background: var(--bbc-light-grey);
   border-left: 4px solid var(--bbc-red);
-  padding: 1.5rem;
+  padding: 2rem 2.5rem;
+  margin: 2.5rem 0;
 }
 
-.bbc-sidebar-card--image {
-  padding: 0;
-  background: transparent;
-  border: none;
+.bbc-research-cta__content {
+  flex: 1;
 }
 
-.bbc-sidebar-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border: 1px solid var(--bbc-grey);
-}
-
-.bbc-sidebar-card__title {
-  margin: 0 0 0.75rem;
-  font-size: 1.3rem;
+.bbc-research-cta__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--bbc-black);
 }
 
-.bbc-sidebar-card__text {
-  margin: 0 0 1rem;
-  font-size: 0.95rem;
+.bbc-research-cta__text {
+  margin: 0;
+  font-size: 1.05rem;
   line-height: 1.5;
   color: #3d3d3d;
 }
 
-.bbc-button {
+.bbc-research-cta__button {
   display: inline-block;
   background: var(--bbc-red);
   color: #fff;
-  padding: 0.65rem 1.5rem;
+  padding: 0.85rem 2.5rem;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 1rem;
   transition: background 0.2s ease;
+  white-space: nowrap;
 }
 
-.bbc-button:hover {
-  background: #a01515;
+.bbc-research-cta__button:hover {
+  background: #0a6904;
 }
 
 .bbc-footer {
@@ -1062,6 +1377,7 @@ body.bbc-shell {
 
   .bbc-people__pi-photo {
     max-width: 360px;
+    margin: 0 auto;
     height: 100%;
   }
 
@@ -1110,9 +1426,18 @@ body.bbc-shell {
   }
 
   .bbc-home__content {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
     padding: 0 1.25rem;
+  }
+
+  .bbc-research-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 2rem;
+  }
+
+  .bbc-research-cta__button {
+    align-self: stretch;
+    text-align: center;
   }
 
   .bbc-hero {
@@ -1125,6 +1450,35 @@ body.bbc-shell {
 
   .bbc-hero__tagline {
     font-size: 1.15rem;
+  }
+
+  .bbc-hero-banner {
+    height: 350px;
+  }
+
+  .bbc-hero-banner__title {
+    font-size: 2.5rem;
+  }
+
+  .bbc-hero-banner__tagline {
+    font-size: 1.3rem;
+  }
+
+  .bbc-hero-banner-parallax {
+    height: 450px;
+  }
+
+  .bbc-hero-banner-parallax__tagline {
+    font-size: 1.75rem;
+  }
+
+  .bbc-hero-banner-parallax__logo img {
+    max-width: 180px;
+  }
+
+  .bbc-pillars {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .research-pager {
@@ -1201,8 +1555,58 @@ body.bbc-shell {
     font-size: 1rem;
   }
 
+  .bbc-hero-banner {
+    height: 280px;
+  }
+
+  .bbc-hero-banner__overlay {
+    padding: 1.5rem;
+  }
+
+  .bbc-hero-banner__title {
+    font-size: 2rem;
+  }
+
+  .bbc-hero-banner__tagline {
+    font-size: 1.1rem;
+  }
+
+  .bbc-hero-banner-parallax {
+    height: 350px;
+  }
+
+  .bbc-hero-banner-parallax__bg {
+    background-attachment: scroll;
+  }
+
+  .bbc-hero-banner-parallax__tagline {
+    font-size: 1.4rem;
+  }
+
+  .bbc-hero-banner-parallax__logo img {
+    max-width: 140px;
+  }
+
+  .bbc-pillars {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .bbc-pillar {
+    padding: 1.5rem 1.25rem;
+  }
+
   .bbc-home__content {
     padding: 0 1rem;
+  }
+
+  .bbc-research-cta {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .bbc-research-cta__title {
+    font-size: 1.3rem;
   }
 
   .bbc-lede {
@@ -1231,5 +1635,7 @@ body.bbc-shell {
 
   .bbc-people__pi-photo {
     max-width: none;
+    margin: 0;
+    height: auto;
   }
 }

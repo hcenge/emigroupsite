@@ -1,0 +1,45 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<section class="bbc-positions">
+  <h1 class="bbc-heading">{{ .Title }}</h1>
+  <div class="bbc-positions__intro">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.phd_projects }}
+  <section class="bbc-positions__section">
+    <header class="bbc-positions__section-head">
+      <h2>DPhil Projects</h2>
+      <span class="bbc-positions__count">{{ len . }}</span>
+    </header>
+    <div class="bbc-positions__grid">
+      {{ range . }}
+        {{ $research := site.GetPage (printf "/research/%s" .research) }}
+        <article class="bbc-project-card">
+          {{ with .image }}
+          <figure class="bbc-project-card__media">
+            <img src="{{ . }}" alt="{{ $.Title }} visual">
+          </figure>
+          {{ end }}
+          <div class="bbc-project-card__body">
+            <h3 class="bbc-project-card__title">
+              <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+            </h3>
+            {{ with $research }}
+              <a class="bbc-project-card__tag" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ else }}
+              {{ if .research }}
+                <span class="bbc-project-card__tag">{{ .research | humanize }}</span>
+              {{ end }}
+            {{ end }}
+            {{ with .collaborators }}
+            <p class="bbc-project-card__collab">{{ delimit . ", " }}</p>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+</section>
+{{ end }}

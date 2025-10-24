@@ -4,7 +4,7 @@ summary: "Computational research using DFT and CTM theory to predict properties 
 category: "Computation"
 featured: false
 live: false
-image: "/images/electronic_structure.png"
+image: "/images/projects/electronic_structure.png"
 weight: 30
 date: 2024-02-17
 showdate: false

@@ -8,7 +8,7 @@ weight: 70
 research_interests: |
     Yağmur’s research centres on developing and characterising catalyst nanoparticles to convert carbon dioxide into useful chemicals. She focuses on using novel micro-reactor designs with graphene windows to enable surface-sensitive X-ray spectroscopy at realistic pressures, allowing operando characterisation of catalyst nanoparticles.
 projects:
-  - electrocatalysis
+  - thermocatalysis
   - operando-xray-techniques
 showdate: false
 ---

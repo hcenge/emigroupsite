@@ -8,7 +8,10 @@ weight: 25
 research_interests: |
     The focus of Jack's work is the understanding the growth and electronic structure of 2-dimensional transition metal dichalcogenides for application in electrocatalysis. Additionally, he is involved in developing novel characterization capabilities in x-ray spectroscopy.
 projects:
-  - electrocatalysis
+  - rechargeable-batteries
+  - thermocatalysis
+  - electrolyte-solvation
+  - operando-xray-techniques
   - electronic-structure
 showdate: false
 ---

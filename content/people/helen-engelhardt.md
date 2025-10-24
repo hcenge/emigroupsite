@@ -2,14 +2,14 @@
 title: "Helen Engelhardt"
 role: "phd"
 tagline: "DPhil Student, Wolfson College"
-photo: "/images/people/helen-engelhardt.png"
+photo: "/images/people/helen-engelhardt.jpeg"
 email: "helen.engelhardt@materials.ox.ac.uk"
 weight: 46
 research_interests: |
     Helen's research focuses on the stability and mechanism of electrochemical reactions on alloyed nanoparticle catalysts. Helen is specifically interested in designing earth abundant catalysts for more economical and sustainable HER and OER. An engineer by training, Helen is committed to working on systems that can be applied for the transition to net zero emissions. 
 projects:
   - electrocatalysis
-  - thermocatalysis
+  - operando-xray-techniques
 showdate: false
 ---
 
