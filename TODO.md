@@ -5,3 +5,5 @@
 - Set up automated deploy once domain is chosen
 - Cron script to update publications weekly
 - Research slug & taxonomy list: document all valid research slugs (e.g., electrocatalysis,rechargeable-batteries) in one place so editors don’t invent mismatched names.
+- Logo for the front page
+- Add group photos over the years
