@@ -34,7 +34,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
     target = "layouts"
 
   [[module.mounts]]
-    source = "images"
+    source = "static"
     target = "static"
 
 [menu]
