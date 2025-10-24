@@ -1,0 +1,8 @@
+{{- $labels := dict
+  "pi" "Principal Investigator"
+  "postdoc" "Postdoctoral Researcher"
+  "phd" "DPhil Student"
+  "masters" "Master's Student"
+  "alumni" "Alumnus/Alumna"
+-}}
+{{- index $labels . | default . -}}

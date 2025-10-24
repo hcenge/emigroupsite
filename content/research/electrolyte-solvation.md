@@ -8,6 +8,9 @@ image: "/images/electrolyte.png"
 weight: 22
 date: 2024-01-22
 showdate: false
+publications:
+  - "10.1126/science.aab1595"
+  - "10.26434/chemrxiv-2024-70tj6"
 ---
 
 The solvation structure of an electrolyte, i.e. the arrangement of ions and solvent molecules in the electrolyte, strongly governs its transport properties as well as its chemical and electrochemical stability. Through electrolyte simulations, we establish direct connections between experimentally measurable properties and local molecular-scale coordination environments.
@@ -20,3 +23,12 @@ Specific areas of active research include:
 - Investigating the role of additives (e.g., urea, methylurea) in shaping the solvation structure and electrochemical stability of water-in-salt electrolytes.
 - Exploring the solvation behavior of fluorine-free, mixed-cation water-in-salt electrolytes for lithium-ion batteries.
 - Developing lattice fluid theories to elucidate how variations in solvation characteristics influence transport properties and the electrolyte's chemical potential.
+
+
+Collaborators: 
+
+Zac Goodwin 
+
+Chris Skylaris 
+
+Charles Monroe 

@@ -1,0 +1,74 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<section class="bbc-people">
+  <header class="bbc-people__header">
+    <h1 class="bbc-heading">{{ .Title }}</h1>
+    {{ with .Content }}<div class="bbc-people__intro">{{ . }}</div>{{ end }}
+  </header>
+
+  {{ $groups := slice
+    (dict "key" "pi" "title" "Principal Investigators")
+    (dict "key" "postdoc" "title" "Postdoctoral Researchers")
+    (dict "key" "phd" "title" "DPhil Students")
+    (dict "key" "masters" "title" "Master's Students")
+    (dict "title" "Alumni" "folder" "people/alumni")
+  }}
+
+  {{ range $groups }}
+    {{ $scratch := newScratch }}
+    {{ if isset . "folder" }}
+      {{ with site.GetPage "section" .folder }}
+        {{ $scratch.Set "people" .RegularPages }}
+      {{ else }}
+        {{ $scratch.Set "people" (slice) }}
+      {{ end }}
+    {{ else }}
+      {{ $scratch.Set "people" (where $.Pages "Params.role" .key) }}
+    {{ end }}
+    {{ $people := $scratch.Get "people" }}
+    {{ if gt (len $people) 0 }}
+      {{ if and (eq .key "pi") (eq (len $people) 1) }}
+        {{ $pi := index $people 0 }}
+        <a class="bbc-people__pi" href="{{ $pi.RelPermalink }}">
+          {{ with $pi.Params.photo }}
+          <figure class="bbc-people__pi-photo">
+            <img src="{{ . }}" alt="{{ $pi.Title }} portrait">
+          </figure>
+          {{ end }}
+          <div class="bbc-people__pi-body">
+            <h2>{{ $pi.Title }}</h2>
+            {{ with $pi.Params.tagline }}<p class="bbc-people__pi-role">{{ . }}</p>{{ end }}
+            {{ with $pi.Params.email }}<p class="bbc-people__pi-contact">{{ . }}</p>{{ end }}
+            <div class="bbc-people__pi-bio">{{ $pi.Content }}</div>
+            <span class="bbc-people__pi-link">View full profile →</span>
+          </div>
+        </a>
+      {{ else }}
+      <section class="bbc-people__group">
+        <div class="bbc-people__group-head">
+          <h2>{{ .title }}</h2>
+          <span class="bbc-people__count">{{ len $people }}</span>
+        </div>
+        <div class="bbc-people__grid">
+          {{ range sort $people "Params.weight" "asc" }}
+            <article class="bbc-profile-card">
+              <a class="bbc-profile-card__link" href="{{ .RelPermalink }}">
+                {{ with .Params.photo }}
+                <figure class="bbc-profile-card__media">
+                  <img src="{{ . }}" alt="{{ $.Title }} portrait">
+                </figure>
+                {{ end }}
+                <div class="bbc-profile-card__body">
+                  <h3 class="bbc-profile-card__name">{{ .Title }}</h3>
+                  {{ with .Params.tagline }}<p class="bbc-profile-card__tagline">{{ . }}</p>{{ end }}
+                </div>
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</section>
+{{ end }}

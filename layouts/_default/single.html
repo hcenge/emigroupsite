@@ -45,5 +45,76 @@
   <div class="bbc-article__body">
     {{ .Content }}
   </div>
+
+  {{ if eq .Section "research" }}
+    {{ $slug := .File.BaseFileName }}
+    {{ $members := slice }}
+    {{ $memberKeys := slice }}
+    {{ with site.GetPage "section" "people" }}
+      {{ range .RegularPages }}
+        {{ $projects := .Params.projects }}
+        {{ if and $projects (in $projects $slug) }}
+          {{ $link := .RelPermalink }}
+          {{ if not (in $memberKeys $link) }}
+            {{ $members = $members | append . }}
+            {{ $memberKeys = $memberKeys | append $link }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ with site.GetPage "section" "people/alumni" }}
+      {{ range .RegularPages }}
+        {{ $projects := .Params.projects }}
+        {{ if and $projects (in $projects $slug) }}
+          {{ $link := .RelPermalink }}
+          {{ if not (in $memberKeys $link) }}
+            {{ $members = $members | append . }}
+            {{ $memberKeys = $memberKeys | append $link }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ if gt (len $members) 0 }}
+    <section class="research-team">
+      <h2>Team Members</h2>
+      <div class="research-team__links">
+        {{ range sort $members "Title" }}
+          <a class="research-team__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  {{ end }}
+
+  {{ if .Params.publications }}
+  <section class="bbc-article__publications">
+    <h2>Key Publications</h2>
+    <div class="bbc-publications__list">
+      {{ range .Params.publications }}
+        {{ $thisDoi := . }}
+        {{ range site.Data.publications }}
+          {{ if eq .doi $thisDoi }}
+          <article class="bbc-publication">
+            <div>
+              <h3 class="bbc-publication__title">
+                {{ if .url }}
+                <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                {{ else }}
+                {{ .title }}
+                {{ end }}
+              </h3>
+              {{ with .authors }}<p class="bbc-publication__authors">{{ . }}</p>{{ end }}
+            </div>
+            <div class="bbc-publication__meta">
+              {{ if .venue }}<span class="bbc-publication__venue">{{ .venue }}</span>{{ end }}
+              {{ if .year }}<span class="bbc-publication__year">{{ .year }}</span>{{ end }}
+            </div>
+          </article>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
 </article>
 {{ end }}

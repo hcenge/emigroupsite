@@ -10,16 +10,18 @@
   {{ if site.Data.publications }}
   <div class="bbc-publications__list">
     {{ range site.Data.publications }}
+    {{ if eq .type "journal-article" }}
     <article class="bbc-publication">
-      <h3 class="bbc-publication__title">
-        {{ if .url }}
-        <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
-        {{ else }}
-        {{ .title }}
-        {{ end }}
-      </h3>
-
-      <p class="bbc-publication__authors">{{ .authors }}</p>
+      <div>
+        <h3 class="bbc-publication__title">
+          {{ if .url }}
+          <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+          {{ else }}
+          {{ .title }}
+          {{ end }}
+        </h3>
+        <p class="bbc-publication__authors">{{ .authors }}</p>
+      </div>
 
       <div class="bbc-publication__meta">
         {{ if .venue }}<span class="bbc-publication__venue">{{ .venue }}</span>{{ end }}
@@ -27,6 +29,7 @@
         {{ if .citations }}<span class="bbc-publication__citations">{{ .citations }} citations</span>{{ end }}
       </div>
     </article>
+    {{ end }}
     {{ end }}
   </div>
   {{ else }}

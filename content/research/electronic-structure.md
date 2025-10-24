@@ -8,6 +8,10 @@ image: "/images/electronic_structure.png"
 weight: 30
 date: 2024-02-17
 showdate: false
+publications:
+  - "10.1021/acs.chemmater.4c01547"
+  - "10.1039/d4ee02398f"
+  - "10.1038/s41467-022-33595-0"
 ---
 
 A material's electronic structure, i.e. the arrangement and interactions of its electrons, govern its fundamental properties. Simulating this can help us to either predict the properties of a material or help us to understand and interpret experimental results.

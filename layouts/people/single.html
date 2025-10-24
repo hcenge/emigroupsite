@@ -1,0 +1,50 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<article class="bbc-person">
+  <header class="bbc-person__header">
+    {{ with .Params.photo }}
+    <figure class="bbc-person__photo">
+      <img src="{{ . }}" alt="{{ $.Title }} portrait">
+    </figure>
+    {{ end }}
+    <div class="bbc-person__meta">
+      <h1 class="bbc-person__name">{{ .Title }}</h1>
+      {{ with .Params.role }}<p class="bbc-person__role">{{ partial "people/role-label.html" . }}</p>{{ end }}
+      {{ with .Params.tagline }}<p class="bbc-person__tagline">{{ . }}</p>{{ end }}
+      <dl class="bbc-person__contacts">
+        {{ with .Params.email }}<div><dt>Email</dt><dd><a href="mailto:{{ . }}">{{ . }}</a></dd></div>{{ end }}
+        {{ with .Params.website }}<div><dt>Website</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></dd></div>{{ end }}
+        {{ with .Params.twitter }}<div><dt>Twitter</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></dd></div>{{ end }}
+        {{ with .Params.linkedin }}<div><dt>LinkedIn</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></dd></div>{{ end }}
+      </dl>
+      {{ with .Params.research_interests }}
+      <div class="bbc-person__interests">
+        <h2>Research Interests</h2>
+        {{ . | markdownify }}
+      </div>
+      {{ end }}
+      {{ with .Params.projects }}
+      <div class="bbc-person__projects">
+        <h2>Projects</h2>
+        <ul>
+          {{ range . }}
+            {{ $project := site.GetPage (printf "/research/%s" .) }}
+            {{ if $project }}
+              <li><a href="{{ $project.RelPermalink }}">{{ $project.Title }}</a></li>
+            {{ else }}
+              <li>{{ . }}</li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+  </header>
+  {{ if .Content }}
+  <div class="bbc-person__bio">
+    <h2>Biography</h2>
+    {{ .Content }}
+  </div>
+  {{ end }}
+</article>
+{{ end }}

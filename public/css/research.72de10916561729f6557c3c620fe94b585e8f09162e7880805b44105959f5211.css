@@ -38,11 +38,7 @@ body.bbc-shell {
   align-items: center;
   gap: 0.3rem;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.bbc-logo:hover {
-  opacity: 0.85;
+  position: relative;
 }
 
 .bbc-logo__block {
@@ -56,6 +52,27 @@ body.bbc-shell {
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.bbc-logo__word {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--bbc-red);
+  letter-spacing: 0.02em;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width 0.4s ease, opacity 0.3s ease;
+  margin-left: -0.3rem;
+}
+
+.bbc-logo:hover .bbc-logo__word {
+  max-width: 10rem;
+  opacity: 1;
+  margin-left: 0;
 }
 
 .bbc-site {
@@ -351,13 +368,15 @@ body.bbc-shell {
   max-width: 900px;
 }
 
+
 .bbc-publication {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--bbc-grey);
-  border-left: 3px solid var(--bbc-light-grey);
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  transition: border-left-color 0.2s ease;
+  margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
 }
 
 .bbc-publication:hover {
@@ -365,10 +384,10 @@ body.bbc-shell {
 }
 
 .bbc-publication__title {
-  margin: 0 0 0.5rem;
-  font-size: 1.15rem;
+  margin: 0;
+  font-size: 1.05rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .bbc-publication__title a {
@@ -382,17 +401,18 @@ body.bbc-shell {
 }
 
 .bbc-publication__authors {
-  margin: 0 0 0.5rem;
-  font-size: 0.95rem;
-  color: #3d3d3d;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
   line-height: 1.4;
 }
 
 .bbc-publication__meta {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  font-size: 0.85rem;
+  justify-content: flex-end;
+  font-size: 0.8rem;
   color: #5a5a5a;
   font-weight: 600;
 }
@@ -433,6 +453,336 @@ body.bbc-shell {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
+}
+
+/* People directory */
+.bbc-people__header {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bbc-people__pi {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: stretch;
+  background: #fff;
+  padding: 0;
+  border: 1px solid var(--bbc-grey);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.bbc-people__pi::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.bbc-people__pi:hover {
+  border-color: var(--bbc-red);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.bbc-people__pi:hover::before {
+  background: var(--bbc-red);
+}
+
+.bbc-people__pi-photo {
+  margin: 0;
+  background: #000;
+  display: flex;
+}
+
+.bbc-people__pi-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bbc-people__pi-body {
+  padding: 2rem;
+  background: #fff;
+}
+
+.bbc-people__pi-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bbc-people__pi-body h2 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.bbc-people__pi-role {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bbc-people__pi-contact {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--bbc-black);
+  font-weight: 600;
+}
+
+.bbc-people__pi-link {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+}
+
+.bbc-people__pi-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2c2c2c;
+}
+
+.bbc-people__intro {
+  max-width: 720px;
+  font-size: 1.05rem;
+  color: #2c2c2c;
+  line-height: 1.7;
+}
+
+.bbc-people__group {
+  margin-bottom: 3rem;
+}
+
+.bbc-people__group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.bbc-people__group-head h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.bbc-people__count {
+  background: var(--bbc-light-grey);
+  color: var(--bbc-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+}
+
+.bbc-people__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.bbc-profile-card {
+  background: #fff;
+  border: 1px solid var(--bbc-grey);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.bbc-profile-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--bbc-red);
+}
+
+.bbc-profile-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bbc-profile-card__media {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--bbc-light-grey);
+}
+
+.bbc-profile-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-profile-card__body {
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bbc-profile-card__name {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.bbc-profile-card__tagline {
+  margin: 0;
+  color: #3d3d3d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.bbc-person {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bbc-person__header {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.bbc-person__photo {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--bbc-grey);
+}
+
+.bbc-person__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-person__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bbc-person__name {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.bbc-person__role {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bbc-red);
+}
+
+.bbc-person__tagline {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #2c2c2c;
+  line-height: 1.5;
+}
+
+.bbc-person__contacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+}
+
+.bbc-person__contacts div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bbc-person__contacts dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5a5a5a;
+}
+
+.bbc-person__contacts dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.bbc-person__contacts a {
+  color: var(--bbc-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bbc-person__interests,
+.bbc-person__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bbc-person__interests h2,
+.bbc-person__projects h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bbc-black);
+}
+
+.bbc-person__interests p,
+.bbc-person__projects ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bbc-person__interests p {
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: #2c2c2c;
+}
+
+.bbc-person__projects li a {
+  color: var(--bbc-black);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.bbc-person__projects li a:hover {
+  color: var(--bbc-red);
+  border-color: var(--bbc-red);
+}
+
+.bbc-person__bio {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #2c2c2c;
 }
 
 .bbc-home {
@@ -702,6 +1052,23 @@ body.bbc-shell {
     gap: 1rem;
   }
 
+  .bbc-people__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bbc-people__pi {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-people__pi-photo {
+    max-width: 360px;
+    height: 100%;
+  }
+
+  .bbc-people__pi-body {
+    padding: 1.5rem;
+  }
+
   .bbc-card.hero {
     box-shadow: none;
   }
@@ -771,6 +1138,24 @@ body.bbc-shell {
     justify-content: center;
     max-width: none;
   }
+
+  .bbc-person__header {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-person__photo {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .bbc-people__pi {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-people__pi-photo {
+    max-width: 360px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 600px) {
@@ -834,5 +1219,17 @@ body.bbc-shell {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
+  }
+
+  .bbc-people__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-person__photo {
+    max-width: none;
+  }
+
+  .bbc-people__pi-photo {
+    max-width: none;
   }
 }
