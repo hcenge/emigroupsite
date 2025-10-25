@@ -7,3 +7,6 @@
 - Research slug & taxonomy list: document all valid research slugs (e.g., electrocatalysis,rechargeable-batteries) in one place so editors don’t invent mismatched names.
 - Logo for the front page
 - Add group photos over the years
+- look nicer on mobile
+- research blocks should all be the same size
+- update weighting for all so that it is in numeric order instead of random
