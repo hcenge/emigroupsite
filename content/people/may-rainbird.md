@@ -4,10 +4,9 @@ role: "phd"
 tagline: "EPSRC DPhil Student, Exeter College"
 photo: "/images/people/may-rainbird.jpg"
 email: "may.rainbird@materials.ox.ac.uk"
-weight: 41
+weight: 50
 research_interests: |
-May's DPhil project will focus on understanding TCO–HTL recombination junctions in perovskite–silicon tandem solar cells. She will be researching sustainable materials that provide effective passivation and good electrical conductivity. Characterisation methods including synchrotron-based spectroscopy techniques will be used to investigate the chemical, structural, electronic and optical properties of the TCO–HTL interface and the charge transport mechanisms that are occurring.
-
+  May's DPhil project will focus on understanding TCO–HTL recombination junctions in perovskite–silicon tandem solar cells. She will be researching sustainable materials that provide effective passivation and good electrical conductivity. Characterisation methods including synchrotron-based spectroscopy techniques will be used to investigate the chemical, structural, electronic and optical properties of the TCO–HTL interface and the charge transport mechanisms that are occurring.
 projects:
   - operando-xray-techniques
   - electronic-structure
