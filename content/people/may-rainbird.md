@@ -2,7 +2,7 @@
 title: "May Rainbird"
 role: "phd"
 tagline: "EPSRC DPhil Student, Exeter College"
-photo: "/images/people/may-rainbird.jpg"
+photo: "/images/people/may-rainbird.JPG"
 email: "may.rainbird@materials.ox.ac.uk"
 weight: 50
 research_interests: |
