@@ -4,7 +4,7 @@ role: "masters"
 tagline: "Master's Student, Mansfield College"
 photo: "/images/people/sevinc-yagmur-bekler.jpg"
 email: "sevinc.bekler@materials.ox.ac.uk"
-weight: 70
+weight: 2024
 research_interests: |
     Yağmur’s research centres on developing and characterising catalyst nanoparticles to convert carbon dioxide into useful chemicals. She focuses on using novel micro-reactor designs with graphene windows to enable surface-sensitive X-ray spectroscopy at realistic pressures, allowing operando characterisation of catalyst nanoparticles.
 projects:

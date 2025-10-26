@@ -4,7 +4,7 @@ role: "phd"
 tagline: "DPhil Student, Trinity College"
 photo: "/images/people/soumyajit-maitra.png"
 email: "soumyajit.maitra@materials.ox.ac.uk"
-weight: 43
+weight: 2022
 research_interests: |
     To be updated.
 projects:

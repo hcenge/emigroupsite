@@ -4,7 +4,7 @@ role: "phd"
 tagline: "DPhil Student, Trinity College"
 photo: "/images/people/catherine-kohler.jpg"
 email: "catherine.kohler@materials.ox.ac.uk"
-weight: 44
+join_year: 2023
 research_interests: |
     Catie joined the group in 2023 as a DPhil student. Her project aims to explore the composition of the battery electrolyte impacts on performance, such as electrochemical stability window and chemical compatibility with battery electrode materials. This research will involve studying the solid-electrolyte interface using a range of different techniques and approaches. The aim of this work will be to further the understanding of battery degradation to assist with the development of more sustainable batteries. Catie has a broad interest in battery science research and hopes to involved in outreach projects for materials science and battery technology to promote interest in sustainability in STEM. 
 projects:

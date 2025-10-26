@@ -3,7 +3,7 @@ title: "EMI Group"
 banner:
   image: "/images/banner.png"
   tagline: "Revealing Reactions at Energy Material Interfaces"
-  logo: "/images/emi-logo.png"
+  logo: "/images/logo.png"
 lede: "We tackle fundamental questions about chemical reactions occurring at energy material interfaces, developing new techniques to uncover the processes that govern them. Our work is driven by the urgent need for improved materials for energy storage and conversion as part of the Net-Zero transition, including Batteries, Electrocatalysts and Thermocatalysts."
 pillars:
   - title: "Energy Storage"
@@ -16,7 +16,7 @@ pillars:
     icon: "🔬"
     description: "Pioneering X-ray techniques to probe materials under realistic operating conditions."
 cta:
-  title: "Latest Research"
+  title: "Research"
   text: "Explore our data-driven, collaborative work in materials, energy systems, and modeling"
   button_text: "View Research"
   button_link: "/research/"

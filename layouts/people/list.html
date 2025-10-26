@@ -43,14 +43,73 @@
             <span class="bbc-people__pi-link">View full profile →</span>
           </div>
         </a>
-      {{ else }}
+      {{ else if not (isset . "folder") }}
       <section class="bbc-people__group">
         <div class="bbc-people__group-head">
           <h2>{{ .title }}</h2>
           <span class="bbc-people__count">{{ len $people }}</span>
         </div>
         <div class="bbc-people__grid">
-          {{ range sort $people "Params.weight" "asc" }}
+          {{ range sort $people "Params.join_year" "asc" }}
+            <article class="bbc-profile-card">
+              <a class="bbc-profile-card__link" href="{{ .RelPermalink }}">
+                {{ with .Params.photo }}
+                <figure class="bbc-profile-card__media">
+                  <img src="{{ . }}" alt="{{ $.Title }} portrait">
+                </figure>
+                {{ end }}
+                <div class="bbc-profile-card__body">
+                  <h3 class="bbc-profile-card__name">{{ .Title }}</h3>
+                  {{ with .Params.tagline }}<p class="bbc-profile-card__tagline">{{ . }}</p>{{ end }}
+                </div>
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ with .Params.group_photos }}
+  {{ if gt (len .) 0 }}
+  <div class="bbc-group-photos-carousel">
+    <div class="bbc-group-photos-carousel__container">
+      <div class="bbc-group-photos-carousel__track">
+        {{ range . }}
+        <div class="bbc-group-photos-carousel__item">
+          <img src="{{ .image }}" alt="Group photo from {{ .date }}" class="bbc-group-photos-carousel__image">
+        </div>
+        {{ end }}
+      </div>
+      <div class="bbc-group-photos-carousel__controls">
+        <button class="bbc-group-photos-carousel__button bbc-group-photos-carousel__button--prev" aria-label="Previous">‹</button>
+        <button class="bbc-group-photos-carousel__button bbc-group-photos-carousel__button--next" aria-label="Next">›</button>
+      </div>
+      <p class="bbc-group-photos-carousel__date"></p>
+      <div class="bbc-group-photos-carousel__dots"></div>
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+
+  {{ range $groups }}
+    {{ if isset . "folder" }}
+      {{ $scratch := newScratch }}
+      {{ with site.GetPage "section" .folder }}
+        {{ $scratch.Set "people" .RegularPages }}
+      {{ else }}
+        {{ $scratch.Set "people" (slice) }}
+      {{ end }}
+      {{ $people := $scratch.Get "people" }}
+      {{ if gt (len $people) 0 }}
+      <section class="bbc-people__group">
+        <div class="bbc-people__group-head">
+          <h2>{{ .title }}</h2>
+          <span class="bbc-people__count">{{ len $people }}</span>
+        </div>
+        <div class="bbc-people__grid">
+          {{ range sort $people "Params.join_year" "asc" }}
             <article class="bbc-profile-card">
               <a class="bbc-profile-card__link" href="{{ .RelPermalink }}">
                 {{ with .Params.photo }}

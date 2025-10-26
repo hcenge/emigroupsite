@@ -4,7 +4,7 @@ role: "postdoc"
 tagline: "Post-doctoral Research Fellow, operando alkaline electrocatalysis"
 photo: "/images/people/connor-sherwin.png"
 email: "connor.sherwin@materials.ox.ac.uk"
-weight: 24
+join_year: 2024
 research_interests: | 
     Connor joined the group as a postdoctoral researcher in September 2024 with his work focussing on the development of novel capabilities for operando X-ray measurements of various electrocatalytic systems. Primarily, he is interested in understanding the operating mechanism of highly active alkaline O2 evolution reaction catalysts and the selectivity of CO2 reduction catalysts. 
 projects:

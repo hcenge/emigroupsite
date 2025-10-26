@@ -4,7 +4,6 @@ role: "pi"
 tagline: "Professor of Energy Materials, Tutorial Fellow of the Queen's College"
 photo: "/images/people/robert-weatherup.png"
 email: "robert.weatherup@materials.ox.ac.uk"
-weight: 10
 research_interests: |
   My research interests lie primarily in the area of interface science – that is understanding the reactions occurring at the interfaces between materials and their environment. This involves developing new reaction environments that enable interface-sensitive probes to be applied in high pressure or liquid environments, and using these techniques to understand both desirable and unwanted reactions that occur at the interfaces between functional materials during operation. This includes electrode-electrolyte interfaces in rechargeable batteries, the surfaces of heterogeneous catalyst materials in gas and liquid environments, and two-dimensional materials growing on top of flat substrates. The group regularly uses X-ray and Neutron sources available at central user facilities, but we are interested in any approach that can tackle the scientific question at hand.
 projects: []

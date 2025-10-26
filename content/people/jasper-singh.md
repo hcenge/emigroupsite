@@ -4,7 +4,7 @@ role: "phd"
 tagline: "DPhil Student, St Edmund Hall"
 photo: "/images/people/jasper-singh.png"
 email: "jasper.singh@materials.ox.ac.uk"
-weight: 42
+weight: 2022
 research_interests: |
     Jasper’s primary research interests lie in applying a combination of spectroscopic techniques to further understand the unique properties exhibited at the electrode-electrolyte interface in Li-Ion batteries. He hopes to explore the electrochemistry and fundamental reaction mechanisms occurring at the surface of Li electrodes. Jasper intends to use both in-situ and ex-situ techniques to assemble a detailed understanding of the different phenomena that influence the interface of these batteries. Jasper’s previous research tackled the discipline of energy from a different standpoint, working alongside the Bugg Group at the University of Warwick, he investigated different strains of bacteria that could convert brown coal into green fuel. 
 projects:

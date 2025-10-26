@@ -4,7 +4,7 @@ role: "postdoc"
 tagline: "Post-doctoral Research Fellow, 2D electrocatalyst development"
 photo: "/images/people/jack-swallow.png"
 email: "jack.swallow@materials.ox.ac.uk"
-weight: 25
+join_year: 2020
 research_interests: |
     The focus of Jack's work is the understanding the growth and electronic structure of 2-dimensional transition metal dichalcogenides for application in electrocatalysis. Additionally, he is involved in developing novel characterization capabilities in x-ray spectroscopy.
 projects:

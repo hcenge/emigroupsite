@@ -83,10 +83,27 @@ _Learn Markdown:_ GitHub has an excellent [Markdown formatting guide](https://do
   - `static/images/projects/` or `static/images/research/` for research pages
 - Reference images using the `/images/...` path in front matter or Markdown: `![Alt text](/images/projects/sample.png)`.
 
+## Valid research slugs (taxonomy reference)
+
+**IMPORTANT:** When linking people to research projects or referencing research areas, always use one of the following exact slugs. Do not create new slugs without consulting the team first, as they must match the filenames in `content/research/`.
+
+### Current valid research slugs:
+- `electrocatalysis` - Electrocatalysis research
+- `electrolyte-solvation` - Electrolyte Solvation studies
+- `electronic-structure` - Electronic Structure investigations
+- `operando-xray-techniques` - Operando X-ray Techniques
+- `rechargeable-batteries` - Rechargeable Batteries research
+- `thermocatalysis` - Thermocatalysis research
+
+**How to use:**
+- In people profiles (`content/people/*.md`), list the slugs under `projects:` in the front matter
+- In positions (`content/positions/_index.md`), use slugs in the `research:` field
+- These slugs link people to research areas and vice versa automatically
+
 ## Tips for safe editing
 - **Stick to YAML + Markdown.** Avoid raw HTML unless absolutely necessary.
 - **Keep indentation consistent** in YAML lists and nested structures.
-- **Match slugs carefully.** Research slugs (e.g., `electrocatalysis`, `rechargeable-batteries`) are used across content files; use existing ones or consult the team before creating new slugs.
+- **Match slugs carefully.** See the "Valid research slugs" section above for the complete list of allowed research area identifiers.
 - **Preview locally** (`hugo server -D`) to catch formatting or YAML errors before committing.
 
 Happy editing!

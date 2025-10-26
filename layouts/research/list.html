@@ -1,20 +1,19 @@
 {{ define "title" }}{{ .Title }}{{ end }}
 {{ define "main" }}
 <section class="bbc-research">
-  {{ $featured := first 1 (where .Pages "Params.featured" true) }}
-  {{ $others := where .Pages "Params.featured" "ne" true }}
+  {{ $allPages := sort .Pages "Params.weight" "asc" }}
 
-  <div class="bbc-grid">
-    {{ with index $featured 0 }}
-    <article class="bbc-card hero">
+  <div class="bbc-research-grid">
+    {{ range $allPages }}
+    <article class="bbc-card">
       <a class="bbc-card__link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
         <figure class="bbc-card__media">
-          <img src="{{ . }}" alt="{{ $.Title }} hero image">
+          <img src="{{ . }}" alt="{{ $.Title }} illustration">
         </figure>
         {{ end }}
         <div class="bbc-card__body">
-          <h2 class="bbc-card__title">{{ .Title }}</h2>
+          <h3 class="bbc-card__title">{{ .Title }}</h3>
           {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
           <span class="bbc-card__meta">
             {{ $showDate := default true .Params.showdate }}
@@ -28,58 +27,6 @@
       </a>
     </article>
     {{ end }}
-
-    <div class="bbc-grid__secondary">
-      {{ range first 2 (sort $others "Params.weight" "asc") }}
-      <article class="bbc-card">
-        <a class="bbc-card__link" href="{{ .RelPermalink }}">
-          {{ with .Params.image }}
-          <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $.Title }} illustration">
-          </figure>
-          {{ end }}
-          <div class="bbc-card__body">
-            <h3 class="bbc-card__title">{{ .Title }}</h3>
-            {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta">
-              {{ $showDate := default true .Params.showdate }}
-              {{ if $showDate }}
-                {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
-              {{ end }}
-              {{ with .Params.category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
-              {{ if .Params.live }}<span class="bbc-card__live">LIVE</span>{{ end }}
-            </span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
-
-    <div class="bbc-grid__stack">
-      {{ range after 2 (sort $others "Params.weight" "asc") }}
-      <article class="bbc-card small">
-        <a class="bbc-card__link" href="{{ .RelPermalink }}">
-          {{ with .Params.image }}
-          <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $.Title }} illustration">
-          </figure>
-          {{ end }}
-          <div class="bbc-card__body">
-            <h4 class="bbc-card__title">{{ .Title }}</h4>
-            {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta">
-              {{ $showDate := default true .Params.showdate }}
-              {{ if $showDate }}
-                {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
-              {{ end }}
-              {{ with .Params.category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
-              {{ if .Params.live }}<span class="bbc-card__live">LIVE</span>{{ end }}
-            </span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
   </div>
 </section>
 {{ end }}

@@ -7,6 +7,7 @@
     <div class="bbc-hero-banner-parallax__overlay">
       {{ if .logo }}
       <div class="bbc-hero-banner-parallax__logo">
+        <p class="bbc-hero-banner-parallax__group-name">Weatherup Group</p>
         <img src="{{ .logo }}" alt="EMI Group Logo">
       </div>
       {{ end }}
@@ -45,7 +46,42 @@
       </div>
       {{ end }}
 
-      
+      {{ $newsPages := (where .Site.RegularPages "Section" "news").ByDate.Reverse }}
+      {{ if gt (len $newsPages) 0 }}
+      <div class="bbc-news-carousel">
+        <div class="bbc-news-carousel__header">
+          <h2 class="bbc-news-carousel__title">Latest News</h2>
+          <a href="/news/" class="bbc-news-carousel__view-all">View All News →</a>
+        </div>
+        <div class="bbc-news-carousel__container">
+          <div class="bbc-news-carousel__track">
+            {{ range first 5 $newsPages }}
+            <div class="bbc-news-carousel__item">
+              <a href="{{ .RelPermalink }}" class="bbc-news-carousel__link">
+                {{ with .Params.image }}
+                <div class="bbc-news-carousel__image" style="background-image: url('{{ . }}');"></div>
+                {{ end }}
+                <div class="bbc-news-carousel__content">
+                  <time class="bbc-news-carousel__date">{{ .Date.Format "2 January 2006" }}</time>
+                  <h3 class="bbc-news-carousel__item-title">{{ .Title }}</h3>
+                  {{ with .Params.summary }}
+                  <p class="bbc-news-carousel__summary">{{ . }}</p>
+                  {{ end }}
+                </div>
+              </a>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        <div class="bbc-news-carousel__controls">
+          <button class="bbc-news-carousel__button bbc-news-carousel__button--prev" aria-label="Previous">‹</button>
+          <button class="bbc-news-carousel__button bbc-news-carousel__button--next" aria-label="Next">›</button>
+        </div>
+        <div class="bbc-news-carousel__dots"></div>
+      </div>
+      {{ end }}
+
+
     </div>
   </div>
 </section>
