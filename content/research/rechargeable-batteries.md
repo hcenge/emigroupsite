@@ -6,7 +6,6 @@ featured: false
 live: false
 image: "/images/projects/battery_degradation.png"
 weight: 20
-date: 2024-03-05
 showdate: false
 publications:
   - "10.1039/d4ee02398f"

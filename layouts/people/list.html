@@ -51,19 +51,7 @@
         </div>
         <div class="bbc-people__grid">
           {{ range sort $people "Params.join_year" "asc" }}
-            <article class="bbc-profile-card">
-              <a class="bbc-profile-card__link" href="{{ .RelPermalink }}">
-                {{ with .Params.photo }}
-                <figure class="bbc-profile-card__media">
-                  <img src="{{ . }}" alt="{{ $.Title }} portrait">
-                </figure>
-                {{ end }}
-                <div class="bbc-profile-card__body">
-                  <h3 class="bbc-profile-card__name">{{ .Title }}</h3>
-                  {{ with .Params.tagline }}<p class="bbc-profile-card__tagline">{{ . }}</p>{{ end }}
-                </div>
-              </a>
-            </article>
+            {{ partial "person-card.html" . }}
           {{ end }}
         </div>
       </section>
@@ -110,19 +98,7 @@
         </div>
         <div class="bbc-people__grid">
           {{ range sort $people "Params.join_year" "asc" }}
-            <article class="bbc-profile-card">
-              <a class="bbc-profile-card__link" href="{{ .RelPermalink }}">
-                {{ with .Params.photo }}
-                <figure class="bbc-profile-card__media">
-                  <img src="{{ . }}" alt="{{ $.Title }} portrait">
-                </figure>
-                {{ end }}
-                <div class="bbc-profile-card__body">
-                  <h3 class="bbc-profile-card__name">{{ .Title }}</h3>
-                  {{ with .Params.tagline }}<p class="bbc-profile-card__tagline">{{ . }}</p>{{ end }}
-                </div>
-              </a>
-            </article>
+            {{ partial "person-card.html" . }}
           {{ end }}
         </div>
       </section>

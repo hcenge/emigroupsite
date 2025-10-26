@@ -1,0 +1,14 @@
+{{ $person := . }}
+<article class="bbc-card bbc-card--profile">
+  <a class="bbc-card__link" href="{{ $person.RelPermalink }}">
+    {{ with $person.Params.photo }}
+    <figure class="bbc-card__media">
+      <img src="{{ . }}" alt="{{ $person.Title }} portrait">
+    </figure>
+    {{ end }}
+    <div class="bbc-card__body">
+      <h3 class="bbc-card__title">{{ $person.Title }}</h3>
+      {{ with $person.Params.tagline }}<p class="bbc-card__subtitle">{{ . }}</p>{{ end }}
+    </div>
+  </a>
+</article>

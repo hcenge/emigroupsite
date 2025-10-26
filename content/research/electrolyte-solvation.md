@@ -6,7 +6,6 @@ featured: false
 live: false
 image: "/images/projects/electrolyte.png"
 weight: 22
-date: 2024-01-22
 showdate: false
 publications:
   - "10.1126/science.aab1595"

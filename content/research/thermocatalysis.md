@@ -4,9 +4,8 @@ summary: "Redesigning chemical industry processes to use sustainable feedstocks 
 category: "Catalysis"
 featured: false
 live: false
-image: "/images/projects/operando_softxas.jpeg"
+image: "/images/projects/thermocatalysis_cell.png"
 weight: 25
-# date: 2024-04-12
 showdate: false
 publications:
   - "10.26434/chemrxiv-2025-0cgp0"

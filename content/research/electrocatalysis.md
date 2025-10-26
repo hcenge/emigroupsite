@@ -6,7 +6,6 @@ featured: false
 live: false
 image: "/images/projects/operando_aem.JPG"
 weight: 15
-date: 2024-05-27
 showdate: false
 publications:
   - "10.1002/anie.201506044"

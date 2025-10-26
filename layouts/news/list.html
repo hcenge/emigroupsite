@@ -10,9 +10,9 @@
 
   {{ $allPages := .Pages.ByDate.Reverse }}
 
-  <div class="bbc-grid">
+  <div class="bbc-grid bbc-grid--split bbc-grid--featured">
     {{ with index $allPages 0 }}
-    <article class="bbc-card hero">
+    <article class="bbc-card bbc-card--hero">
       <a class="bbc-card__link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
         <figure class="bbc-card__media">
@@ -30,9 +30,9 @@
     </article>
     {{ end }}
 
-    <div class="bbc-grid__secondary">
+    <div class="bbc-grid__column bbc-grid__column--aside">
       {{ range first 2 (after 1 $allPages) }}
-      <article class="bbc-card">
+      <article class="bbc-card bbc-card--aside">
         <a class="bbc-card__link" href="{{ .RelPermalink }}">
           {{ with .Params.image }}
           <figure class="bbc-card__media">
@@ -51,9 +51,9 @@
       {{ end }}
     </div>
 
-    <div class="bbc-grid__stack">
+    <div class="bbc-grid__column bbc-grid__column--stack">
       {{ range after 3 $allPages }}
-      <article class="bbc-card small">
+      <article class="bbc-card bbc-card--compact">
         <a class="bbc-card__link" href="{{ .RelPermalink }}">
           {{ with .Params.image }}
           <figure class="bbc-card__media">

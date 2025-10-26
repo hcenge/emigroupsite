@@ -6,7 +6,6 @@ featured: true
 live: false
 image: "/images/projects/operando_xrs.jpg"
 weight: 10
-date: 2024-05-01
 showdate: false
 publications:
   - "10.26434/chemrxiv-2025-0cgp0"

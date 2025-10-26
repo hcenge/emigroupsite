@@ -15,25 +15,25 @@
     <div class="bbc-positions__grid">
       {{ range . }}
         {{ $research := site.GetPage (printf "/research/%s" .research) }}
-        <article class="bbc-project-card">
+        <article class="bbc-card bbc-card--project">
           {{ with .image }}
-          <figure class="bbc-project-card__media">
+          <figure class="bbc-card__media">
             <img src="{{ . }}" alt="{{ $.Title }} visual">
           </figure>
           {{ end }}
-          <div class="bbc-project-card__body">
-            <h3 class="bbc-project-card__title">
+          <div class="bbc-card__body">
+            <h3 class="bbc-card__title">
               <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
             </h3>
             {{ with $research }}
-              <a class="bbc-project-card__tag" href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <a class="bbc-card__tag" href="{{ .RelPermalink }}">{{ .Title }}</a>
             {{ else }}
               {{ if .research }}
-                <span class="bbc-project-card__tag">{{ .research | humanize }}</span>
+                <span class="bbc-card__tag">{{ .research | humanize }}</span>
               {{ end }}
             {{ end }}
             {{ with .collaborators }}
-            <p class="bbc-project-card__collab">{{ delimit . ", " }}</p>
+            <p class="bbc-card__text">{{ delimit . ", " }}</p>
             {{ end }}
           </div>
         </article>

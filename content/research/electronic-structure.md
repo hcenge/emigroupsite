@@ -6,7 +6,6 @@ featured: false
 live: false
 image: "/images/projects/electronic_structure.png"
 weight: 30
-date: 2024-02-17
 showdate: false
 publications:
   - "10.1021/acs.chemmater.4c01547"

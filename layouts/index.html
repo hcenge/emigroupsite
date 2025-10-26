@@ -57,18 +57,22 @@
           <div class="bbc-news-carousel__track">
             {{ range first 5 $newsPages }}
             <div class="bbc-news-carousel__item">
-              <a href="{{ .RelPermalink }}" class="bbc-news-carousel__link">
-                {{ with .Params.image }}
-                <div class="bbc-news-carousel__image" style="background-image: url('{{ . }}');"></div>
-                {{ end }}
-                <div class="bbc-news-carousel__content">
-                  <time class="bbc-news-carousel__date">{{ .Date.Format "2 January 2006" }}</time>
-                  <h3 class="bbc-news-carousel__item-title">{{ .Title }}</h3>
-                  {{ with .Params.summary }}
-                  <p class="bbc-news-carousel__summary">{{ . }}</p>
+              <article class="bbc-card bbc-card--carousel">
+                <a class="bbc-card__link" href="{{ .RelPermalink }}">
+                  {{ with .Params.image }}
+                  <figure class="bbc-card__media">
+                    <img src="{{ . }}" alt="{{ $.Title }} illustration">
+                  </figure>
                   {{ end }}
-                </div>
-              </a>
+                  <div class="bbc-card__body">
+                    <h3 class="bbc-card__title">{{ .Title }}</h3>
+                    {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
+                    <span class="bbc-card__meta">
+                      <time class="bbc-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+                    </span>
+                  </div>
+                </a>
+              </article>
             </div>
             {{ end }}
           </div>
