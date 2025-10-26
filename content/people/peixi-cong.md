@@ -4,7 +4,7 @@ role: "postdoc"
 tagline: "Post-doctoral Research Fellow, operando X-ray catalysis"
 photo: "/images/people/peixi-cong.png"
 email: "peixi.cong@materials.ox.ac.uk"
-weight: 2022
+join_year: 2022
 research_interests: |
     Peixi’s research interest centred on elucidating the structure-activity relationship of catalytic materials in situ/operando using cutting-edge X-ray techniques. Currently, he is focused on developing beyond ambient pressure surfaces sensitive methods, and applying them to understand reactions that occur at the surface of solid materials that are crucial to the production of carbon-neutral renewable fuel.
 projects:

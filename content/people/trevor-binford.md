@@ -4,7 +4,7 @@ role: "phd"
 tagline: "iCASE DPhil Student (Johnson Matthey), Corpus Christi College"
 photo: "/images/people/trevor-binford.png"
 email: "trevor.binford@materials.ox.ac.uk"
-weight: 2021
+join_year: 2021
 research_interests: |
     Trevor’s interests lie in the areas of electrochemistry (especially energy storage) and surface science. His current research focuses on the degradation of Li-ion batteries, examining how the cathode-electrolyte interface changes with charging and discharging. The main technique for this work is X-ray photoelectron spectroscopy (XPS), particularly in-situ and operando methodologies. Previously, Trevor has worked on electrochemical carbon capture, examining carbon-based supercapacitors for capturing carbon dioxide. 
 projects:
