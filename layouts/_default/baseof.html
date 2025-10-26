@@ -79,167 +79,131 @@
           });
         }
 
-        // Group photos carousel
-        const groupPhotosCarousel = document.querySelector('.bbc-group-photos-carousel');
-        if (groupPhotosCarousel) {
-          const container = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__container');
-          const track = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__track');
-          const items = groupPhotosCarousel.querySelectorAll('.bbc-group-photos-carousel__item');
-          const prevBtn = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__button--prev');
-          const nextBtn = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__button--next');
-          const dotsContainer = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__dots');
-          const dateDisplay = groupPhotosCarousel.querySelector('.bbc-group-photos-carousel__date');
+        function initCarousel(config) {
+          const root = document.querySelector(config.rootSelector);
+          if (!root) return;
 
-          if (items.length > 0) {
-            let currentIndex = 0;
-            const totalSlides = items.length;
+          const track = root.querySelector(config.trackSelector);
+          const items = root.querySelectorAll(config.itemSelector);
+          const prevBtn = root.querySelector(config.prevSelector);
+          const nextBtn = root.querySelector(config.nextSelector);
+          const dotsContainer = root.querySelector(config.dotsSelector);
+          const metaDisplay = config.metaSelector ? root.querySelector(config.metaSelector) : null;
 
-            // Get dates from images alt text
-            const dates = Array.from(items).map(item => {
-              const img = item.querySelector('img');
-              const altText = img.getAttribute('alt');
-              return altText.replace('Group photo from ', '');
-            });
+          if (!track || items.length === 0 || !prevBtn || !nextBtn || !dotsContainer) {
+            return;
+          }
 
-            // Create dots
+          let currentIndex = 0;
+          let itemsPerSlide = 1;
+          let totalSlides = items.length;
+          let metaValues = [];
+
+          if (config.getMetaValue) {
+            metaValues = Array.from(items).map(config.getMetaValue);
+          }
+
+          function recalc() {
+            itemsPerSlide = config.getItemsPerSlide ? config.getItemsPerSlide() : 1;
+            totalSlides = config.singleItem ? items.length : Math.max(1, Math.ceil(items.length / itemsPerSlide));
+            dotsContainer.innerHTML = "";
             for (let i = 0; i < totalSlides; i++) {
-              const dot = document.createElement('button');
-              dot.classList.add('bbc-group-photos-carousel__dot');
-              dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
-              if (i === 0) dot.classList.add('bbc-group-photos-carousel__dot--active');
-              dot.addEventListener('click', () => goToSlide(i));
+              const dot = document.createElement("button");
+              dot.classList.add(config.dotClass);
+              dot.setAttribute("aria-label", config.ariaDotLabel(i));
+              if (i === 0) dot.classList.add(config.dotActiveClass);
+              dot.addEventListener("click", () => {
+                goToSlide(i);
+              });
               dotsContainer.appendChild(dot);
             }
-
-            const dots = dotsContainer.querySelectorAll('.bbc-group-photos-carousel__dot');
-
-            function updateCarousel() {
-              const itemWidth = items[0].offsetWidth;
-              const gap = 32; // 2rem = 32px
-              const offset = currentIndex * (itemWidth + gap);
-              track.style.transform = `translateX(-${offset}px)`;
-
-              // Update date
-              dateDisplay.textContent = dates[currentIndex];
-
-              // Update dots
-              dots.forEach((dot, index) => {
-                dot.classList.toggle('bbc-group-photos-carousel__dot--active', index === currentIndex);
-              });
-
-              // Update button states
-              prevBtn.disabled = currentIndex === 0;
-              nextBtn.disabled = currentIndex >= totalSlides - 1;
-            }
-
-            function goToSlide(index) {
-              currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-              updateCarousel();
-            }
-
-            prevBtn.addEventListener('click', () => {
-              if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-              }
-            });
-
-            nextBtn.addEventListener('click', () => {
-              if (currentIndex < totalSlides - 1) {
-                currentIndex++;
-                updateCarousel();
-              }
-            });
-
-            // Update on window resize
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-              clearTimeout(resizeTimeout);
-              resizeTimeout = setTimeout(() => {
-                updateCarousel();
-              }, 250);
-            });
-
-            // Initialize
             updateCarousel();
           }
-        }
 
-        // News carousel
-        const carousel = document.querySelector('.bbc-news-carousel');
-        if (carousel) {
-          const track = carousel.querySelector('.bbc-news-carousel__track');
-          const items = carousel.querySelectorAll('.bbc-news-carousel__item');
-          const prevBtn = carousel.querySelector('.bbc-news-carousel__button--prev');
-          const nextBtn = carousel.querySelector('.bbc-news-carousel__button--next');
-          const dotsContainer = carousel.querySelector('.bbc-news-carousel__dots');
+          function updateCarousel() {
+            const dots = dotsContainer.querySelectorAll(`.${config.dotClass}`);
+            const itemWidth = items[0].offsetWidth;
+            const gap = config.gap || 0;
+            const offset = currentIndex * (config.singleItem ? itemWidth + gap : itemsPerSlide * (itemWidth + gap));
+            track.style.transform = `translateX(-${offset}px)`;
 
-          if (items.length > 0) {
-            let currentIndex = 0;
-            const itemsToShow = window.innerWidth <= 900 ? 1 : 3;
-            const totalSlides = Math.ceil(items.length / itemsToShow);
-
-            // Create dots
-            for (let i = 0; i < totalSlides; i++) {
-              const dot = document.createElement('button');
-              dot.classList.add('bbc-news-carousel__dot');
-              dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-              if (i === 0) dot.classList.add('bbc-news-carousel__dot--active');
-              dot.addEventListener('click', () => goToSlide(i));
-              dotsContainer.appendChild(dot);
-            }
-
-            const dots = dotsContainer.querySelectorAll('.bbc-news-carousel__dot');
-
-            function updateCarousel() {
-              const itemWidth = items[0].offsetWidth;
-              const gap = 24; // 1.5rem = 24px
-              const offset = currentIndex * itemsToShow * (itemWidth + gap);
-              track.style.transform = `translateX(-${offset}px)`;
-
-              // Update dots
-              dots.forEach((dot, index) => {
-                dot.classList.toggle('bbc-news-carousel__dot--active', index === currentIndex);
-              });
-
-              // Update button states
-              prevBtn.disabled = currentIndex === 0;
-              nextBtn.disabled = currentIndex >= totalSlides - 1;
-            }
-
-            function goToSlide(index) {
-              currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-              updateCarousel();
-            }
-
-            prevBtn.addEventListener('click', () => {
-              if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-              }
+            dots.forEach((dot, index) => {
+              dot.classList.toggle(config.dotActiveClass, index === currentIndex);
             });
 
-            nextBtn.addEventListener('click', () => {
-              if (currentIndex < totalSlides - 1) {
-                currentIndex++;
-                updateCarousel();
-              }
-            });
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalSlides - 1;
 
-            // Update on window resize
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-              clearTimeout(resizeTimeout);
-              resizeTimeout = setTimeout(() => {
-                currentIndex = 0;
-                updateCarousel();
-              }, 250);
-            });
+            if (metaDisplay && metaValues.length > currentIndex) {
+              metaDisplay.textContent = metaValues[currentIndex];
+            }
+          }
 
-            // Initialize
+          function goToSlide(index) {
+            currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
             updateCarousel();
           }
+
+          prevBtn.addEventListener("click", () => {
+            if (currentIndex > 0) {
+              currentIndex--;
+              updateCarousel();
+            }
+          });
+
+          nextBtn.addEventListener("click", () => {
+            if (currentIndex < totalSlides - 1) {
+              currentIndex++;
+              updateCarousel();
+            }
+          });
+
+          let resizeTimeout;
+          window.addEventListener("resize", () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              if (!config.singleItem) currentIndex = 0;
+              recalc();
+            }, 250);
+          });
+
+          recalc();
         }
+
+        initCarousel({
+          rootSelector: ".bbc-group-photos-carousel",
+          trackSelector: ".bbc-group-photos-carousel__track",
+          itemSelector: ".bbc-group-photos-carousel__item",
+          prevSelector: ".bbc-group-photos-carousel__button--prev",
+          nextSelector: ".bbc-group-photos-carousel__button--next",
+          dotsSelector: ".bbc-group-photos-carousel__dots",
+          dotClass: "bbc-group-photos-carousel__dot",
+          dotActiveClass: "bbc-group-photos-carousel__dot--active",
+          ariaDotLabel: index => `Go to photo ${index + 1}`,
+          metaSelector: ".bbc-group-photos-carousel__date",
+          getMetaValue: item => {
+            const img = item.querySelector("img");
+            const altText = img ? img.getAttribute("alt") : "";
+            return altText.replace("Group photo from ", "");
+          },
+          gap: 32,
+          singleItem: true
+        });
+
+        initCarousel({
+          rootSelector: ".bbc-news-carousel",
+          trackSelector: ".bbc-news-carousel__track",
+          itemSelector: ".bbc-news-carousel__item",
+          prevSelector: ".bbc-news-carousel__button--prev",
+          nextSelector: ".bbc-news-carousel__button--next",
+          dotsSelector: ".bbc-news-carousel__dots",
+          dotClass: "bbc-news-carousel__dot",
+          dotActiveClass: "bbc-news-carousel__dot--active",
+          ariaDotLabel: index => `Go to slide ${index + 1}`,
+          gap: 24,
+          singleItem: false,
+          getItemsPerSlide: () => (window.innerWidth <= 900 ? 1 : 3)
+        });
       });
     </script>
   </body>

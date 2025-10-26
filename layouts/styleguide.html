@@ -1,0 +1,14 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<section class="bbc-styleguide bbc-main">
+  <h1 class="bbc-heading">{{ .Title }}</h1>
+  {{ with .Page.Params.description }}<p>{{ . }}</p>{{ end }}
+
+  {{ with site.Data.styleguide }}
+    {{ partial "styleguide/cards.html" .cards }}
+    {{ partial "styleguide/pi.html" .pi }}
+    {{ partial "styleguide/utilities.html" .utilities }}
+    {{ partial "styleguide/carousel.html" .carousel }}
+  {{ end }}
+</section>
+{{ end }}

@@ -6,7 +6,7 @@
       <img src="{{ . }}" alt="{{ $person.Title }} portrait">
     </figure>
     {{ end }}
-    <div class="bbc-card__body">
+    <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
       <h3 class="bbc-card__title">{{ $person.Title }}</h3>
       {{ with $person.Params.tagline }}<p class="bbc-card__subtitle">{{ . }}</p>{{ end }}
     </div>

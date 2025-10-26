@@ -1,0 +1,40 @@
+{{ $cards := . }}
+<section class="bbc-styleguide__section">
+  <h2>Cards</h2>
+  <div class="bbc-grid bbc-grid--stack bbc-styleguide__cards">
+    {{ range $cards }}
+      {{ $card := . }}
+      {{ $modifier := .modifier }}
+      {{ $class := "bbc-card" }}
+      {{ if $modifier }}
+        {{ $class = printf "%s bbc-card--%s" $class $modifier }}
+      {{ end }}
+      {{ if eq $modifier "hero" }}
+        {{ $class = printf "%s bbc-styleguide__hero" $class }}
+      {{ end }}
+      <article class="{{ $class }}">
+        <a class="bbc-card__link" href="#">
+          {{ with $card.image }}
+          <figure class="bbc-card__media">
+            <img src="{{ . }}" alt="{{ $card.title }} example">
+          </figure>
+          {{ end }}
+          <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
+            <h3 class="bbc-card__title">{{ $card.title }}</h3>
+            {{ with $card.subtitle }}<p class="bbc-card__subtitle">{{ . }}</p>{{ end }}
+            {{ with $card.summary }}<p class="bbc-card__summary">{{ . | safeHTML }}</p>{{ end }}
+            {{ with $card.meta }}
+            <span class="bbc-card__meta bbc-flex-row bbc-flex-row--gap-sm bbc-flex-row--wrap">
+              {{ with .date }}<time class="bbc-card__date">{{ . }}</time>{{ end }}
+              {{ with .category }}<span class="bbc-card__category">{{ . }}</span>{{ end }}
+            </span>
+            {{ end }}
+            {{ with $card.tag }}
+            <span class="bbc-card__tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+</section>

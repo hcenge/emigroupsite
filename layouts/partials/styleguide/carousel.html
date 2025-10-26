@@ -1,0 +1,17 @@
+{{ $carousel := . }}
+<section class="bbc-styleguide__section">
+  <h2>Carousel Controls</h2>
+  <p>Use the shared classes for arrows and dots to keep carousel UI consistent between news and group photos.</p>
+  <div class="bbc-styleguide__carousel-demo">
+    <div class="bbc-flex-row bbc-flex-row--gap-lg">
+      <button class="bbc-carousel-button" aria-label="{{ $carousel.arrows.prev_label }}">‹</button>
+      <button class="bbc-carousel-button" aria-label="{{ $carousel.arrows.next_label }}">›</button>
+    </div>
+    <div class="bbc-styleguide__dots">
+      {{ $dots := default 3 $carousel.dots }}
+      {{ range $i, $_ := seq $dots }}
+        <button class="bbc-group-photos-carousel__dot {{ if eq $i 0 }}bbc-group-photos-carousel__dot--active{{ end }}" aria-label="Carousel dot {{ add $i 1 }}"></button>
+      {{ end }}
+    </div>
+  </div>
+</section>

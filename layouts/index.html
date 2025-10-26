@@ -64,10 +64,10 @@
                     <img src="{{ . }}" alt="{{ $.Title }} illustration">
                   </figure>
                   {{ end }}
-                  <div class="bbc-card__body">
+                  <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
                     <h3 class="bbc-card__title">{{ .Title }}</h3>
                     {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-                    <span class="bbc-card__meta">
+                    <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
                       <time class="bbc-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
                     </span>
                   </div>
@@ -78,8 +78,8 @@
           </div>
         </div>
         <div class="bbc-news-carousel__controls">
-          <button class="bbc-news-carousel__button bbc-news-carousel__button--prev" aria-label="Previous">‹</button>
-          <button class="bbc-news-carousel__button bbc-news-carousel__button--next" aria-label="Next">›</button>
+          <button class="bbc-carousel-button bbc-news-carousel__button bbc-news-carousel__button--prev" aria-label="Previous">‹</button>
+          <button class="bbc-carousel-button bbc-news-carousel__button bbc-news-carousel__button--next" aria-label="Next">›</button>
         </div>
         <div class="bbc-news-carousel__dots"></div>
       </div>

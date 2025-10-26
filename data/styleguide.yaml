@@ -1,0 +1,47 @@
+cards:
+  - title: "Base Card"
+    modifier: ""
+    image: "/images/people/may-rainbird.jpg"
+    summary: "Use for default listing cards showing title, summary and meta content."
+    meta:
+      date: "15 January 2025"
+      category: "Category"
+  - title: "Hero Card"
+    modifier: "hero"
+    image: "/images/group_photos/group_photo_aug2022.png"
+    summary: "Add `bbc-card--hero` for feature cards that span multiple columns."
+  - title: "Profile Card"
+    modifier: "profile"
+    image: "/images/people/may-rainbird.jpg"
+    subtitle: "Short subtitle text"
+  - title: "Project Card"
+    modifier: "project"
+    image: "/images/projects/thermocatalysis_cell.png"
+    summary: "Use `bbc-card--project` for position and project listings."
+    tag: "research area"
+
+pi:
+  name: "Professor Example"
+  role: "Group Lead"
+  email: "example@materials.ox.ac.uk"
+  photo: "/images/people/robert-weatherup.png"
+  bio:
+    - "Copy pulled from the PI content will render here. Add `bbc-card--pi` to reuse the featured layout."
+    - "Combine with utilities like `bbc-stack` to control spacing."
+
+utilities:
+  - title: "Flex Stack"
+    description: "Apply `bbc-stack` with a gap modifier to stack content vertically."
+    code: "&lt;div class=\"bbc-stack bbc-stack--gap-sm\"&gt;…&lt;/div&gt;"
+  - title: "Row Utilities"
+    description: "Use `bbc-flex-row` (with optional `bbc-flex-row--wrap`) for inline meta information."
+    code: "&lt;div class=\"bbc-flex-row bbc-flex-row--gap-sm bbc-flex-row--wrap\"&gt;…&lt;/div&gt;"
+  - title: "Responsive Grid"
+    description: "`bbc-grid` automatically adapts via CSS custom properties; add `bbc-grid--stack` for auto-fit columns."
+    code: "&lt;div class=\"bbc-grid bbc-grid--stack\"&gt;…&lt;/div&gt;"
+
+carousel:
+  arrows:
+    prev_label: "Previous"
+    next_label: "Next"
+  dots: 3

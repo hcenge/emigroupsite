@@ -10,7 +10,7 @@
     {{ range .Pages }}
     <article class="bbc-card bbc-card--compact">
       <a class="bbc-card__link" href="{{ .RelPermalink }}">
-        <div class="bbc-card__body">
+        <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
           <h2 class="bbc-card__title">{{ .Title }}</h2>
           {{ with .Summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
         </div>

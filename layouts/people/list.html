@@ -29,17 +29,17 @@
     {{ if gt (len $people) 0 }}
       {{ if and (eq .key "pi") (eq (len $people) 1) }}
         {{ $pi := index $people 0 }}
-        <a class="bbc-people__pi" href="{{ $pi.RelPermalink }}">
+        <a class="bbc-card bbc-card--pi" href="{{ $pi.RelPermalink }}">
           {{ with $pi.Params.photo }}
-          <figure class="bbc-people__pi-photo">
+          <figure class="bbc-card__media bbc-card--pi__media">
             <img src="{{ . }}" alt="{{ $pi.Title }} portrait">
           </figure>
           {{ end }}
-          <div class="bbc-people__pi-body">
-            <h2>{{ $pi.Title }}</h2>
+          <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">
+            <h2 class="bbc-card__title bbc-card--pi__title">{{ $pi.Title }}</h2>
             {{ with $pi.Params.tagline }}<p class="bbc-people__pi-role">{{ . }}</p>{{ end }}
             {{ with $pi.Params.email }}<p class="bbc-people__pi-contact">{{ . }}</p>{{ end }}
-            <div class="bbc-people__pi-bio">{{ $pi.Content }}</div>
+            <div class="bbc-people__pi-bio bbc-stack bbc-stack--gap-sm">{{ $pi.Content }}</div>
             <span class="bbc-people__pi-link">View full profile →</span>
           </div>
         </a>
@@ -71,11 +71,13 @@
         {{ end }}
       </div>
       <div class="bbc-group-photos-carousel__controls">
-        <button class="bbc-group-photos-carousel__button bbc-group-photos-carousel__button--prev" aria-label="Previous">‹</button>
-        <button class="bbc-group-photos-carousel__button bbc-group-photos-carousel__button--next" aria-label="Next">›</button>
+        <button class="bbc-carousel-button bbc-group-photos-carousel__button bbc-group-photos-carousel__button--prev" aria-label="Previous">‹</button>
+        <button class="bbc-carousel-button bbc-group-photos-carousel__button bbc-group-photos-carousel__button--next" aria-label="Next">›</button>
       </div>
-      <p class="bbc-group-photos-carousel__date"></p>
-      <div class="bbc-group-photos-carousel__dots"></div>
+      <div class="bbc-group-photos-carousel__meta">
+        <p class="bbc-group-photos-carousel__date"></p>
+        <div class="bbc-group-photos-carousel__dots"></div>
+      </div>
     </div>
   </div>
   {{ end }}

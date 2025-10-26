@@ -1,0 +1,17 @@
+{{ $utilities := . }}
+<section class="bbc-styleguide__section">
+  <h2>Grids & Utilities</h2>
+  <div class="bbc-grid bbc-grid--stack">
+    {{ range $utilities }}
+    <div class="bbc-card">
+      <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
+        <h3 class="bbc-card__title">{{ .title }}</h3>
+        <p class="bbc-card__summary">{{ .description }}</p>
+        {{ with .code }}
+        <pre><code>{{ . | safeHTML }}</code></pre>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>

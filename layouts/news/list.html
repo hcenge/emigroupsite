@@ -19,10 +19,10 @@
           <img src="{{ . }}" alt="{{ $.Title }} hero image">
         </figure>
         {{ end }}
-        <div class="bbc-card__body">
+        <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
           <h2 class="bbc-card__title">{{ .Title }}</h2>
           {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-          <span class="bbc-card__meta">
+          <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
             {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
           </span>
         </div>
@@ -39,10 +39,10 @@
             <img src="{{ . }}" alt="{{ $.Title }} illustration">
           </figure>
           {{ end }}
-          <div class="bbc-card__body">
+          <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
             <h3 class="bbc-card__title">{{ .Title }}</h3>
             {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta">
+            <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
               {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
             </span>
           </div>
@@ -60,10 +60,10 @@
             <img src="{{ . }}" alt="{{ $.Title }} illustration">
           </figure>
           {{ end }}
-          <div class="bbc-card__body">
+          <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
             <h4 class="bbc-card__title">{{ .Title }}</h4>
             {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta">
+            <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
               {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
             </span>
           </div>

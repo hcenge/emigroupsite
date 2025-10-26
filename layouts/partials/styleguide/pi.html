@@ -1,0 +1,22 @@
+{{ $pi := . }}
+<section class="bbc-styleguide__section">
+  <h2>People: Principal Investigator Feature</h2>
+  <a class="bbc-card bbc-card--pi" href="#">
+    {{ with $pi.photo }}
+    <figure class="bbc-card__media bbc-card--pi__media">
+      <img src="{{ . }}" alt="{{ $pi.name }}">
+    </figure>
+    {{ end }}
+    <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">
+      <h3 class="bbc-card__title bbc-card--pi__title">{{ $pi.name }}</h3>
+      {{ with $pi.role }}<p class="bbc-people__pi-role">{{ . }}</p>{{ end }}
+      {{ with $pi.email }}<p class="bbc-people__pi-contact">{{ . }}</p>{{ end }}
+      {{ with $pi.bio }}
+      <div class="bbc-people__pi-bio bbc-stack bbc-stack--gap-sm">
+        {{ range . }}<p>{{ . | safeHTML }}</p>{{ end }}
+      </div>
+      {{ end }}
+      <span class="bbc-people__pi-link">View full profile →</span>
+    </div>
+  </a>
+</section>
