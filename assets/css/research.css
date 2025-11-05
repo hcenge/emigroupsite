@@ -76,7 +76,7 @@ a:focus {
 
 .bbc-topbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0.75rem 2rem;
   background: var(--bbc-white);
@@ -126,6 +126,8 @@ a:focus {
   align-items: center;
   gap: 0.3rem;
   font-weight: 700;
+  flex: 1;
+  min-width: 0;
 }
 
 .bbc-logo {
@@ -174,6 +176,45 @@ a:focus {
 .bbc-site {
   font-size: 1.1rem;
   letter-spacing: 0.02em;
+}
+
+.bbc-header-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 0;
+  justify-content: flex-end;
+}
+
+.bbc-oxford-logo,
+.bbc-materials-logo {
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  max-width: 100px;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity var(--bbc-transition);
+}
+
+.bbc-oxford-logo:hover,
+.bbc-materials-logo:hover {
+  opacity: 0.85;
+}
+
+.bbc-oxford-logo picture,
+.bbc-materials-logo picture {
+  height: 100%;
+  display: flex;
+}
+
+.bbc-oxford-logo img,
+.bbc-materials-logo img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 .bbc-nav {
@@ -330,6 +371,7 @@ a:focus {
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -400,6 +442,7 @@ a:focus {
   font-size: 0.98rem;
   line-height: 1.45;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .bbc-card--compact {
@@ -444,6 +487,7 @@ a:focus {
 .bbc-card--carousel .bbc-card__summary {
   font-size: 0.9rem;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .bbc-card--carousel .bbc-card__meta {
@@ -646,7 +690,7 @@ a:focus {
 
 .bbc-research-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -696,6 +740,7 @@ a:focus {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .bbc-card--pi__body {
@@ -1470,6 +1515,34 @@ a:focus {
   font-size: 0.9rem;
 }
 
+.bbc-sponsors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.bbc-sponsors__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-sponsors__logo img {
+  display: block;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--bbc-transition), opacity var(--bbc-transition);
+}
+
+.bbc-sponsors__logo:hover img {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
 .bbc-article {
   background: var(--bbc-white);
   border: 1px solid var(--bbc-grey);
@@ -1623,6 +1696,14 @@ a:focus {
     font-size: 2rem;
   }
 
+  .bbc-people__pi-bio {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .bbc-grid {
     --bbc-grid-columns: 1;
   }
@@ -1650,12 +1731,12 @@ a:focus {
   }
 
   .bbc-card--pi {
-    grid-template-columns: 1fr;
+    grid-template-columns: 35% 1fr;
+    gap: 1rem;
   }
 
   .bbc-card--pi__media {
-    max-width: 360px;
-    margin: 0 auto;
+    margin: 0;
     height: 100%;
   }
 
@@ -1694,6 +1775,7 @@ a:focus {
   .bbc-card--hero .bbc-card__summary {
     font-size: 0.88rem;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .bbc-card__title {
@@ -1757,7 +1839,6 @@ a:focus {
   .bbc-nav a {
     width: 100%;
     padding: 0.75rem 1.5rem;
-    border-bottom: 1px solid var(--bbc-grey);
     font-size: 0.95rem;
   }
 
@@ -1848,6 +1929,16 @@ a:focus {
 
   .bbc-news-carousel__title {
     font-size: 1.5rem;
+  }
+
+  .bbc-header-logos {
+    gap: 0.75rem;
+  }
+
+  .bbc-oxford-logo,
+  .bbc-materials-logo {
+    height: 4rem;
+    /* max-width: 80px; */
   }
 }
 
@@ -1972,10 +2063,24 @@ a:focus {
     max-width: none;
   }
 
+  .bbc-card--pi {
+    grid-template-columns: 30% 1fr;
+    gap: 0.75rem;
+  }
+
   .bbc-card--pi__media {
-    max-width: none;
     margin: 0;
-    height: auto;
+    height: 100%;
+  }
+
+  .bbc-card--pi__body {
+    padding: 1rem;
+  }
+
+  .bbc-oxford-logo,
+  .bbc-materials-logo {
+    height: 1.9rem;
+    /* max-width: 60px; */
   }
 }
 .bbc-styleguide__section {

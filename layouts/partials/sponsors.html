@@ -1,0 +1,11 @@
+{{ with site.Data.sponsors.sponsors }}
+  {{ if gt (len .) 0 }}
+  <div class="bbc-sponsors">
+    {{ range . }}
+      <a class="bbc-sponsors__logo" href="{{ .url }}" target="_blank" rel="noopener">
+        <img src="{{ .image }}" alt="{{ .name }}">
+      </a>
+    {{ end }}
+  </div>
+  {{ end }}
+{{ end }}

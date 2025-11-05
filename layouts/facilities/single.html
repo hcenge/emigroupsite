@@ -1,0 +1,47 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "main" }}
+<article class="bbc-article">
+  <header class="bbc-article__header">
+    <div class="bbc-article__titleblock">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.category }}<p class="bbc-article__category">{{ . }}</p>{{ end }}
+    </div>
+    {{ $pages := sort (where .Site.RegularPages "Section" "facilities") "Params.weight" "asc" }}
+    {{ $count := len $pages }}
+    {{ if gt $count 1 }}
+      {{ $scratch := newScratch }}
+      {{ $scratch.Set "position" -1 }}
+      {{ range $i, $p := $pages }}
+        {{ if eq $p.RelPermalink $.RelPermalink }}
+          {{ $scratch.Set "position" $i }}
+        {{ end }}
+      {{ end }}
+      {{ $position := $scratch.Get "position" }}
+      {{ if ge $position 0 }}
+        {{ $prevIndex := mod (add (sub $position 1) $count) $count }}
+        {{ $nextIndex := mod (add $position 1) $count }}
+        {{ $prev := index $pages $prevIndex }}
+        {{ $next := index $pages $nextIndex }}
+        <nav class="research-pager">
+          <a class="research-pager__link prev" href="{{ $prev.RelPermalink }}" aria-label="Previous facility">
+            <span class="arrow">←</span>
+            <span class="label">{{ $prev.Title }}</span>
+          </a>
+          <a class="research-pager__link next" href="{{ $next.RelPermalink }}" aria-label="Next facility">
+            <span class="label">{{ $next.Title }}</span>
+            <span class="arrow">→</span>
+          </a>
+        </nav>
+      {{ end }}
+    {{ end }}
+  </header>
+  {{ with .Params.image }}
+  <figure class="bbc-article__media">
+    <img src="{{ . }}" alt="{{ $.Title }}">
+  </figure>
+  {{ end }}
+  <div class="bbc-article__body">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

@@ -25,6 +25,20 @@
           <span class="bbc-logo__word">nterfaces</span>
         </a>
       </div>
+      <div class="bbc-header-logos">
+        <a href="https://www.materials.ox.ac.uk/" class="bbc-materials-logo" target="_blank" rel="noopener" aria-label="Department of Materials, University of Oxford">
+          <picture>
+            <source media="(max-width: 900px)" srcset="/images/materials-logo-small.png">
+            <img src="/images/materials-logo.png" alt="Department of Materials">
+          </picture>
+        </a>
+        <a href="https://www.ox.ac.uk" class="bbc-oxford-logo" target="_blank" rel="noopener" aria-label="University of Oxford">
+          <picture>
+            <source media="(max-width: 900px)" srcset="/images/oxford-logo-small.png">
+            <img src="/images/oxford-logo.png" alt="University of Oxford">
+          </picture>
+        </a>
+      </div>
     </header>
     {{ with site.Menus.main }}
     <nav class="bbc-nav" id="main-nav">
@@ -37,6 +51,7 @@
       {{ block "main" . }}{{ end }}
     </main>
     <footer class="bbc-footer">
+      {{ partial "sponsors.html" . }}
       <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</p>
     </footer>
     <script>

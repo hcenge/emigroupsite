@@ -1,10 +1,53 @@
 {{ define "title" }}{{ .Title }}{{ end }}
 {{ define "main" }}
-<section class="bbc-facilities">
+<section class="bbc-research">
   <h1 class="bbc-heading">{{ .Title }}</h1>
 
-  <div class="bbc-facilities__content">
-    {{ .Content }}
+  {{ with .Content }}
+  <div class="bbc-generic-content">
+    {{ . }}
   </div>
+  {{ end }}
+
+  {{ $allPages := sort .Pages "Params.weight" "asc" }}
+  {{ if gt (len $allPages) 0 }}
+    {{ range .Params.sections }}
+      {{ $sectionLocation := .location }}
+      {{ $sectionPages := where $allPages "Params.location" $sectionLocation }}
+
+      {{ if gt (len $sectionPages) 0 }}
+      <div class="bbc-people__group">
+        <div class="bbc-people__group-head">
+          <h2>{{ .name }}</h2>
+          {{ if .show_count }}
+          <span class="bbc-people__count">{{ len $sectionPages }}</span>
+          {{ end }}
+        </div>
+        <div class="bbc-research-grid">
+          {{ range $sectionPages }}
+          <article class="bbc-card bbc-card--project">
+            <a class="bbc-card__link" href="{{ .RelPermalink }}">
+              {{ with .Params.image }}
+              <figure class="bbc-card__media">
+                <img src="{{ . }}" alt="{{ $.Title }}">
+              </figure>
+              {{ end }}
+              <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
+                <h3 class="bbc-card__title">{{ .Title }}</h3>
+                {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
+                {{ with .Params.category }}
+                <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
+                  <span class="bbc-card__category">{{ . }}</span>
+                </span>
+                {{ end }}
+              </div>
+            </a>
+          </article>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+  {{ end }}
 </section>
 {{ end }}

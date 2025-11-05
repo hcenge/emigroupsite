@@ -1,5 +1,7 @@
 # Deployment Guide
 
+These are instructions for deploying this site for testing on Hugo (running on a local port), and subsequently on Cloudflare workers. Likely this will cease to be relevant after the website is properly deployed.
+
 ## Local Development
 
 1. Enter the Nix development environment:
