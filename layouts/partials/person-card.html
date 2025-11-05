@@ -1,10 +1,13 @@
 {{ $person := . }}
-<article class="bbc-card bbc-card--profile">
+{{ $isAlumni := eq $person.Params.role "alumni" }}
+<article class="bbc-card bbc-card--profile{{ if $isAlumni }} bbc-card--alumni{{ end }}">
   <a class="bbc-card__link" href="{{ $person.RelPermalink }}">
-    {{ with $person.Params.photo }}
-    <figure class="bbc-card__media">
-      <img src="{{ . }}" alt="{{ $person.Title }} portrait">
-    </figure>
+    {{ if not $isAlumni }}
+      {{ with $person.Params.photo }}
+      <figure class="bbc-card__media">
+        <img src="{{ . }}" alt="{{ $person.Title }} portrait">
+      </figure>
+      {{ end }}
     {{ end }}
     <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
       <h3 class="bbc-card__title">{{ $person.Title }}</h3>

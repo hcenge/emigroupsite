@@ -475,6 +475,85 @@ a:focus {
   font-size: 1.15rem;
 }
 
+/* Alumni grid - full width layout */
+.bbc-people__grid--alumni {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  grid-template-columns: none !important;
+  max-height: 5000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+/* Collapsed state */
+.bbc-people__grid--collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+}
+
+/* Collapsible toggle button */
+.bbc-people__group-head--toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.bbc-people__group-head--toggle:hover h2 {
+  color: var(--bbc-red);
+}
+
+.bbc-people__group-head-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.bbc-people__toggle-icon {
+  font-size: 1rem;
+  color: var(--bbc-red);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Alumni card - minimal style without photos */
+.bbc-card--alumni {
+  border: none;
+  border-top: 1px solid var(--bbc-grey);
+  border-bottom: 1px solid var(--bbc-grey);
+  border-radius: 0;
+  margin-bottom: -1px;
+  transition: border-color var(--bbc-transition), background-color var(--bbc-transition);
+}
+
+.bbc-card--alumni:hover {
+  border-top-color: var(--bbc-red);
+  border-bottom-color: var(--bbc-red);
+  background-color: var(--bbc-light-grey);
+  transform: none;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.bbc-card--alumni .bbc-card__body {
+  padding: 1.25rem 0;
+}
+
+.bbc-card--alumni .bbc-card__title {
+  font-size: 1.05rem;
+}
+
+.bbc-card--alumni .bbc-card__subtitle {
+  font-size: 0.9rem;
+}
+
 .bbc-card--carousel .bbc-card__body {
   padding: 1rem 1rem 1.1rem;
   gap: 0.75rem;
@@ -2064,17 +2143,18 @@ a:focus {
   }
 
   .bbc-card--pi {
-    grid-template-columns: 30% 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .bbc-card--pi__media {
     margin: 0;
-    height: 100%;
+    height: auto;
+    max-height: 400px;
   }
 
   .bbc-card--pi__body {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .bbc-oxford-logo,

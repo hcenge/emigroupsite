@@ -93,13 +93,16 @@
       {{ end }}
       {{ $people := $scratch.Get "people" }}
       {{ if gt (len $people) 0 }}
-      <section class="bbc-people__group">
-        <div class="bbc-people__group-head">
-          <h2>{{ .title }}</h2>
-          <span class="bbc-people__count">{{ len $people }}</span>
-        </div>
-        <div class="bbc-people__grid">
-          {{ range sort $people "Params.join_year" "asc" }}
+      <section class="bbc-people__group bbc-people__group--collapsible">
+        <button class="bbc-people__group-head bbc-people__group-head--toggle" onclick="toggleAlumni(this)">
+          <div class="bbc-people__group-head-content">
+            <h2>{{ .title }}</h2>
+            <span class="bbc-people__count">{{ len $people }}</span>
+          </div>
+          <span class="bbc-people__toggle-icon">▼</span>
+        </button>
+        <div class="bbc-people__grid bbc-people__grid--alumni bbc-people__grid--collapsed">
+          {{ range sort $people "Params.end_year" "desc" }}
             {{ partial "person-card.html" . }}
           {{ end }}
         </div>
@@ -108,4 +111,19 @@
     {{ end }}
   {{ end }}
 </section>
+
+<script>
+function toggleAlumni(button) {
+  const grid = button.nextElementSibling;
+  const icon = button.querySelector('.bbc-people__toggle-icon');
+
+  if (grid.classList.contains('bbc-people__grid--collapsed')) {
+    grid.classList.remove('bbc-people__grid--collapsed');
+    icon.style.transform = 'rotate(180deg)';
+  } else {
+    grid.classList.add('bbc-people__grid--collapsed');
+    icon.style.transform = 'rotate(0deg)';
+  }
+}
+</script>
 {{ end }}
