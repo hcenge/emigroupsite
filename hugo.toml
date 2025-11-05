@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'EMI Research Group'
+title = 'Weatherup Group'
 staticDir = ['static']
 ignoreLogs = ['warning-goldmark-raw-html']
 
@@ -48,10 +48,10 @@ ignoreLogs = ['warning-goldmark-raw-html']
     pageRef = '/people'
     weight = 20
 
-  [[menu.main]]
-    name = 'News'
-    pageRef = '/news'
-    weight = 22
+  # [[menu.main]]
+  #   name = 'News'
+  #   pageRef = '/news'
+  #   weight = 22
 
   [[menu.main]]
     name = 'Facilities'
