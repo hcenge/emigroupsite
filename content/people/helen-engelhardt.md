@@ -18,3 +18,5 @@ Helen joined the group as a DPhil student in October 2024, supported by the Clar
 During undergrad, Helen researched CO2 reduction electrochemistry, synthesis of various shapes of gold nanoparticles, and the electrochemical stability of gold nanoparticle catalysts with the Klinkova lab. She also spent 4 months studying metal foil battery electrodes at NRC-Nano with the Fleischauer group. Helen has also interned in industry: she spent 8 months working on separation of Co and Ni for battery recycling at SiTration, and 8 months in microfluidics design for nanomedicine at Precision Nanosystems.
 
 Outside of lab, you might find Helen hiking, playing violin, or knitting a sweater.
+
+(testing website here)
