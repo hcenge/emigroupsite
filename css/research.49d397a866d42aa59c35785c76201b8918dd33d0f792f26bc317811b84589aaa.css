@@ -1,0 +1,2206 @@
+:root {
+  /* Brand Colors */
+  --bbc-red: #0d8306;
+  --bbc-blue: #1172c2;
+
+  /* Neutrals */
+  --bbc-black: #0d0d0d;
+  --bbc-white: #fff;
+  --bbc-true-black: #000;
+  --bbc-grey: #dcdcdc;
+  --bbc-light-grey: #f2f2f2;
+  --bbc-dark-grey: #5a5a5a;
+  --bbc-medium-grey: #3d3d3d;
+  --bbc-text-color: #2c2c2c;
+  --bbc-text-secondary: #555;
+
+  /* Typography */
+  --bbc-font: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+
+  /* Utilities */
+  --bbc-border-radius-sm: 0.25rem;
+  --bbc-border-radius-md: 0.4rem;
+  --bbc-border-radius-full: 999px;
+  --bbc-transition: 0.2s ease;
+  --bbc-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+body.bbc-shell {
+  margin: 0;
+  background: var(--bbc-white);
+  color: var(--bbc-black);
+  font-family: var(--bbc-font);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--bbc-red);
+}
+
+a:hover,
+a:focus {
+  color: var(--bbc-red);
+}
+
+/* Layout utilities */
+.bbc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbc-stack-gap, 1rem);
+}
+
+.bbc-stack--gap-xs { --bbc-stack-gap: 0.35rem; }
+.bbc-stack--gap-sm { --bbc-stack-gap: 0.6rem; }
+.bbc-stack--gap-md { --bbc-stack-gap: 1rem; }
+.bbc-stack--gap-lg { --bbc-stack-gap: 1.5rem; }
+
+.bbc-flex-row {
+  display: flex;
+  align-items: center;
+  gap: var(--bbc-row-gap, 0.75rem);
+}
+
+.bbc-flex-row--wrap {
+  flex-wrap: wrap;
+}
+
+.bbc-flex-row--gap-sm { --bbc-row-gap: 0.5rem; }
+.bbc-flex-row--gap-lg { --bbc-row-gap: 1.25rem; }
+
+.bbc-grid-auto {
+  display: grid;
+  gap: var(--bbc-grid-gap, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(var(--bbc-grid-min, 240px), 1fr));
+}
+
+.bbc-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background: var(--bbc-white);
+  border-bottom: 1px solid var(--bbc-grey);
+  position: relative;
+}
+
+/* Hamburger Menu */
+.bbc-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.bbc-hamburger span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--bbc-red);
+  transition: all 0.3s ease;
+}
+
+.bbc-hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.bbc-hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.bbc-hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.bbc-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+}
+
+.bbc-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.bbc-logo__block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--bbc-red);
+  color: var(--bbc-white);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  border-radius: var(--bbc-border-radius-md);
+}
+
+.bbc-logo__word {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--bbc-red);
+  letter-spacing: 0.02em;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width 0.4s ease, opacity 0.3s ease;
+  margin-left: -0.3rem;
+}
+
+.bbc-logo:hover .bbc-logo__word {
+  max-width: 10rem;
+  opacity: 1;
+  margin-left: 0;
+}
+
+.bbc-site {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.bbc-header-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 0;
+  justify-content: flex-end;
+}
+
+.bbc-oxford-logo,
+.bbc-materials-logo {
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  max-width: 100px;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity var(--bbc-transition);
+}
+
+.bbc-oxford-logo:hover,
+.bbc-materials-logo:hover {
+  opacity: 0.85;
+}
+
+.bbc-oxford-logo picture,
+.bbc-materials-logo picture {
+  height: 100%;
+  display: flex;
+}
+
+.bbc-oxford-logo img,
+.bbc-materials-logo img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.bbc-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem 2rem;
+  background: var(--bbc-white);
+  border-bottom: 1px solid var(--bbc-grey);
+}
+
+.bbc-nav a {
+  font-weight: 600;
+  color: var(--bbc-black);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.bbc-nav a:hover {
+  color: var(--bbc-red);
+}
+
+.bbc-main {
+  padding: 1.5rem 2rem 2.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.bbc-research {
+  padding-top: 0.5rem;
+}
+
+.bbc-heading {
+  font-size: 2.1rem;
+  margin: 0 0 1.25rem;
+  font-weight: 700;
+}
+
+.bbc-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(var(--bbc-grid-columns, 1), minmax(0, 1fr));
+}
+
+.bbc-grid--split {
+  --bbc-grid-columns: 1;
+}
+
+.bbc-grid--stack {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.bbc-grid__column {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(var(--bbc-grid-column-count, 1), minmax(0, 1fr));
+}
+
+.bbc-grid__column--stack {
+  --bbc-grid-column-count: auto-fit;
+  --bbc-grid-min: 240px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--bbc-grid-min, 240px), 1fr));
+}
+
+.bbc-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bbc-white);
+  border: 1px solid var(--bbc-grey);
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform var(--bbc-transition), border-color var(--bbc-transition), box-shadow var(--bbc-transition);
+}
+
+.bbc-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--bbc-red);
+  box-shadow: var(--bbc-box-shadow);
+}
+
+.bbc-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bbc-card__media {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--bbc-light-grey);
+  border-bottom: 1px solid var(--bbc-grey);
+  transition: border-color var(--bbc-transition);
+  flex-shrink: 0;
+}
+
+.bbc-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-card:hover .bbc-card__media {
+  border-bottom-color: var(--bbc-red);
+}
+
+.bbc-card__body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.bbc-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--bbc-black);
+  transition: color var(--bbc-transition);
+}
+
+.bbc-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bbc-card__title a:hover {
+  color: var(--bbc-red);
+}
+
+.bbc-card:hover .bbc-card__title {
+  color: var(--bbc-red);
+}
+
+.bbc-card__subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--bbc-medium-grey);
+  line-height: 1.4;
+}
+
+.bbc-card__summary {
+  margin: 0;
+  color: var(--bbc-medium-grey);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bbc-card__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--bbc-text-secondary);
+  line-height: 1.4;
+}
+
+.bbc-card__meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-card__meta span,
+.bbc-card__meta time {
+  display: inline-flex;
+  align-items: center;
+}
+
+.bbc-card__date {
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-card__category {
+  color: var(--bbc-red);
+  font-weight: 700;
+}
+
+.bbc-card__tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bbc-card__live {
+  color: var(--bbc-blue);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.bbc-card--hero {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-left-width: 4px;
+  border-left-color: var(--bbc-light-grey);
+  box-shadow: none;
+}
+
+.bbc-card--hero:hover {
+  border-left-color: var(--bbc-red);
+}
+
+.bbc-card--hero .bbc-card__body {
+  padding: 1.75rem;
+}
+
+.bbc-card--hero .bbc-card__summary {
+  font-size: 0.98rem;
+  line-height: 1.45;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.bbc-card--compact {
+  font-size: 0.95rem;
+}
+
+.bbc-card--compact .bbc-card__body {
+  padding: 0.9rem 1rem 1.1rem;
+  gap: 0.6rem;
+}
+
+.bbc-card--compact .bbc-card__title {
+  font-size: 1.05rem;
+}
+
+.bbc-card--profile {
+  overflow: hidden;
+}
+
+.bbc-card--profile .bbc-card__media {
+  aspect-ratio: 4 / 3;
+}
+
+.bbc-card--profile .bbc-card__body {
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.bbc-card--profile .bbc-card__title {
+  font-size: 1.15rem;
+}
+
+/* Alumni grid - full width layout */
+.bbc-people__grid--alumni {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  grid-template-columns: none !important;
+  max-height: 5000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+/* Collapsed state */
+.bbc-people__grid--collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+}
+
+/* Collapsible toggle button */
+.bbc-people__group-head--toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.bbc-people__group-head--toggle:hover h2 {
+  color: var(--bbc-red);
+}
+
+.bbc-people__group-head-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.bbc-people__toggle-icon {
+  font-size: 1rem;
+  color: var(--bbc-red);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Alumni card - minimal style without photos */
+.bbc-card--alumni {
+  border: none;
+  border-top: 1px solid var(--bbc-grey);
+  border-bottom: 1px solid var(--bbc-grey);
+  border-radius: 0;
+  margin-bottom: -1px;
+  transition: border-color var(--bbc-transition), background-color var(--bbc-transition);
+}
+
+.bbc-card--alumni:hover {
+  border-top-color: var(--bbc-red);
+  border-bottom-color: var(--bbc-red);
+  background-color: var(--bbc-light-grey);
+  transform: none;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.bbc-card--alumni .bbc-card__body {
+  padding: 1.25rem 0;
+}
+
+.bbc-card--alumni .bbc-card__title {
+  font-size: 1.05rem;
+}
+
+.bbc-card--alumni .bbc-card__subtitle {
+  font-size: 0.9rem;
+}
+
+.bbc-card--carousel .bbc-card__body {
+  padding: 1rem 1rem 1.1rem;
+  gap: 0.75rem;
+}
+
+.bbc-card--carousel .bbc-card__title {
+  font-size: 1.1rem;
+}
+
+.bbc-card--carousel .bbc-card__summary {
+  font-size: 0.9rem;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.bbc-card--carousel .bbc-card__meta {
+  margin-top: auto;
+  justify-content: flex-start;
+}
+
+.bbc-card--carousel .bbc-card__media {
+  aspect-ratio: 16 / 9;
+}
+
+.bbc-card--aside {
+  border-left-width: 3px;
+  border-left-color: var(--bbc-light-grey);
+  padding-left: 0.75rem;
+  box-shadow: none;
+}
+
+.bbc-card--aside:hover {
+  border-left-color: var(--bbc-red);
+  box-shadow: none;
+}
+
+.bbc-card--project .bbc-card__media {
+  aspect-ratio: auto;
+  height: 160px;
+  background: var(--bbc-true-black);
+}
+
+.bbc-card--project .bbc-card__body {
+  padding: 1.2rem 1.2rem 1rem;
+  gap: 0.75rem;
+}
+
+.bbc-generic-list {
+  background: transparent;
+}
+
+.bbc-generic-content {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+  line-height: 1.7;
+}
+
+.bbc-facilities__content {
+  max-width: 900px;
+  line-height: 1.7;
+  color: var(--bbc-text-color);
+}
+
+.bbc-facilities__content h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: var(--bbc-black);
+  border-bottom: 3px solid var(--bbc-red);
+  padding-bottom: 0.5rem;
+}
+
+.bbc-facilities__content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--bbc-black);
+}
+
+.bbc-facilities__content p {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+}
+
+.bbc-facilities__content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.bbc-facilities__content ul li {
+  padding: 0.75rem 0 0.75rem 1.5rem;
+  border-left: 3px solid var(--bbc-light-grey);
+  margin-bottom: 0.5rem;
+  transition: border-left-color 0.2s ease;
+}
+
+.bbc-facilities__content ul li:hover {
+  border-left-color: var(--bbc-red);
+}
+
+.bbc-facilities__content ul li strong {
+  color: var(--bbc-black);
+  font-weight: 700;
+}
+
+.bbc-publications__intro {
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+  line-height: 1.7;
+}
+
+.bbc-publications__list {
+  max-width: 900px;
+}
+
+
+.bbc-publication {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--bbc-grey);
+  margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.bbc-publication:hover {
+  border-left-color: var(--bbc-red);
+}
+
+.bbc-publication__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.bbc-publication__title a {
+  color: var(--bbc-black);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bbc-publication__title a:hover {
+  color: var(--bbc-red);
+}
+
+.bbc-publication__authors {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--bbc-text-secondary);
+  line-height: 1.4;
+}
+
+.bbc-publication__meta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  color: var(--bbc-dark-grey);
+  font-weight: 600;
+}
+
+.bbc-publication__venue {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-style: italic;
+}
+
+.bbc-publication__preprint {
+  color: var(--bbc-red);
+}
+
+.bbc-publication__year {
+  color: var(--bbc-red);
+}
+
+.bbc-publication__citations {
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-publications__empty {
+  background: var(--bbc-light-grey);
+  padding: 2rem;
+  border-left: 4px solid var(--bbc-red);
+  margin-top: 2rem;
+}
+
+.bbc-publications__empty p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.bbc-publications__empty pre {
+  background: var(--bbc-white);
+  padding: 1rem;
+  border: 1px solid var(--bbc-grey);
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+.bbc-generic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.bbc-research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* People directory */
+.bbc-people__header {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bbc-card--pi {
+  position: relative;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 3rem;
+}
+
+.bbc-card--pi::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background var(--bbc-transition);
+}
+
+.bbc-card--pi:hover::before {
+  background: var(--bbc-red);
+}
+
+.bbc-card--pi__media {
+  margin: 0;
+  background: var(--bbc-true-black);
+  display: flex;
+  height: 100%;
+}
+
+.bbc-card--pi__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.bbc-card--pi__body {
+  padding: 2rem;
+}
+
+.bbc-card--pi__title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.bbc-people__pi-role {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bbc-people__pi-contact {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--bbc-black);
+  font-weight: 600;
+}
+
+.bbc-people__pi-link {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+}
+
+.bbc-people__pi-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--bbc-text-color);
+}
+
+.bbc-people__intro {
+  max-width: 720px;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+  line-height: 1.7;
+}
+
+.bbc-people__group {
+  margin-bottom: 3rem;
+}
+
+.bbc-people__group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.bbc-people__group-head h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.bbc-people__count {
+  background: var(--bbc-light-grey);
+  color: var(--bbc-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--bbc-border-radius-full);
+}
+
+.bbc-people__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* Group Photos Carousel */
+.bbc-group-photos-carousel {
+  margin: 0 0 3rem 0;
+  padding: 0;
+  position: relative;
+}
+
+.bbc-group-photos-carousel__container {
+  position: relative;
+  overflow: hidden;
+  margin: 0 4rem;
+  padding: 0;
+}
+
+.bbc-group-photos-carousel__track {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.4s ease;
+}
+
+.bbc-group-photos-carousel__item {
+  flex: 0 0 100%;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bbc-group-photos-carousel__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--bbc-grey);
+}
+
+.bbc-group-photos-carousel__date {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bbc-red);
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--bbc-border-radius-sm);
+}
+
+.bbc-group-photos-carousel__controls {
+  position: static;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0 0;
+}
+
+.bbc-group-photos-carousel__dots,
+.bbc-news-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.bbc-group-photos-carousel__dot,
+.bbc-news-carousel__dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--bbc-light-grey);
+  border: 1px solid var(--bbc-grey);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.bbc-group-photos-carousel__dot--active,
+.bbc-news-carousel__dot--active {
+  background: var(--bbc-red);
+  border-color: var(--bbc-red);
+}
+
+.bbc-group-photos-carousel__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.bbc-group-photos-carousel__date {
+  position: static;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.95rem;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-carousel-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: none;
+  background: transparent;
+  color: var(--bbc-black);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.bbc-carousel-button:hover {
+  color: var(--bbc-red);
+}
+
+.bbc-carousel-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-person {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bbc-person__header {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.bbc-person__photo {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--bbc-grey);
+}
+
+.bbc-person__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-person__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bbc-person__name {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.bbc-person__role {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bbc-red);
+}
+
+.bbc-person__tagline {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+  line-height: 1.5;
+}
+
+.bbc-person__contacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+}
+
+.bbc-person__contacts div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bbc-person__contacts dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-person__contacts dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.bbc-person__contacts a {
+  color: var(--bbc-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bbc-person__interests,
+.bbc-person__projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bbc-person__interests h2,
+.bbc-person__projects h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bbc-black);
+}
+
+.bbc-person__interests p,
+.bbc-person__projects ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bbc-person__interests p {
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+}
+
+.bbc-person__projects ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bbc-person__projects li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--bbc-grey);
+  color: var(--bbc-black);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.bbc-person__projects li a:hover {
+  color: var(--bbc-red);
+  border-color: var(--bbc-red);
+}
+
+.bbc-person__bio {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--bbc-text-color);
+}
+
+.research-team {
+  margin-top: 2rem;
+}
+
+.research-team h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.research-team__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.research-team__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--bbc-grey);
+  color: var(--bbc-black);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.research-team__link:hover {
+  border-color: var(--bbc-red);
+  color: var(--bbc-red);
+}
+
+/* Positions */
+.bbc-positions__intro {
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+  line-height: 1.7;
+}
+
+.bbc-positions__section {
+  margin-top: 2.5rem;
+}
+
+.bbc-positions__section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.bbc-positions__section-head h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.bbc-positions__count {
+  background: var(--bbc-light-grey);
+  color: var(--bbc-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--bbc-border-radius-full);
+}
+
+.bbc-positions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.bbc-home {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.bbc-hero {
+  background: var(--bbc-light-grey);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 4px solid var(--bbc-red);
+}
+
+.bbc-hero__title {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--bbc-black);
+}
+
+.bbc-hero__tagline {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--bbc-medium-grey);
+  line-height: 1.3;
+}
+
+.bbc-hero-banner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.bbc-hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.bbc-hero-banner__overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.bbc-hero-banner__title {
+  margin: 0 0 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--bbc-white);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.bbc-hero-banner__tagline {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--bbc-white);
+  line-height: 1.3;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Parallax Banner */
+.bbc-hero-banner-parallax {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 500px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.bbc-hero-banner-parallax__bg {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  will-change: transform;
+}
+
+.bbc-hero-banner-parallax__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.bbc-hero-banner-parallax__logo {
+  margin-bottom: 2rem;
+  animation: fadeInDown 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bbc-hero-banner-parallax__group-name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--bbc-white);
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.05em;
+}
+
+.bbc-hero-banner-parallax__logo img {
+  max-width: 200px;
+  height: auto;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.6));
+}
+
+.bbc-hero-banner-parallax__tagline {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--bbc-white);
+  line-height: 1.4;
+  text-align: center;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  max-width: 900px;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Research Pillars */
+.bbc-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 2rem 0;
+}
+
+.bbc-pillar {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: transparent;
+}
+
+.bbc-pillar__icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background: var(--bbc-light-grey);
+  border-radius: 1.5rem;
+}
+
+.bbc-pillar__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--bbc-black);
+}
+
+.bbc-pillar__description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--bbc-medium-grey);
+}
+
+.bbc-home__content {
+  padding: 0 2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.bbc-home__main {
+  line-height: 1.7;
+  color: var(--bbc-text-color);
+}
+
+.bbc-home__main p {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+}
+
+.bbc-lede {
+  font-size: 1.15rem !important;
+  font-weight: 500;
+  line-height: 1.6 !important;
+  color: var(--bbc-black) !important;
+}
+
+.bbc-research-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--bbc-light-grey);
+  border-left: 4px solid var(--bbc-red);
+  padding: 2rem 2.5rem;
+  margin: 2.5rem 0;
+}
+
+.bbc-research-cta__content {
+  flex: 1;
+}
+
+.bbc-research-cta__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bbc-black);
+}
+
+.bbc-research-cta__text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--bbc-medium-grey);
+}
+
+.bbc-research-cta__button {
+  display: inline-block;
+  background: var(--bbc-red);
+  color: var(--bbc-white);
+  padding: 0.85rem 2.5rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.bbc-research-cta__button:hover {
+  background: #0a6904;
+}
+
+/* News Carousel */
+.bbc-news-carousel {
+  margin: 3rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--bbc-grey);
+  border-bottom: 1px solid var(--bbc-grey);
+}
+
+.bbc-news-carousel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.bbc-news-carousel__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.bbc-news-carousel__view-all {
+  color: var(--bbc-red);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.bbc-news-carousel__view-all:hover {
+  opacity: 0.8;
+}
+
+.bbc-news-carousel__container {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.bbc-news-carousel__track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.bbc-news-carousel__item {
+  flex: 0 0 calc(33.333% - 1rem);
+  min-width: 0;
+  display: flex;
+}
+
+.bbc-news-carousel__item .bbc-card {
+  width: 100%;
+}
+
+.bbc-news-carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.bbc-footer {
+  background: var(--bbc-white);
+  border-top: 1px solid var(--bbc-grey);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.bbc-sponsors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.bbc-sponsors__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbc-sponsors__logo img {
+  display: block;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--bbc-transition), opacity var(--bbc-transition);
+}
+
+.bbc-sponsors__logo:hover img {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+.bbc-article {
+  background: var(--bbc-white);
+  border: 1px solid var(--bbc-grey);
+  padding: 2rem;
+}
+
+.bbc-article__header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.bbc-article__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bbc-article__titleblock {
+  flex: 1 1 320px;
+  min-width: 240px;
+}
+
+.bbc-article__category {
+  margin: 0;
+  font-weight: 600;
+  color: var(--bbc-red);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.bbc-article__media {
+  float: left;
+  width: 45%;
+  margin: 0 2rem 1.5rem 0;
+}
+
+.bbc-article__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--bbc-grey);
+}
+
+.bbc-article__body {
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: var(--bbc-text-color);
+}
+
+.research-pager {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+.research-pager__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--bbc-grey);
+  border-radius: var(--bbc-border-radius-full);
+  background: var(--bbc-white);
+  color: var(--bbc-black);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  max-width: 220px;
+}
+
+.research-pager__link:hover {
+  border-color: var(--bbc-red);
+  color: var(--bbc-red);
+}
+
+.research-pager__link .arrow {
+  font-size: 1rem;
+  color: var(--bbc-red);
+}
+
+.research-pager__link .label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bbc-article__body::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 1100px) {
+  .bbc-grid--split {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .bbc-grid--featured {
+    align-items: start;
+  }
+
+  .bbc-grid--featured > .bbc-card {
+    grid-column: 1;
+  }
+
+  .bbc-grid--featured > .bbc-grid__column--aside {
+    grid-column: 2;
+  }
+
+  .bbc-grid--featured > .bbc-grid__column--stack {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .bbc-main {
+    padding: 1.5rem 1.5rem 2.5rem;
+  }
+
+  .bbc-card--hero .bbc-card__body {
+    padding: 1.3rem;
+  }
+
+  .bbc-card__title {
+    font-size: 1.1rem;
+  }
+
+  .bbc-card__summary {
+    font-size: 0.86rem;
+  }
+
+  .bbc-nav {
+    gap: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .bbc-main {
+    padding: 1.5rem 1.25rem 2.5rem;
+  }
+
+  .bbc-heading {
+    font-size: 2rem;
+  }
+
+  .bbc-people__pi-bio {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bbc-grid {
+    --bbc-grid-columns: 1;
+  }
+
+  .bbc-grid--stack {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-grid__column,
+  .bbc-grid__column--stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bbc-grid__column {
+    gap: 1.2rem;
+  }
+
+  .bbc-grid__column--stack {
+    gap: 1rem;
+  }
+
+  .bbc-people__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bbc-card--pi {
+    grid-template-columns: 35% 1fr;
+    gap: 1rem;
+  }
+
+  .bbc-card--pi__media {
+    margin: 0;
+    height: 100%;
+  }
+
+  .bbc-card--pi__body {
+    padding: 1.5rem;
+  }
+
+  .bbc-styleguide__cards .bbc-styleguide__hero {
+    grid-column: span 1;
+  }
+
+  /* Make hero cards behave like standard cards on smaller screens */
+  .bbc-card--hero {
+    display: flex;
+    border-left-width: 1px;
+    border-bottom: 1px solid var(--bbc-grey);
+    box-shadow: none;
+  }
+
+  .bbc-card--hero:hover {
+    border-left-color: var(--bbc-red);
+  }
+
+  .bbc-card--hero .bbc-card__media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .bbc-card--hero .bbc-card__body {
+    padding: 1rem 0 0;
+  }
+
+  .bbc-card--hero .bbc-card__title {
+    font-size: 1.15rem;
+  }
+
+  .bbc-card--hero .bbc-card__summary {
+    font-size: 0.88rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .bbc-card__title {
+    font-size: 1.15rem;
+  }
+
+  .bbc-card--compact .bbc-card__title {
+    font-size: 1.05rem;
+  }
+
+  .bbc-card__summary {
+    font-size: 0.88rem;
+  }
+
+  .bbc-topbar {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .bbc-brand {
+    flex-direction: row;
+    gap: 0.4rem;
+    text-align: center;
+  }
+
+  /* Show hamburger menu on mobile */
+  .bbc-hamburger {
+    display: flex;
+  }
+
+  /* Disable logo hover expansion on mobile */
+  .bbc-logo:hover .bbc-logo__word {
+    max-width: 0;
+    opacity: 0;
+    margin-left: -0.3rem;
+  }
+
+  /* Hide navigation by default on mobile */
+  .bbc-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--bbc-white);
+    border-right: 1px solid var(--bbc-grey);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0;
+    padding: 5rem 0 2rem;
+    z-index: 999;
+    transition: left 0.3s ease;
+  }
+
+  /* Show navigation when active */
+  .bbc-nav.active {
+    left: 0;
+  }
+
+  .bbc-nav a {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .bbc-nav a:hover {
+    background: transparent;
+  }
+
+  .bbc-home__content {
+    padding: 0 1.25rem;
+  }
+
+  .bbc-research-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 2rem;
+  }
+
+  .bbc-research-cta__button {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .bbc-hero {
+    padding: 2rem 1.25rem;
+  }
+
+  .bbc-hero__title {
+    font-size: 2rem;
+  }
+
+  .bbc-hero__tagline {
+    font-size: 1.15rem;
+  }
+
+  .bbc-hero-banner {
+    height: 350px;
+  }
+
+  .bbc-hero-banner__title {
+    font-size: 2.5rem;
+  }
+
+  .bbc-hero-banner__tagline {
+    font-size: 1.3rem;
+  }
+
+  .bbc-hero-banner-parallax {
+    height: 450px;
+  }
+
+  .bbc-hero-banner-parallax__tagline {
+    font-size: 1.75rem;
+  }
+
+  .bbc-hero-banner-parallax__logo img {
+    max-width: 180px;
+  }
+
+  .bbc-pillars {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .research-pager {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  .research-pager__link {
+    flex: 1 1 auto;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .bbc-person__header {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-person__photo {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .bbc-news-carousel__item {
+    flex: 0 0 calc(100% - 1rem);
+  }
+
+  .bbc-news-carousel__title {
+    font-size: 1.5rem;
+  }
+
+  .bbc-header-logos {
+    gap: 0.75rem;
+  }
+
+  .bbc-oxford-logo,
+  .bbc-materials-logo {
+    height: 4rem;
+    /* max-width: 80px; */
+  }
+}
+
+@media (max-width: 600px) {
+  .bbc-heading {
+    font-size: 1.75rem;
+  }
+
+  .bbc-topbar {
+    padding: 0.65rem 1rem;
+  }
+
+  .bbc-logo {
+    gap: 0.2rem;
+  }
+
+  .bbc-logo__block {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.95rem;
+  }
+
+  .bbc-site {
+    font-size: 0.95rem;
+  }
+
+  .bbc-card--hero .bbc-card__media img {
+    max-height: 240px;
+  }
+
+  .bbc-card__body {
+    padding: 1rem 1.2rem 1.2rem;
+  }
+
+  .bbc-hero {
+    padding: 1.5rem 1rem;
+  }
+
+  .bbc-hero__title {
+    font-size: 1.65rem;
+  }
+
+  .bbc-hero__tagline {
+    font-size: 1rem;
+  }
+
+  .bbc-hero-banner {
+    height: 280px;
+  }
+
+  .bbc-hero-banner__overlay {
+    padding: 1.5rem;
+  }
+
+  .bbc-hero-banner__title {
+    font-size: 2rem;
+  }
+
+  .bbc-hero-banner__tagline {
+    font-size: 1.1rem;
+  }
+
+  .bbc-hero-banner-parallax {
+    height: 350px;
+  }
+
+  .bbc-hero-banner-parallax__bg {
+    background-attachment: scroll;
+  }
+
+  .bbc-hero-banner-parallax__tagline {
+    font-size: 1.4rem;
+  }
+
+  .bbc-hero-banner-parallax__logo img {
+    max-width: 140px;
+  }
+
+  .bbc-pillars {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .bbc-pillar {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .bbc-home__content {
+    padding: 0 1rem;
+  }
+
+  .bbc-research-cta {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .bbc-research-cta__title {
+    font-size: 1.3rem;
+  }
+
+  .bbc-lede {
+    font-size: 1.05rem !important;
+  }
+
+  .bbc-article__media {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .research-pager {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .bbc-people__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bbc-person__photo {
+    max-width: none;
+  }
+
+  .bbc-card--pi {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .bbc-card--pi__media {
+    margin: 0;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .bbc-card--pi__body {
+    padding: 1.5rem 1rem;
+  }
+
+  .bbc-oxford-logo,
+  .bbc-materials-logo {
+    height: 1.9rem;
+    /* max-width: 60px; */
+  }
+}
+.bbc-styleguide__section {
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--bbc-grey);
+  padding-top: 2rem;
+}
+
+.bbc-styleguide__section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.bbc-styleguide__cards .bbc-styleguide__hero {
+  grid-column: span 2;
+}
+
+.bbc-styleguide__cards .bbc-card {
+  height: 100%;
+}
+
+.bbc-styleguide__carousel-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.bbc-styleguide__dots {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.bbc-styleguide {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.bbc-styleguide > p {
+  font-size: 1rem;
+  color: var(--bbc-medium-grey);
+}
