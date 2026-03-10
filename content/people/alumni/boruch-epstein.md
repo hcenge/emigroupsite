@@ -4,7 +4,8 @@ role: "phd"
 tagline: "EPSRC DPhil Student, Linacre College"
 photo: "/images/people/boruch-epstein.jpg"
 email: "boruch.epstein@materials.ox.ac.uk"
-join_year: 2021
+join_year: 2021-10
+end_year: 2026-02
 research_interests: |
     Boruch’s project attempts to understand 2D transition metal dichalcogenide electrocatalysts, using a mixture of theoretical and lab-based methods. The eventual aim is to understand these materials well enough to permit computer-aided rational design of 2D electrocatalysts.
 
