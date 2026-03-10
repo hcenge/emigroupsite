@@ -1,0 +1,32 @@
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $preset := .preset | default "card" -}}
+{{- $class := .class | default "" -}}
+{{- $loading := .loading | default "lazy" -}}
+
+{{- $widths := dict
+  "card" "640x"
+  "hero" "1200x"
+  "person" "400x"
+  "banner" "1920x"
+  "carousel" "1400x"
+  "logo" "300x"
+  "gallery" "480x"
+  "lightbox" "1600x"
+-}}
+
+{{- $width := index $widths $preset | default "640x" -}}
+
+{{- $path := strings.TrimPrefix "/" $src -}}
+{{- $resource := resources.Get $path -}}
+
+{{- if $resource -}}
+  {{- $resized := $resource.Resize (printf "%s webp" $width) -}}
+  {{- $fallback := $resource.Resize $width -}}
+  <picture>
+    <source srcset="{{ $resized.RelPermalink }}" type="image/webp">
+    <img src="{{ $fallback.RelPermalink }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}">
+  </picture>
+{{- else -}}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}">
+{{- end -}}

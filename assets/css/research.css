@@ -2204,3 +2204,65 @@ a:focus {
   font-size: 1rem;
   color: var(--bbc-medium-grey);
 }
+
+/* Facilities Gallery */
+.bbc-facilities-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.bbc-gallery__item {
+  display: flex;
+  flex-direction: column;
+  background: var(--bbc-white);
+  border: 1px solid var(--bbc-grey);
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--bbc-transition), border-color var(--bbc-transition), box-shadow var(--bbc-transition);
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+
+.bbc-gallery__item:hover {
+  transform: translateY(-4px);
+  border-color: var(--bbc-red);
+  box-shadow: var(--bbc-box-shadow);
+}
+
+.bbc-gallery__media {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bbc-light-grey);
+  border-bottom: 1px solid var(--bbc-grey);
+}
+
+.bbc-gallery__media picture,
+.bbc-gallery__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bbc-gallery__title {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--bbc-black);
+  transition: color var(--bbc-transition);
+}
+
+.bbc-gallery__item:hover .bbc-gallery__title {
+  color: var(--bbc-red);
+}
+
+@media (max-width: 600px) {
+  .bbc-facilities-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+}

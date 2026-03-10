@@ -18,7 +18,7 @@
         <article class="bbc-card bbc-card--project">
           {{ with .image }}
           <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $.Title }} visual">
+            {{ partial "image.html" (dict "src" . "alt" (printf "%s visual" $.Title) "preset" "card") }}
           </figure>
           {{ end }}
           <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">

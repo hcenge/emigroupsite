@@ -16,7 +16,7 @@
         <a class="bbc-card__link" href="#">
           {{ with $card.image }}
           <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $card.title }} example">
+            {{ partial "image.html" (dict "src" . "alt" (printf "%s example" $card.title) "preset" "card") }}
           </figure>
           {{ end }}
           <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">

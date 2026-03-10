@@ -2,7 +2,7 @@
 title: "Lijin An"
 role: "alumni"
 tagline: "DPhil Student (Oct. 2021 - Sep. 2025), The Queen's College"
-photo: "images/people/lijin-an.png"
+photo: "/images/people/lijin-an.png"
 email: ""
 research_interests: |
     Lijin's research mainly focuses on the charge compensation mechanisms in Lithium-ion batteries (LIBs), layered cathode materials especially, and how their structures change during lithiation and delithiation processes. More specifically, in measuring the x-ray absorption and emission spectra of operando LIBs during charge and discharge to probe the electronic structures. In addition, quantum mechanical simulations are used to predict the structural and electronic properties of various types of cathode materials at different state of charge, which are compared to experimental results. Lijin's work intends to provide a better understanding of charge compensation mechanisms for layered cathode materials in LIBs and to verify the applicability of the simulation method by building a bridge between experimentally measured spectra and theoretical predictions.

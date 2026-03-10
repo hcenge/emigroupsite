@@ -1,4 +1,76 @@
 {{ define "title" }}{{ .Title }}{{ end }}
+{{ define "head" }}
+<style>
+  .bbc-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .bbc-lightbox.active { display: flex; }
+  .bbc-lightbox__inner {
+    position: relative;
+    max-width: 1200px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .bbc-lightbox__inner img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+  }
+  .bbc-lightbox__title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .bbc-lightbox__close {
+    position: absolute;
+    top: -2.5rem;
+    right: -0.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+  .bbc-lightbox__close:hover { opacity: 0.7; }
+  .bbc-lightbox__nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 1rem;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    z-index: 2001;
+  }
+  .bbc-lightbox__nav:hover { opacity: 1; }
+  .bbc-lightbox__nav:disabled { opacity: 0.2; cursor: default; }
+  .bbc-lightbox__nav--prev { left: 1rem; }
+  .bbc-lightbox__nav--next { right: 1rem; }
+  .bbc-lightbox__counter {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+  }
+</style>
+{{ end }}
 {{ define "main" }}
 <section class="bbc-research">
   <h1 class="bbc-heading">{{ .Title }}</h1>
@@ -9,45 +81,105 @@
   </div>
   {{ end }}
 
-  {{ $allPages := sort .Pages "Params.weight" "asc" }}
-  {{ if gt (len $allPages) 0 }}
+  {{ $allItems := site.Data.facilities }}
+  {{ if gt (len $allItems) 0 }}
     {{ range .Params.sections }}
       {{ $sectionLocation := .location }}
-      {{ $sectionPages := where $allPages "Params.location" $sectionLocation }}
+      {{ $sectionItems := where $allItems "location" $sectionLocation }}
 
-      {{ if gt (len $sectionPages) 0 }}
+      {{ if gt (len $sectionItems) 0 }}
       <div class="bbc-people__group">
         <div class="bbc-people__group-head">
           <h2>{{ .name }}</h2>
           {{ if .show_count }}
-          <span class="bbc-people__count">{{ len $sectionPages }}</span>
+          <span class="bbc-people__count">{{ len $sectionItems }}</span>
           {{ end }}
         </div>
-        <div class="bbc-research-grid">
-          {{ range $sectionPages }}
-          <article class="bbc-card bbc-card--project">
-            <a class="bbc-card__link" href="{{ .RelPermalink }}">
-              {{ with .Params.image }}
-              <figure class="bbc-card__media">
-                <img src="{{ . }}" alt="{{ $.Title }}">
-              </figure>
-              {{ end }}
-              <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
-                <h3 class="bbc-card__title">{{ .Title }}</h3>
-                {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-                {{ with .Params.category }}
-                <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
-                  <span class="bbc-card__category">{{ . }}</span>
-                </span>
-                {{ end }}
-              </div>
-            </a>
-          </article>
+        <div class="bbc-facilities-gallery">
+          {{ range $sectionItems }}
+          {{ $facilityTitle := .title }}
+          {{ with .image }}
+          {{ $path := strings.TrimPrefix "/" . }}
+          {{ $resource := resources.Get $path }}
+          <button class="bbc-gallery__item" type="button"
+            data-lightbox-src="{{ if $resource }}{{ ($resource.Resize "1600x webp").RelPermalink }}{{ else }}{{ . }}{{ end }}"
+            data-lightbox-title="{{ $facilityTitle }}">
+            <figure class="bbc-gallery__media">
+              {{ partial "image.html" (dict "src" . "alt" $facilityTitle "preset" "gallery") }}
+            </figure>
+            <span class="bbc-gallery__title">{{ $facilityTitle }}</span>
+          </button>
+          {{ end }}
           {{ end }}
         </div>
       </div>
       {{ end }}
     {{ end }}
   {{ end }}
+
+  <div class="bbc-lightbox" id="facilities-lightbox">
+    <button class="bbc-lightbox__nav bbc-lightbox__nav--prev" aria-label="Previous">&#8249;</button>
+    <button class="bbc-lightbox__nav bbc-lightbox__nav--next" aria-label="Next">&#8250;</button>
+    <div class="bbc-lightbox__inner">
+      <button class="bbc-lightbox__close" aria-label="Close">&times;</button>
+      <img src="" alt="">
+      <p class="bbc-lightbox__title"></p>
+      <p class="bbc-lightbox__counter"></p>
+    </div>
+  </div>
 </section>
+
+<script>
+(function() {
+  var lightbox = document.getElementById('facilities-lightbox');
+  if (!lightbox) return;
+
+  var img = lightbox.querySelector('img');
+  var title = lightbox.querySelector('.bbc-lightbox__title');
+  var counter = lightbox.querySelector('.bbc-lightbox__counter');
+  var closeBtn = lightbox.querySelector('.bbc-lightbox__close');
+  var prevBtn = lightbox.querySelector('.bbc-lightbox__nav--prev');
+  var nextBtn = lightbox.querySelector('.bbc-lightbox__nav--next');
+  var items = Array.from(document.querySelectorAll('.bbc-gallery__item'));
+  var currentIndex = 0;
+
+  function show(index) {
+    currentIndex = index;
+    var item = items[index];
+    img.src = item.dataset.lightboxSrc;
+    img.alt = item.dataset.lightboxTitle;
+    title.textContent = item.dataset.lightboxTitle;
+    counter.textContent = (index + 1) + ' / ' + items.length;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === items.length - 1;
+    lightbox.classList.add('active');
+  }
+
+  function close() { lightbox.classList.remove('active'); }
+
+  items.forEach(function(btn, i) {
+    btn.addEventListener('click', function() { show(i); });
+  });
+
+  prevBtn.addEventListener('click', function() {
+    if (currentIndex > 0) show(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    if (currentIndex < items.length - 1) show(currentIndex + 1);
+  });
+
+  closeBtn.addEventListener('click', close);
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) close();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft' && currentIndex > 0) show(currentIndex - 1);
+    if (e.key === 'ArrowRight' && currentIndex < items.length - 1) show(currentIndex + 1);
+  });
+})();
+</script>
 {{ end }}

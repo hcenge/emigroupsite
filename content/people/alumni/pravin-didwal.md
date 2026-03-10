@@ -2,7 +2,7 @@
 title: "Pravin Didwal"
 role: "alumni"
 tagline: "Post-doctoral Research Fellow (Oct. 2021 - Jan. 2024)"
-photo: "images/people/pravin-didwal.png"
+photo: "/images/people/pravin-didwal.png"
 email: ""
 research_interests: |
     Pravin's work is mainly focused on finding the degradation products formed within in the battery at the electrode-electrolyte interface (SEI/CEI) during electrochemical cycling by using XPS, NMR, and MAS spectroscopy in order to extend the battery life through the modification in electrodes as well as electrolyte.

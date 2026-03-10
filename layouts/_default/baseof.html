@@ -27,16 +27,46 @@
       </div>
       <div class="bbc-header-logos">
         <a href="https://www.materials.ox.ac.uk/" class="bbc-materials-logo" target="_blank" rel="noopener" aria-label="Department of Materials, University of Oxford">
+          {{- $matFull := resources.Get "images/materials-logo.png" -}}
+          {{- $matSmall := resources.Get "images/materials-logo-small.png" -}}
+          {{- if and $matFull $matSmall -}}
+            {{- $matFullWebP := $matFull.Resize "300x webp" -}}
+            {{- $matSmallWebP := $matSmall.Resize "300x webp" -}}
+            {{- $matFullFallback := $matFull.Resize "300x" -}}
+            {{- $matSmallFallback := $matSmall.Resize "300x" -}}
+          <picture>
+            <source media="(max-width: 900px)" srcset="{{ $matSmallWebP.RelPermalink }}" type="image/webp">
+            <source media="(max-width: 900px)" srcset="{{ $matSmallFallback.RelPermalink }}">
+            <source srcset="{{ $matFullWebP.RelPermalink }}" type="image/webp">
+            <img src="{{ $matFullFallback.RelPermalink }}" alt="Department of Materials" loading="eager">
+          </picture>
+          {{- else -}}
           <picture>
             <source media="(max-width: 900px)" srcset="/images/materials-logo-small.png">
             <img src="/images/materials-logo.png" alt="Department of Materials">
           </picture>
+          {{- end -}}
         </a>
         <a href="https://www.ox.ac.uk" class="bbc-oxford-logo" target="_blank" rel="noopener" aria-label="University of Oxford">
+          {{- $oxFull := resources.Get "images/oxford-logo.png" -}}
+          {{- $oxSmall := resources.Get "images/oxford-logo-small.png" -}}
+          {{- if and $oxFull $oxSmall -}}
+            {{- $oxFullWebP := $oxFull.Resize "300x webp" -}}
+            {{- $oxSmallWebP := $oxSmall.Resize "300x webp" -}}
+            {{- $oxFullFallback := $oxFull.Resize "300x" -}}
+            {{- $oxSmallFallback := $oxSmall.Resize "300x" -}}
+          <picture>
+            <source media="(max-width: 900px)" srcset="{{ $oxSmallWebP.RelPermalink }}" type="image/webp">
+            <source media="(max-width: 900px)" srcset="{{ $oxSmallFallback.RelPermalink }}">
+            <source srcset="{{ $oxFullWebP.RelPermalink }}" type="image/webp">
+            <img src="{{ $oxFullFallback.RelPermalink }}" alt="University of Oxford" loading="eager">
+          </picture>
+          {{- else -}}
           <picture>
             <source media="(max-width: 900px)" srcset="/images/oxford-logo-small.png">
             <img src="/images/oxford-logo.png" alt="University of Oxford">
           </picture>
+          {{- end -}}
         </a>
       </div>
     </header>

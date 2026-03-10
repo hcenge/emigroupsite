@@ -5,7 +5,7 @@
     {{ if not $isAlumni }}
       {{ with $person.Params.photo }}
       <figure class="bbc-card__media">
-        <img src="{{ . }}" alt="{{ $person.Title }} portrait">
+        {{ partial "image.html" (dict "src" . "alt" (printf "%s portrait" $person.Title) "preset" "card") }}
       </figure>
       {{ end }}
     {{ end }}

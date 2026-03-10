@@ -4,7 +4,7 @@
   <a class="bbc-card bbc-card--pi" href="#">
     {{ with $pi.photo }}
     <figure class="bbc-card__media bbc-card--pi__media">
-      <img src="{{ . }}" alt="{{ $pi.name }}">
+      {{ partial "image.html" (dict "src" . "alt" $pi.name "preset" "hero") }}
     </figure>
     {{ end }}
     <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">

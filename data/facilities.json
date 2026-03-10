@@ -1,0 +1,21 @@
+[
+  { "title": "Arbin Cycler", "location": "rex", "image": "/images/facilities/arbin.png" },
+  { "title": "BioLogic Current Booster", "location": "rex", "image": "/images/facilities/biologic_currentbooster.png" },
+  { "title": "Büchi", "location": "rex", "image": "/images/facilities/buchi.png" },
+  { "title": "Carbolite Furnace", "location": "rex", "image": "/images/facilities/carbolite_gero.png" },
+  { "title": "Co-Precipitation Synthesis", "location": "rex", "image": "/images/facilities/coprecip_synthesis.png" },
+  { "title": "CVD", "location": "rex", "image": "/images/facilities/CVD.png" },
+  { "title": "easyXAFS", "location": "rex", "image": "/images/facilities/easyXAFS.png" },
+  { "title": "Electrolysers", "location": "rex", "image": "/images/facilities/electrolysers.png" },
+  { "title": "Glovebox 1", "location": "rex", "image": "/images/facilities/glovebox1.png" },
+  { "title": "Glovebox 2", "location": "rex", "image": "/images/facilities/glovebox2.png" },
+  { "title": "Hiden", "location": "rex", "image": "/images/facilities/hiden.png" },
+  { "title": "Nikalyte", "location": "rex", "image": "/images/facilities/nikalyte.png" },
+  { "title": "Nochromix Cleaning", "location": "rex", "image": "/images/facilities/nochromix_clean.png" },
+  { "title": "Probe Sonicator", "location": "rex", "image": "/images/facilities/probe_sonicator.png" },
+  { "title": "RDE", "location": "rex", "image": "/images/facilities/RDE.png" },
+  { "title": "Reacnostics", "location": "rex", "image": "/images/facilities/revcnostics.png" },
+  { "title": "Li deposition system", "location": "rex", "image": "/images/facilities/li_dep.png" },
+  { "title": "CVD with inert transfer", "location": "rex", "image": "/images/facilities/whatisthis2.png" },
+  { "title": "Phi VersaProbe XPS System", "location": "rex", "image": "/images/facilities/xps.png" }
+]

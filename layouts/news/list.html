@@ -16,7 +16,7 @@
       <a class="bbc-card__link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
         <figure class="bbc-card__media">
-          <img src="{{ . }}" alt="{{ $.Title }} hero image">
+          {{ partial "image.html" (dict "src" . "alt" (printf "%s hero image" $.Title) "preset" "hero") }}
         </figure>
         {{ end }}
         <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
@@ -36,7 +36,7 @@
         <a class="bbc-card__link" href="{{ .RelPermalink }}">
           {{ with .Params.image }}
           <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $.Title }} illustration">
+            {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
           </figure>
           {{ end }}
           <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
@@ -57,7 +57,7 @@
         <a class="bbc-card__link" href="{{ .RelPermalink }}">
           {{ with .Params.image }}
           <figure class="bbc-card__media">
-            <img src="{{ . }}" alt="{{ $.Title }} illustration">
+            {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
           </figure>
           {{ end }}
           <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">

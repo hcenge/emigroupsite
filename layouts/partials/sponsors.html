@@ -3,7 +3,7 @@
   <div class="bbc-sponsors">
     {{ range . }}
       <a class="bbc-sponsors__logo" href="{{ .url }}" target="_blank" rel="noopener">
-        <img src="{{ .image }}" alt="{{ .name }}">
+        {{ partial "image.html" (dict "src" .image "alt" .name "preset" "logo") }}
       </a>
     {{ end }}
   </div>

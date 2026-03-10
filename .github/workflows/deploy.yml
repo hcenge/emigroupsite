@@ -10,14 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
         with:
-          hugo-version: 'latest'
-          extended: true
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Build
-        run: hugo --minify
+        run: nix develop --command hugo --minify
 
       - name: Commit public/ to main
         run: |

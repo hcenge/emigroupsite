@@ -39,7 +39,7 @@
   </header>
   {{ with .Params.image }}
   <figure class="bbc-article__media">
-    <img src="{{ . }}" alt="{{ $.Title }} image">
+    {{ partial "image.html" (dict "src" . "alt" (printf "%s image" $.Title) "preset" "hero") }}
   </figure>
   {{ end }}
   <div class="bbc-article__body">

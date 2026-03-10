@@ -3,12 +3,13 @@
 <section class="bbc-home">
   {{ with .Params.banner }}
   <div class="bbc-hero-banner-parallax" id="hero-banner">
-    <div class="bbc-hero-banner-parallax__bg" style="background-image: url('{{ .image }}');"></div>
+    {{- $bannerUrl := partial "image-url.html" (dict "src" .image "preset" "banner") -}}
+    <div class="bbc-hero-banner-parallax__bg" style="background-image: url('{{ $bannerUrl }}');"></div>
     <div class="bbc-hero-banner-parallax__overlay">
       {{ if .logo }}
       <div class="bbc-hero-banner-parallax__logo">
         <p class="bbc-hero-banner-parallax__group-name">Weatherup Group</p>
-        <img src="{{ .logo }}" alt="EMI Group Logo">
+        {{ partial "image.html" (dict "src" .logo "alt" "EMI Group Logo" "preset" "logo" "loading" "eager") }}
       </div>
       {{ end }}
       <p class="bbc-hero-banner-parallax__tagline">{{ .tagline }}</p>
@@ -61,7 +62,7 @@
                 <a class="bbc-card__link" href="{{ .RelPermalink }}">
                   {{ with .Params.image }}
                   <figure class="bbc-card__media">
-                    <img src="{{ . }}" alt="{{ $.Title }} illustration">
+                    {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
                   </figure>
                   {{ end }}
                   <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">

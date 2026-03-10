@@ -13,6 +13,7 @@
         hugoPkg = pkgs.hugo; # extended build with SCSS support
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
           requests
+          scholarly
         ]);
       in {
         packages = {

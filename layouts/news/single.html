@@ -12,7 +12,7 @@
 
   {{ with .Params.image }}
   <figure class="bbc-article__media">
-    <img src="{{ . }}" alt="{{ $.Title }}">
+    {{ partial "image.html" (dict "src" . "alt" $.Title "preset" "hero") }}
   </figure>
   {{ end }}
 

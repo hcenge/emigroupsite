@@ -32,7 +32,7 @@
         <a class="bbc-card bbc-card--pi" href="{{ $pi.RelPermalink }}">
           {{ with $pi.Params.photo }}
           <figure class="bbc-card__media bbc-card--pi__media">
-            <img src="{{ . }}" alt="{{ $pi.Title }} portrait">
+            {{ partial "image.html" (dict "src" . "alt" (printf "%s portrait" $pi.Title) "preset" "hero") }}
           </figure>
           {{ end }}
           <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">
@@ -66,7 +66,7 @@
       <div class="bbc-group-photos-carousel__track">
         {{ range . }}
         <div class="bbc-group-photos-carousel__item">
-          <img src="{{ .image }}" alt="Group photo from {{ .date }}" class="bbc-group-photos-carousel__image">
+          {{ partial "image.html" (dict "src" .image "alt" (printf "Group photo from %s" .date) "preset" "carousel" "class" "bbc-group-photos-carousel__image") }}
         </div>
         {{ end }}
       </div>

@@ -2,7 +2,7 @@
 title: "Namrata Ramesh"
 role: "alumni"
 tagline: "Rhodes Trust DPhil Student (Oct. 2021 - Sep. 2025), Corpus Christi College"
-photo: "images/people/namrata-ramesh.jpeg"
+photo: "/images/people/namrata-ramesh.jpeg"
 research_interests: |
     My research interests primarily involve using computational techniques to understand the origin of emergent phenomena in materials for sustainable energy applications. I am currently using density functional theory (DFT) to understand the x-ray absorption spectra (XAS) data collected at the electrolyte-electrode interface of Li-ion batteries.
 join_year: 2021-10

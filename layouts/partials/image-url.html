@@ -1,0 +1,25 @@
+{{- $src := .src -}}
+{{- $preset := .preset | default "banner" -}}
+
+{{- $widths := dict
+  "card" "640x"
+  "hero" "1200x"
+  "person" "400x"
+  "banner" "1920x"
+  "carousel" "1400x"
+  "logo" "300x"
+  "gallery" "480x"
+  "lightbox" "1600x"
+-}}
+
+{{- $width := index $widths $preset | default "1920x" -}}
+{{- $path := strings.TrimPrefix "/" $src -}}
+{{- $resource := resources.Get $path -}}
+{{- $url := $src -}}
+
+{{- with $resource -}}
+  {{- $resized := .Resize (printf "%s webp" $width) -}}
+  {{- $url = $resized.RelPermalink -}}
+{{- end -}}
+
+{{- return $url -}}

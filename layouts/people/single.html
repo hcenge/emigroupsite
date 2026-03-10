@@ -4,7 +4,7 @@
   <header class="bbc-person__header">
     {{ with .Params.photo }}
     <figure class="bbc-person__photo">
-      <img src="{{ . }}" alt="{{ $.Title }} portrait">
+      {{ partial "image.html" (dict "src" . "alt" (printf "%s portrait" $.Title) "preset" "person") }}
     </figure>
     {{ end }}
     <div class="bbc-person__meta">
