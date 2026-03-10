@@ -1,0 +1,37 @@
+name: Update Publications
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Every Sunday at midnight
+  workflow_dispatch:  # Manual trigger from Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install scholarly requests
+
+      - name: Fetch publications
+        run: python scripts/fetch_publications.py
+
+      - name: Update DOIs
+        run: python scripts/update_dois.py
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Update publications from Google Scholar"
+          branch: update-publications
+          title: "Update publications from Google Scholar"
+          body: |
+            Automated weekly publication update from Google Scholar.
+
+            Please review the changes to `data/publications.json` to check for incorrect entries before merging.
+          add-paths: data/publications.json
