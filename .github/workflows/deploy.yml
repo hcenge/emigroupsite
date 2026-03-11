@@ -7,6 +7,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -18,10 +20,8 @@ jobs:
       - name: Build
         run: nix develop --command hugo --minify
 
-      - name: Deploy to materials server
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H int-webs.materials.ox.ac.uk >> ~/.ssh/known_hosts 2>/dev/null
-          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" public/ emi@int-webs.materials.ox.ac.uk:/emi/
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
