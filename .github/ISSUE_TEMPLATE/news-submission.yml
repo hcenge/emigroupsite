@@ -1,0 +1,54 @@
+name: Submit News Post
+description: Submit a news article for the group website
+labels: ["content-submission", "news"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Article Title
+      placeholder: e.g. Beamtime at Diamond Light Source
+    validations:
+      required: true
+
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: Publication date in YYYY-MM-DD format
+      placeholder: "2025-06-15"
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A short one-line summary shown in article listings
+      placeholder: Brief summary of the article
+    validations:
+      required: true
+
+  - type: textarea
+    id: image
+    attributes:
+      label: Featured Image
+      description: Drag and drop an image here (optional). GitHub will upload it and insert a URL.
+      placeholder: Drag and drop an image file here
+
+  - type: dropdown
+    id: featured
+    attributes:
+      label: Featured?
+      description: Should this appear in the featured news carousel?
+      options:
+        - "No"
+        - "Yes"
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Article Content
+      description: Write the article body in Markdown
+      placeholder: Write your article here...
+    validations:
+      required: true
