@@ -124,8 +124,10 @@ def write_front_matter(f, items):
             f.write(f"{key}: |\n")
             for line in value.splitlines():
                 f.write(f"    {line}\n")
-        else:
+        elif isinstance(value, int):
             f.write(f"{key}: {value}\n")
+        else:
+            f.write(f'{key}: "{value}"\n')
     f.write("---\n")
 
 
