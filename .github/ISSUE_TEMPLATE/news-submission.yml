@@ -36,15 +36,6 @@ body:
       description: Drag and drop an image here (optional). GitHub will upload it and insert a URL.
       placeholder: Drag and drop an image file here
 
-  - type: dropdown
-    id: featured
-    attributes:
-      label: Featured?
-      description: Should this appear in the featured news carousel?
-      options:
-        - "No"
-        - "Yes"
-
   - type: textarea
     id: content
     attributes:

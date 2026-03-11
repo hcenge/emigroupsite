@@ -136,8 +136,6 @@ def process_news(fields):
     title = fields.get("Article Title", "").strip()
     date = fields.get("Date", "").strip()
     summary = fields.get("Summary", "").strip()
-    featured_text = fields.get("Featured?", "No").strip()
-    featured = featured_text == "Yes"
     content = fields.get("Article Content", "").strip()
     image_text = fields.get("Featured Image", "")
 
@@ -159,7 +157,6 @@ def process_news(fields):
     ]
     if image_path:
         fm_items.append(("image", image_path))
-    fm_items.append(("featured", featured))
 
     dest = Path("content/news") / filename
     dest.parent.mkdir(parents=True, exist_ok=True)
