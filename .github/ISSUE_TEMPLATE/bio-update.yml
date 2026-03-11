@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form to update an existing bio. Only fill in the fields you want to change — everything else will be preserved.
+        Select the person to update, then only fill in the fields you want to change. Everything else will be preserved.
 
   - type: dropdown
     id: person
@@ -35,28 +35,12 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
-    id: fields_to_update
-    attributes:
-      label: Which fields do you want to update?
-      description: Tick the fields you're changing. Only ticked fields will be updated.
-      options:
-        - label: Role
-        - label: Tagline
-        - label: Email
-        - label: Year Joined
-        - label: Profile Photo
-        - label: Research Interests
-        - label: Projects
-        - label: Biography
-
   - type: dropdown
     id: role
     attributes:
-      label: New Role
-      description: Leave as "None" if not updating
+      label: Role
       options:
-        - "None"
+        - "No change"
         - pi
         - postdoc
         - phd
@@ -66,39 +50,39 @@ body:
   - type: input
     id: tagline
     attributes:
-      label: New Tagline
+      label: Tagline
       placeholder: e.g. DPhil Student, Wolfson College
 
   - type: input
     id: email
     attributes:
-      label: New Email
+      label: Email
       placeholder: e.g. name@materials.ox.ac.uk
 
   - type: input
     id: join_year
     attributes:
-      label: New Year Joined
+      label: Year Joined
       placeholder: e.g. 2024
 
   - type: textarea
     id: photo
     attributes:
-      label: New Profile Photo
+      label: Profile Photo
       description: Drag and drop a new photo here.
       placeholder: Drag and drop an image file here
 
   - type: textarea
     id: research_interests
     attributes:
-      label: New Research Interests
+      label: Research Interests
       placeholder: Describe your research interests...
 
   - type: checkboxes
     id: projects
     attributes:
-      label: New Projects
-      description: Select all projects (this will replace the current list)
+      label: Projects
+      description: Select all projects (this will replace the current list). Leave all unchecked to keep existing projects.
       options:
         - label: Electrocatalysis
         - label: Electrolyte Solvation
@@ -110,6 +94,6 @@ body:
   - type: textarea
     id: biography
     attributes:
-      label: New Biography
+      label: Biography
       description: Full biography in Markdown (replaces the current body text)
       placeholder: Write your biography here...

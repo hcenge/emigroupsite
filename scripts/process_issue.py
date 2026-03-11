@@ -233,57 +233,46 @@ def process_bio_update(fields):
         existing_fm = yaml.safe_load(match.group(1)) or {}
         existing_body = match.group(2).strip()
 
-    # Determine which fields the user wants to update
-    updating = set(parse_checkboxes(fields.get("Which fields do you want to update?", "")))
-
     fm = dict(existing_fm)
 
-    if "Role" in updating:
-        role = fields.get("New Role", "").strip()
-        if role and role != "None":
-            fm["role"] = role
+    role = fields.get("Role", "").strip()
+    if role and role != "No change":
+        fm["role"] = role
 
-    if "Tagline" in updating:
-        tagline = fields.get("New Tagline", "").strip()
-        if tagline:
-            fm["tagline"] = tagline
+    tagline = fields.get("Tagline", "").strip()
+    if tagline:
+        fm["tagline"] = tagline
 
-    if "Email" in updating:
-        email = fields.get("New Email", "").strip()
-        if email:
-            fm["email"] = email
+    email = fields.get("Email", "").strip()
+    if email:
+        fm["email"] = email
 
-    if "Year Joined" in updating:
-        join_year = fields.get("New Year Joined", "").strip()
-        if join_year:
-            try:
-                fm["join_year"] = int(join_year)
-            except ValueError:
-                fm["join_year"] = join_year
+    join_year = fields.get("Year Joined", "").strip()
+    if join_year:
+        try:
+            fm["join_year"] = int(join_year)
+        except ValueError:
+            fm["join_year"] = join_year
 
-    if "Profile Photo" in updating:
-        photo_text = fields.get("New Profile Photo", "")
-        if photo_text:
-            downloaded = download_image(photo_text, "assets/images/people")
-            if downloaded:
-                fm["photo"] = f"/images/people/{downloaded.name}"
+    photo_text = fields.get("Profile Photo", "")
+    if photo_text:
+        downloaded = download_image(photo_text, "assets/images/people")
+        if downloaded:
+            fm["photo"] = f"/images/people/{downloaded.name}"
 
-    if "Research Interests" in updating:
-        research_interests = fields.get("New Research Interests", "").strip()
-        if research_interests:
-            fm["research_interests"] = research_interests + "\n"
+    research_interests = fields.get("Research Interests", "").strip()
+    if research_interests:
+        fm["research_interests"] = research_interests + "\n"
 
-    if "Projects" in updating:
-        checked = parse_checkboxes(fields.get("New Projects", ""))
-        project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
-        if project_slugs:
-            fm["projects"] = project_slugs
+    checked = parse_checkboxes(fields.get("Projects", ""))
+    project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
+    if project_slugs:
+        fm["projects"] = project_slugs
 
     body = existing_body
-    if "Biography" in updating:
-        biography = fields.get("New Biography", "").strip()
-        if biography:
-            body = biography
+    biography = fields.get("Biography", "").strip()
+    if biography:
+        body = biography
 
     write_bio(dest, fm, body)
     print(f"Updated {dest}")
