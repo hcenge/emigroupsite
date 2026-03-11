@@ -2,12 +2,14 @@ name: Process Content Submission
 
 on:
   issues:
-    types: [labeled]
+    types: [opened, labeled]
 
 jobs:
   process:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'content-submission'
+    if: >-
+      (github.event.action == 'labeled' && github.event.label.name == 'content-submission') ||
+      (github.event.action == 'opened' && contains(join(github.event.issue.labels.*.name, ','), 'content-submission'))
     permissions:
       contents: write
       pull-requests: write
