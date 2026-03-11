@@ -239,22 +239,22 @@ def process_bio_update(fields):
     fm = dict(existing_fm)
 
     if "Role" in updating:
-        role = fields.get("Role", "").strip()
+        role = fields.get("New Role", "").strip()
         if role and role != "None":
             fm["role"] = role
 
     if "Tagline" in updating:
-        tagline = fields.get("Tagline", "").strip()
+        tagline = fields.get("New Tagline", "").strip()
         if tagline:
             fm["tagline"] = tagline
 
     if "Email" in updating:
-        email = fields.get("Email", "").strip()
+        email = fields.get("New Email", "").strip()
         if email:
             fm["email"] = email
 
     if "Year Joined" in updating:
-        join_year = fields.get("Year Joined", "").strip()
+        join_year = fields.get("New Year Joined", "").strip()
         if join_year:
             try:
                 fm["join_year"] = int(join_year)
@@ -262,26 +262,26 @@ def process_bio_update(fields):
                 fm["join_year"] = join_year
 
     if "Profile Photo" in updating:
-        photo_text = fields.get("Profile Photo", "")
+        photo_text = fields.get("New Profile Photo", "")
         if photo_text:
             downloaded = download_image(photo_text, "assets/images/people")
             if downloaded:
                 fm["photo"] = f"/images/people/{downloaded.name}"
 
     if "Research Interests" in updating:
-        research_interests = fields.get("Research Interests", "").strip()
+        research_interests = fields.get("New Research Interests", "").strip()
         if research_interests:
             fm["research_interests"] = research_interests + "\n"
 
     if "Projects" in updating:
-        checked = parse_checkboxes(fields.get("Projects", ""))
+        checked = parse_checkboxes(fields.get("New Projects", ""))
         project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
         if project_slugs:
             fm["projects"] = project_slugs
 
     body = existing_body
     if "Biography" in updating:
-        biography = fields.get("Biography", "").strip()
+        biography = fields.get("New Biography", "").strip()
         if biography:
             body = biography
 

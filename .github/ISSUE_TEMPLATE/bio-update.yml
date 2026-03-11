@@ -53,7 +53,7 @@ body:
   - type: dropdown
     id: role
     attributes:
-      label: Role
+      label: New Role
       description: Leave as "None" if not updating
       options:
         - "None"
@@ -66,38 +66,38 @@ body:
   - type: input
     id: tagline
     attributes:
-      label: Tagline
+      label: New Tagline
       placeholder: e.g. DPhil Student, Wolfson College
 
   - type: input
     id: email
     attributes:
-      label: Email
+      label: New Email
       placeholder: e.g. name@materials.ox.ac.uk
 
   - type: input
     id: join_year
     attributes:
-      label: Year Joined
+      label: New Year Joined
       placeholder: e.g. 2024
 
   - type: textarea
     id: photo
     attributes:
-      label: Profile Photo
+      label: New Profile Photo
       description: Drag and drop a new photo here.
       placeholder: Drag and drop an image file here
 
   - type: textarea
     id: research_interests
     attributes:
-      label: Research Interests
+      label: New Research Interests
       placeholder: Describe your research interests...
 
   - type: checkboxes
     id: projects
     attributes:
-      label: Projects
+      label: New Projects
       description: Select all projects (this will replace the current list)
       options:
         - label: Electrocatalysis
@@ -110,6 +110,6 @@ body:
   - type: textarea
     id: biography
     attributes:
-      label: Biography
+      label: New Biography
       description: Full biography in Markdown (replaces the current body text)
       placeholder: Write your biography here...
