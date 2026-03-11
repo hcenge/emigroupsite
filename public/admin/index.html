@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMI Group CMS</title>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Inject site CSS into preview pane — find the fingerprinted URL dynamically
+    fetch("/")
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var match = html.match(/\/css\/research\.[a-f0-9]+\.css/);
+        if (match) CMS.registerPreviewStyle(match[0]);
+      });
+
+    // Base styles for preview iframe body (mirrors body.bbc-shell)
+    CMS.registerPreviewStyle(
+      "body{margin:0;background:#fff;color:#0d0d0d;" +
+      "font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif;" +
+      "font-size:16px;line-height:1.5}" +
+      "a{color:#005B7A}" +
+      ".bbc-main{padding:1.5rem 2rem 2.5rem;max-width:1080px;margin:0 auto}",
+      { raw: true }
+    );
+
+    // ── Role labels (matches Hugo partial) ──
+    var roleLabels = {
+      pi: "Principal Investigator",
+      postdoc: "Postdoctoral Researcher",
+      phd: "DPhil Student",
+      masters: "Master's Student",
+      visitor: "Visitor",
+      alumni: "Alumnus/Alumna"
+    };
+
+    // ── Project labels ──
+    var projectLabels = {
+      "electrocatalysis": "Electrocatalysis",
+      "electrolyte-solvation": "Electrolyte Solvation",
+      "electronic-structure": "Electronic Structure",
+      "operando-xray-techniques": "Operando X-ray Techniques",
+      "rechargeable-batteries": "Rechargeable Batteries",
+      "thermocatalysis": "Thermocatalysis"
+    };
+
+    // ── News preview ──
+    var NewsPreview = createClass({
+      render: function () {
+        var entry = this.props.entry;
+        var title = entry.getIn(["data", "title"]) || "";
+        var date = entry.getIn(["data", "date"]);
+        var image = entry.getIn(["data", "image"]);
+        var body = this.props.widgetFor("body");
+
+        var dateStr = "";
+        if (date) {
+          var d = new Date(date);
+          dateStr = d.toLocaleDateString("en-GB", {
+            day: "numeric", month: "long", year: "numeric"
+          });
+        }
+
+        return h("div", { className: "bbc-main" },
+          h("article", { className: "bbc-article" },
+            h("header", { className: "bbc-article__header" },
+              h("div", { className: "bbc-article__titleblock" },
+                h("h1", {}, title),
+                dateStr && h("p", { className: "bbc-article__meta" },
+                  h("time", {}, dateStr)
+                )
+              )
+            ),
+            image && h("figure", { className: "bbc-article__media" },
+              h("img", { src: image, alt: title })
+            ),
+            h("div", { className: "bbc-article__body" }, body)
+          )
+        );
+      }
+    });
+    CMS.registerPreviewTemplate("news", NewsPreview);
+
+    // ── People preview ──
+    var PersonPreview = createClass({
+      render: function () {
+        var entry = this.props.entry;
+        var title = entry.getIn(["data", "title"]) || "";
+        var role = entry.getIn(["data", "role"]) || "";
+        var tagline = entry.getIn(["data", "tagline"]);
+        var photo = entry.getIn(["data", "photo"]);
+        var email = entry.getIn(["data", "email"]);
+        var website = entry.getIn(["data", "website"]);
+        var twitter = entry.getIn(["data", "twitter"]);
+        var linkedin = entry.getIn(["data", "linkedin"]);
+        var interests = entry.getIn(["data", "research_interests"]);
+        var projects = entry.getIn(["data", "projects"]);
+        var body = this.props.widgetFor("body");
+
+        var contacts = [];
+        if (email) contacts.push(h("div", {},
+          h("dt", {}, "Email"),
+          h("dd", {}, h("a", { href: "mailto:" + email }, email))
+        ));
+        if (website) contacts.push(h("div", {},
+          h("dt", {}, "Website"),
+          h("dd", {}, h("a", { href: website }, website))
+        ));
+        if (twitter) contacts.push(h("div", {},
+          h("dt", {}, "Twitter"),
+          h("dd", {}, h("a", { href: twitter }, twitter))
+        ));
+        if (linkedin) contacts.push(h("div", {},
+          h("dt", {}, "LinkedIn"),
+          h("dd", {}, h("a", { href: linkedin }, linkedin))
+        ));
+
+        var projectItems = [];
+        if (projects && projects.toJS) {
+          projects.toJS().forEach(function (slug) {
+            projectItems.push(
+              h("li", {}, projectLabels[slug] || slug)
+            );
+          });
+        }
+
+        return h("div", { className: "bbc-main" },
+          h("article", { className: "bbc-person" },
+            h("header", { className: "bbc-person__header" },
+              photo && h("figure", { className: "bbc-person__photo" },
+                h("img", { src: photo, alt: title + " portrait" })
+              ),
+              h("div", { className: "bbc-person__meta" },
+                h("h1", { className: "bbc-person__name" }, title),
+                role && h("p", { className: "bbc-person__role" },
+                  roleLabels[role] || role
+                ),
+                tagline && h("p", { className: "bbc-person__tagline" }, tagline),
+                contacts.length > 0 && h("dl", { className: "bbc-person__contacts" }, contacts),
+                interests && h("div", { className: "bbc-person__interests" },
+                  h("h2", {}, "Research Interests"),
+                  h("p", {}, interests)
+                ),
+                projectItems.length > 0 && h("div", { className: "bbc-person__projects" },
+                  h("h2", {}, "Projects"),
+                  h("ul", {}, projectItems)
+                )
+              )
+            ),
+            body && h("div", { className: "bbc-person__bio" },
+              h("h2", {}, "Biography"),
+              body
+            )
+          )
+        );
+      }
+    });
+    CMS.registerPreviewTemplate("people", PersonPreview);
+    CMS.registerPreviewTemplate("alumni", PersonPreview);
+
+    // ── Research preview ──
+    var ResearchPreview = createClass({
+      render: function () {
+        var entry = this.props.entry;
+        var title = entry.getIn(["data", "title"]) || "";
+        var category = entry.getIn(["data", "category"]);
+        var image = entry.getIn(["data", "image"]);
+        var body = this.props.widgetFor("body");
+
+        return h("div", { className: "bbc-main" },
+          h("article", { className: "bbc-article" },
+            h("header", { className: "bbc-article__header" },
+              h("div", { className: "bbc-article__titleblock" },
+                h("h1", {}, title),
+                category && h("p", { className: "bbc-article__category" }, category)
+              )
+            ),
+            image && h("figure", { className: "bbc-article__media" },
+              h("img", { src: image, alt: title })
+            ),
+            h("div", { className: "bbc-article__body" }, body)
+          )
+        );
+      }
+    });
+    CMS.registerPreviewTemplate("research", ResearchPreview);
+  </script>
+</body>
+</html>
