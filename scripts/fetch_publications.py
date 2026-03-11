@@ -38,7 +38,6 @@ REPO_ROOT = SCRIPT_DIR.parent
 DATA_DIR = REPO_ROOT / "data"
 DATA_PATH = DATA_DIR / "publications.json"
 BACKUP_DIR = DATA_DIR / "backups"
-BACKUP_SUFFIX = datetime.now().strftime(".%Y%m%d_%H%M%S.bak")
 CROSSREF_API = "https://api.crossref.org/works"
 USER_AGENT = {
     "User-Agent": "EMI-group-site/1.0 (mailto:robert.weatherup@materials.ox.ac.uk)",
@@ -57,7 +56,6 @@ def load_publications(path: Path) -> List[Dict]:
 
 
 def save_publications(path: Path, publications: Iterable[Dict]) -> None:
-    # Preserve deterministic ordering of keys for prettier diffs
     ordered = [OrderedDict(sorted(pub.items())) for pub in publications]
     with path.open("w", encoding="utf-8") as handle:
         json.dump(ordered, handle, indent=2, ensure_ascii=False)
@@ -86,6 +84,68 @@ def parse_year(value: Optional[str]) -> Optional[int]:
 
 
 # ---------------------------------------------------------------------------
+# Title matching
+# ---------------------------------------------------------------------------
+
+def _titles_match(a: str, b: str) -> bool:
+    """Check if two titles are similar enough to be the same publication."""
+    a = a.lower().strip().rstrip(".")
+    b = b.lower().strip().rstrip(".")
+    if a == b:
+        return True
+    if a in b or b in a:
+        return True
+    words_a = set(a.split())
+    words_b = set(b.split())
+    if not words_a or not words_b:
+        return False
+    overlap = len(words_a & words_b) / max(len(words_a), len(words_b))
+    return overlap > 0.8
+
+
+# ---------------------------------------------------------------------------
+# CrossRef helpers
+# ---------------------------------------------------------------------------
+
+def _extract_date(item: Dict):
+    """Extract an ISO date string and year from a CrossRef work item."""
+    for date_field in ("published-print", "published-online", "issued"):
+        parts = item.get(date_field, {}).get("date-parts")
+        if parts and parts[0]:
+            p = parts[0]
+            year = p[0]
+            month = p[1] if len(p) > 1 else 1
+            day = p[2] if len(p) > 2 else 1
+            return f"{year:04d}-{month:02d}-{day:02d}", str(year)
+    return None, None
+
+
+def _crossref_matches(item: Dict, title: str, year: Optional[int]) -> bool:
+    """Validate a CrossRef result against our known title and year."""
+    cr_title = (item.get("title") or [""])[0]
+    if not cr_title or not _titles_match(title, cr_title):
+        return False
+    if year:
+        _, cr_year_str = _extract_date(item)
+        cr_year = parse_year(cr_year_str)
+        if cr_year and cr_year != year:
+            return False
+    return True
+
+
+def _apply_crossref_date(pub: Dict, item: Dict) -> bool:
+    """Apply date from CrossRef if year matches. Returns True if date was set."""
+    date_str, year_str = _extract_date(item)
+    existing_year = parse_year(pub.get("year"))
+    if date_str and year_str:
+        if not existing_year or str(existing_year) == year_str:
+            pub["date"] = date_str
+            pub["year"] = year_str
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------------
 # Scholar fetching
 # ---------------------------------------------------------------------------
 
@@ -101,17 +161,21 @@ def _is_supplementary(title: str) -> bool:
     return any(t.startswith(prefix) for prefix in _SI_PREFIXES)
 
 
-def _is_duplicate(title: str, existing_titles: List[str]) -> bool:
-    for existing in existing_titles:
-        if _titles_match(title, existing):
+def _is_duplicate(title: str, year: Optional[int], existing_pubs: List[Dict]) -> bool:
+    """A publication is a duplicate only if both title and year match."""
+    for pub in existing_pubs:
+        existing_title = (pub.get("title") or "").strip().lower()
+        existing_year = parse_year(pub.get("year"))
+        if _titles_match(title, existing_title):
+            if year and existing_year and year != existing_year:
+                continue
             return True
     return False
 
 
 def fetch_from_scholar(
     scholar_id: str,
-    existing_titles: Optional[List[str]] = None,
-    min_year: Optional[int] = None,
+    existing_pubs: Optional[List[Dict]] = None,
 ) -> List[Dict]:
     """Fetch new publications from Google Scholar.
 
@@ -124,7 +188,7 @@ def fetch_from_scholar(
     try:
         author = scholarly.search_author_id(scholar_id)
         author_filled = scholarly.fill(author, sections=["publications"])
-    except Exception as error:  # pragma: no cover - network errors
+    except Exception as error:
         print(f"✗ Failed to query Google Scholar: {error}")
         return []
 
@@ -132,8 +196,8 @@ def fetch_from_scholar(
     total = len(all_pubs)
     print(f"  Found {total} publications on Scholar")
 
-    if existing_titles is None:
-        existing_titles = []
+    if existing_pubs is None:
+        existing_pubs = []
 
     # First pass: identify which publications are new
     new_pubs = []
@@ -149,10 +213,7 @@ def fetch_from_scholar(
         if _is_supplementary(title):
             skipped_si += 1
             continue
-        if min_year and year and year < min_year:
-            skipped += 1
-            continue
-        if _is_duplicate(title, existing_titles):
+        if _is_duplicate(title, year, existing_pubs):
             skipped += 1
             continue
 
@@ -195,10 +256,10 @@ def fetch_from_scholar(
             )
             print(f"    [{idx}/{len(new_pubs)}] {title[:70]} ({year or 'n/a'})")
 
-        except KeyboardInterrupt:  # pragma: no cover
+        except KeyboardInterrupt:
             print("\n⚠ Interrupted by user")
             break
-        except Exception as error:  # pragma: no cover - network issues
+        except Exception as error:
             print(f"    ⚠ Error reading publication {idx}: {error}")
 
     print(f"✓ Retrieved {len(pubs)} new publications from Scholar")
@@ -210,7 +271,7 @@ def _extract_doi_and_url(pub: Dict):
     doi = None
     url = None
 
-    for candidate in (bib.get("pub_url"), pub.get("eprint_url")):
+    for candidate in (bib.get("pub_url"), pub.get("pub_url"), pub.get("eprint_url")):
         if not candidate:
             continue
         if "doi.org" in candidate:
@@ -248,65 +309,40 @@ def enrich_with_crossref(publications: List[Dict]) -> None:
                 continue
 
             item = items[0]
+            year = parse_year(pub.get("year"))
 
-            # Only use the result if the title is a close match
-            cr_title = (item.get("title") or [""])[0].lower().strip()
-            if cr_title and _titles_match(title, cr_title):
-                pub["doi"] = item.get("DOI") or pub.get("doi")
-                pub["url"] = f"https://doi.org/{pub['doi']}" if pub.get("doi") else pub.get("url")
+            if not _crossref_matches(item, title, year):
+                print(f"    [{index}/{len(publications)}] Title/year mismatch, skipped: {title[:60]}")
+                continue
 
-                container = item.get("container-title", [])
-                if container:
-                    pub["journal"] = container[0]
-                pub["conference"] = item.get("event", {}).get("name") or pub.get("conference")
+            pub["doi"] = item.get("DOI") or pub.get("doi")
+            pub["url"] = f"https://doi.org/{pub['doi']}" if pub.get("doi") else pub.get("url")
 
-                # Authors
-                if not pub.get("authors") and item.get("author"):
-                    author_parts = []
-                    for a in item["author"]:
-                        given = a.get("given", "")
-                        family = a.get("family", "")
-                        author_parts.append(f"{given} {family}".strip())
-                    pub["authors"] = ", ".join(author_parts)
+            container = item.get("container-title", [])
+            if container:
+                pub["journal"] = container[0]
+            pub["conference"] = item.get("event", {}).get("name") or pub.get("conference")
 
-                # Year
-                for date_field in ("published-print", "published-online", "issued"):
-                    parts = item.get(date_field, {}).get("date-parts")
-                    if parts and parts[0]:
-                        pub["year"] = str(parts[0][0])
-                        break
+            if not pub.get("authors") and item.get("author"):
+                author_parts = []
+                for a in item["author"]:
+                    given = a.get("given", "")
+                    family = a.get("family", "")
+                    author_parts.append(f"{given} {family}".strip())
+                pub["authors"] = ", ".join(author_parts)
 
-                print(f"    [{index}/{len(publications)}] ✓ {title[:60]}")
-            else:
-                print(f"    [{index}/{len(publications)}] Title mismatch, skipped: {title[:60]}")
+            _apply_crossref_date(pub, item)
 
-        except requests.HTTPError as error:  # pragma: no cover - network
+            print(f"    [{index}/{len(publications)}] ✓ {title[:60]}")
+
+        except requests.HTTPError as error:
             print(f"    ⚠ CrossRef HTTP error for '{title[:50]}…': {error}")
-        except requests.RequestException as error:  # pragma: no cover
+        except requests.RequestException as error:
             print(f"    ⚠ CrossRef request error for '{title[:50]}…': {error}")
-        except Exception as error:  # pragma: no cover
+        except Exception as error:
             print(f"    ⚠ CrossRef unknown error for '{title[:50]}…': {error}")
 
-        time.sleep(0.2)  # rate limit
-
-
-def _titles_match(a: str, b: str) -> bool:
-    """Check if two titles are similar enough to be the same publication."""
-    a = a.lower().strip().rstrip(".")
-    b = b.lower().strip().rstrip(".")
-    # Exact match after normalisation
-    if a == b:
-        return True
-    # One contains the other (handles subtitle differences)
-    if a in b or b in a:
-        return True
-    # Check word overlap ratio
-    words_a = set(a.split())
-    words_b = set(b.split())
-    if not words_a or not words_b:
-        return False
-    overlap = len(words_a & words_b) / max(len(words_a), len(words_b))
-    return overlap > 0.7
+        time.sleep(0.2)
 
 
 # ---------------------------------------------------------------------------
@@ -323,18 +359,20 @@ def merge_publications(existing: List[Dict], new: List[Dict]) -> List[Dict]:
         combined[key] = pub
 
     def sort_key(pub: Dict):
-        year = parse_year(pub.get("year")) or 0
+        date = pub.get("date") or ""
+        if not date:
+            year = parse_year(pub.get("year")) or 0
+            date = f"{year:04d}-01-01"
         title = pub.get("title", "")
-        return (-year, title.lower())
+        return (date, title.lower())
 
-    return sorted(combined.values(), key=sort_key)
+    return sorted(combined.values(), key=sort_key, reverse=True)
 
 
 def format_authors(authors: str) -> str:
     if not authors:
         return ""
     formatted = authors.replace(" and ", ", ")
-    # collapse repeated commas/spaces
     parts = [part.strip() for part in formatted.split(",") if part.strip()]
     return ", ".join(parts)
 
@@ -358,6 +396,10 @@ def remove_supplementary(publications: List[Dict]) -> List[Dict]:
         print(f"  Removed {removed} supplementary/SI entries")
     return cleaned
 
+
+# ---------------------------------------------------------------------------
+# Refresh & backfill
+# ---------------------------------------------------------------------------
 
 def _needs_journal_refresh(pub: Dict) -> bool:
     """Check if a publication has a missing or preprint-only journal."""
@@ -394,23 +436,23 @@ def refresh_missing_journals(publications: List[Dict]) -> None:
                 continue
 
             item = items[0]
-            cr_title = (item.get("title") or [""])[0]
-            if not _titles_match(title, cr_title):
-                print(f"    [{idx}/{len(to_refresh)}] Title mismatch: {title[:60]}")
+            year = parse_year(pub.get("year"))
+
+            if not _crossref_matches(item, title, year):
+                print(f"    [{idx}/{len(to_refresh)}] Title/year mismatch: {title[:60]}")
                 continue
 
             container = item.get("container-title", [])
             new_journal = container[0] if container else ""
             if new_journal and "rxiv" not in new_journal.lower():
                 pub["journal"] = new_journal
-                # Also update DOI/URL if missing
                 if not pub.get("doi") and item.get("DOI"):
                     pub["doi"] = item["DOI"]
                     pub["url"] = f"https://doi.org/{pub['doi']}"
-                # Update authors if missing
                 if not pub.get("authors") and item.get("author"):
                     parts = [f"{a.get('given', '')} {a.get('family', '')}".strip() for a in item["author"]]
                     pub["authors"] = ", ".join(parts)
+                _apply_crossref_date(pub, item)
                 updated += 1
                 print(f"    [{idx}/{len(to_refresh)}] ✓ {title[:50]} → {new_journal}")
             else:
@@ -422,6 +464,46 @@ def refresh_missing_journals(publications: List[Dict]) -> None:
         time.sleep(0.2)
 
     print(f"✓ Updated journal for {updated}/{len(to_refresh)} publications")
+
+
+def backfill_dates(publications: List[Dict]) -> None:
+    """Fetch full dates from CrossRef for publications that have a DOI but no date."""
+    to_fill = [pub for pub in publications if pub.get("doi") and not pub.get("date")]
+    if not to_fill:
+        print("All publications with DOIs already have dates.")
+        return
+
+    print(f"Backfilling dates for {len(to_fill)} publications via CrossRef DOI lookup…")
+
+    filled = 0
+    for idx, pub in enumerate(to_fill, 1):
+        doi = pub["doi"]
+        title = pub.get("title", "")
+
+        try:
+            url = f"{CROSSREF_API}/{doi}"
+            response = requests.get(url, headers=USER_AGENT, timeout=10)
+            response.raise_for_status()
+            item = response.json().get("message", {})
+
+            # Verify CrossRef returned data for the right paper
+            cr_title = (item.get("title") or [""])[0]
+            if cr_title and not _titles_match(title, cr_title):
+                print(f"    [{idx}/{len(to_fill)}] ⚠ Title mismatch from DOI, skipped: {title[:50]}")
+                continue
+
+            if _apply_crossref_date(pub, item):
+                filled += 1
+                print(f"    [{idx}/{len(to_fill)}] ✓ {title[:50]} → {pub['date']}")
+            else:
+                print(f"    [{idx}/{len(to_fill)}] ⚠ Year mismatch or no date: {title[:50]}")
+
+        except Exception as error:
+            print(f"    [{idx}/{len(to_fill)}] ⚠ Error: {error}")
+
+        time.sleep(0.2)
+
+    print(f"✓ Backfilled dates for {filled}/{len(to_fill)} publications")
 
 
 def sanitize_publications(publications: List[Dict]) -> None:
@@ -449,24 +531,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.dry_run:
         print("(Dry run - no files will be written)")
 
-    # Build list of known publication titles for fuzzy deduplication
-    existing_titles = []
-    min_year = None
-    if not mode_init:
-        for pub in existing:
-            title = (pub.get("title") or "").strip().lower()
-            if title:
-                existing_titles.append(title)
-        # Use min_year as a cutoff: skip anything strictly before this year
-        # (subtract 1 so we re-check publications from the most recent year)
-        max_year = max(filter(None, map(parse_year, (pub.get("year") for pub in existing))), default=None)
-        min_year = (max_year - 1) if max_year else None
-
     try:
         new_publications = fetch_from_scholar(
             args.scholar_id,
-            existing_titles=existing_titles,
-            min_year=min_year,
+            existing_pubs=existing if not mode_init else None,
         )
         enrich_with_crossref(new_publications)
 
@@ -478,6 +546,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         merged = remove_supplementary(merged)
         sanitize_publications(merged)
         refresh_missing_journals(merged)
+        backfill_dates(merged)
 
         if args.dry_run:
             print(f"Dry run: would write {len(merged)} publications to {DATA_PATH}")
@@ -488,10 +557,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(f"✓ Saved {len(merged)} publications to {DATA_PATH}")
         return 0
 
-    except KeyboardInterrupt:  # pragma: no cover
+    except KeyboardInterrupt:
         print("\n⚠ Aborted by user")
         return 1
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     raise SystemExit(main())

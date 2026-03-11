@@ -2,7 +2,7 @@
 title: "Trevor Binford"
 role: "phd"
 tagline: "iCASE DPhil Student (Johnson Matthey), Corpus Christi College"
-photo: "/images/people/trevor-binford.png"
+photo: "/images/people/trevor-binford.jpeg"
 email: "trevor.binford@materials.ox.ac.uk"
 join_year: 2021
 research_interests: |

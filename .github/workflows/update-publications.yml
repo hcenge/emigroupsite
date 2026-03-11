@@ -19,9 +19,6 @@ jobs:
       - name: Fetch publications
         run: nix develop --command python scripts/fetch_publications.py
 
-      - name: Update DOIs
-        run: nix develop --command python scripts/update_dois.py
-
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:

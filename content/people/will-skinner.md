@@ -2,7 +2,7 @@
 title: "Will Skinner"
 role: "postdoc"
 tagline: "Post-doctoral Research Fellow, Operando XPS"
-photo: "/images/people/william-skinner.jpeg"
+photo: "/images/people/will-skinner.jpeg"
 email: "william.skinner@materials.ox.ac.uk"
 join_year: 2026
 research_interests: |

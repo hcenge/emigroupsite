@@ -2,7 +2,7 @@
 title: "Erik Björklund"
 role: "postdoc"
 tagline: "Post-doctoral Research Fellow, Li-ion battery degradation interfaces"
-photo: "/images/people/erik-bjorklund.png"
+photo: "/images/people/erik-bjorklund.jpeg"
 email: "erik.bjorklund@materials.ox.ac.uk"
 join_year: 2019
 research_interests: |

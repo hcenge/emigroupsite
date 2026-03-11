@@ -2,7 +2,7 @@
 title: "Conor Phelan"
 role: "postdoc"
 tagline: "Post-doctoral Research Fellow, rechargeable battery interfaces"
-photo: "/images/people/conor-phelan.png"
+photo: "/images/people/conor-phelan.jpeg"
 email: "conor.phelan@materials.ox.ac.uk"
 join_year: 2025
 research_interests: |

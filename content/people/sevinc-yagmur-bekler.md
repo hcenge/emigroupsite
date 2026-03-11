@@ -2,7 +2,7 @@
 title: "Sevinç Yağmur Bekler"
 role: "masters"
 tagline: "Master's Student, Mansfield College"
-photo: "/images/people/sevinc-yagmur-bekler.jpg"
+photo: "/images/people/yagmur-bekler.jpeg"
 email: "sevinc.bekler@materials.ox.ac.uk"
 weight: 2024
 research_interests: |

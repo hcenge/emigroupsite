@@ -2,7 +2,7 @@
 title: "Yifan Bai"
 role: "phd"
 tagline: "DPhil Student, Mansfield College"
-photo: "/images/people/yifan-bai.png"
+photo: "/images/people/yifan-bai.jpeg"
 email: "yifan.bai@materials.ox.ac.uk"
 join_year: 2025
 research_interests: |
