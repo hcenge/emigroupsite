@@ -1,6 +1,6 @@
 ---
 title: "Jack Swallow"
-role: "postdoc"
+role: "visitor"
 tagline: "Post-doctoral Research Fellow, 2D electrocatalyst development"
 photo: "/images/people/jack-swallow.png"
 email: "jack.swallow@materials.ox.ac.uk"
