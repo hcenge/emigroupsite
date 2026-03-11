@@ -49,12 +49,14 @@ def slugify(text):
     return text.strip("-")
 
 
-def download_image(text, dest_dir):
-    """Extract first image URL from text, download it, return local path.
+def download_image(text, dest_dir, filename):
+    """Extract first image URL from text, download it with the given filename.
 
     GitHub drag-and-drop produces markdown like:
         ![image](https://github.com/user-attachments/assets/...)
     or a bare URL.
+
+    The filename should not include an extension — it will be derived from the URL.
     """
     # Match markdown image syntax or bare GitHub user-attachments URL
     patterns = [
@@ -79,14 +81,7 @@ def download_image(text, dest_dir):
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Derive filename from the last path segment of the URL
-    url_filename = url.rstrip("/").split("/")[-1]
-    # Clean up query params
-    url_filename = url_filename.split("?")[0]
-    if not re.search(r"\.\w+$", url_filename):
-        url_filename += ext
-
-    dest_path = dest_dir / url_filename
+    dest_path = dest_dir / f"{filename}{ext}"
     urllib.request.urlretrieve(url, dest_path)
     return dest_path
 
@@ -111,6 +106,29 @@ def parse_checkboxes(text):
     return results
 
 
+def write_front_matter(f, items):
+    """Write front matter preserving key order.
+
+    items is a list of (key, value) tuples. Values can be strings, bools,
+    ints, or lists of strings.
+    """
+    f.write("---\n")
+    for key, value in items:
+        if isinstance(value, bool):
+            f.write(f"{key}: {str(value).lower()}\n")
+        elif isinstance(value, list):
+            f.write(f"{key}:\n")
+            for item in value:
+                f.write(f"  - {item}\n")
+        elif isinstance(value, str) and "\n" in value:
+            f.write(f"{key}: |\n")
+            for line in value.splitlines():
+                f.write(f"    {line}\n")
+        else:
+            f.write(f"{key}: {value}\n")
+    f.write("---\n")
+
+
 def process_news(fields):
     """Create a news post from parsed issue fields."""
     title = fields.get("Article Title", "").strip()
@@ -127,42 +145,57 @@ def process_news(fields):
     # Download image if provided
     image_path = ""
     if image_text:
-        downloaded = download_image(image_text, "assets/images/news")
+        downloaded = download_image(image_text, "assets/images/news", slug)
         if downloaded:
-            # Store path relative to project root, with leading /
             image_path = f"/images/news/{downloaded.name}"
 
-    # Build front matter
-    front_matter = {
-        "title": title,
-        "date": f"{date}T00:00:00Z",
-        "summary": summary,
-        "featured": featured,
-    }
+    # Build front matter in conventional order: title, date, summary, image, featured
+    fm_items = [
+        ("title", title),
+        ("date", f"{date}T00:00:00Z"),
+        ("summary", summary),
+    ]
     if image_path:
-        front_matter["image"] = image_path
+        fm_items.append(("image", image_path))
+    fm_items.append(("featured", featured))
 
     dest = Path("content/news") / filename
     dest.parent.mkdir(parents=True, exist_ok=True)
     with open(dest, "w") as f:
-        f.write("---\n")
-        f.write(yaml.dump(front_matter, default_flow_style=False, allow_unicode=True))
-        f.write("---\n")
+        write_front_matter(f, fm_items)
         if content:
             f.write(f"\n{content}\n")
 
     print(f"Created {dest}")
 
 
-def write_bio(dest, fm, body):
-    """Write a bio markdown file with front matter and body."""
+def write_bio(dest, fm_items, body):
+    """Write a bio markdown file with ordered front matter and body."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     with open(dest, "w") as f:
-        f.write("---\n")
-        f.write(yaml.dump(fm, default_flow_style=False, allow_unicode=True))
-        f.write("---\n")
+        write_front_matter(f, fm_items)
         if body:
             f.write(f"\n{body}\n")
+
+
+# Canonical key order for bio front matter
+BIO_KEY_ORDER = [
+    "title", "role", "tagline", "photo", "email", "join_year",
+    "research_interests", "projects", "showdate",
+]
+
+
+def bio_fm_to_items(fm):
+    """Convert a bio front matter dict to an ordered list of (key, value) tuples."""
+    items = []
+    for key in BIO_KEY_ORDER:
+        if key in fm:
+            items.append((key, fm[key]))
+    # Include any extra keys not in the canonical order
+    for key in fm:
+        if key not in BIO_KEY_ORDER:
+            items.append((key, fm[key]))
+    return items
 
 
 def process_new_bio(fields):
@@ -180,10 +213,10 @@ def process_new_bio(fields):
     projects_text = fields.get("Projects", "")
     biography = fields.get("Biography", "").strip()
 
-    # Download photo if provided
+    # Download photo named after the person (e.g. helen-engelhardt.jpg)
     photo_path = ""
     if photo_text:
-        downloaded = download_image(photo_text, "assets/images/people")
+        downloaded = download_image(photo_text, "assets/images/people", slug)
         if downloaded:
             photo_path = f"/images/people/{downloaded.name}"
 
@@ -211,12 +244,12 @@ def process_new_bio(fields):
         fm["projects"] = project_slugs
     fm["showdate"] = False
 
-    write_bio(dest, fm, biography)
+    write_bio(dest, bio_fm_to_items(fm), biography)
     print(f"Created {dest}")
 
 
 def process_bio_update(fields):
-    """Update an existing bio, only overwriting fields the user ticked."""
+    """Update an existing bio, only overwriting non-empty submitted fields."""
     name = fields.get("Person to Update", "").strip()
     slug = slugify(name)
     dest = Path("content/people") / f"{slug}.md"
@@ -256,7 +289,7 @@ def process_bio_update(fields):
 
     photo_text = fields.get("Profile Photo", "")
     if photo_text:
-        downloaded = download_image(photo_text, "assets/images/people")
+        downloaded = download_image(photo_text, "assets/images/people", slug)
         if downloaded:
             fm["photo"] = f"/images/people/{downloaded.name}"
 
@@ -274,7 +307,7 @@ def process_bio_update(fields):
     if biography:
         body = biography
 
-    write_bio(dest, fm, body)
+    write_bio(dest, bio_fm_to_items(fm), body)
     print(f"Updated {dest}")
 
 
