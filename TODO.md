@@ -9,7 +9,7 @@
 - add alumni and finish porting all content over from the original website
 - make sure publications on each research area are correct
 - ask visitors if they would like bio updated
-- new profile pics
+- new profile pics and add seonghyun
 
 
 # Doable after discussion with Paul

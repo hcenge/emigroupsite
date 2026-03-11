@@ -9,7 +9,7 @@ weight: 25
 showdate: false
 publications:
   - "10.26434/chemrxiv-2025-0cgp0"
-  - "10.1021/jacs.2c11384"
+  - "10.1021/jacs.2c12728"
   - "10.1021/acs.jpclett.6b00640"
 ---
 

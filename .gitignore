@@ -1,2 +1,4 @@
 public/
 resources/
+data/backups/
+data/*.backup.*.json
