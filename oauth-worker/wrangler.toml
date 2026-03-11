@@ -1,0 +1,10 @@
+name = "emi-cms-oauth"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+# These are public — safe to commit
+GITHUB_CLIENT_ID = "Ov23li7u7ocYlz90ILF9"
+
+# Set the secret via: npx wrangler secret put GITHUB_CLIENT_SECRET
+# (never commit the secret)
