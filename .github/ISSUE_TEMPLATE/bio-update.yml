@@ -1,42 +1,73 @@
-name: Submit or Update Bio
-description: Add a new group member bio or update an existing one
-labels: ["content-submission", "bio"]
+name: Update Existing Bio
+description: Update an existing group member's bio
+title: "Bio update: "
+labels: ["content-submission", "bio-update"]
 body:
   - type: markdown
     attributes:
       value: |
-        Use this form to add a new bio or update an existing one.
-        For updates, only fill in the fields you want to change — existing values will be preserved.
+        Use this form to update an existing bio. Only fill in the fields you want to change — everything else will be preserved.
 
-  - type: input
-    id: name
+  - type: dropdown
+    id: person
     attributes:
-      label: Full Name
-      placeholder: e.g. Helen Engelhardt
+      label: Person to Update
+      options:
+        - Catherine Kohler
+        - Connor Sherwin
+        - Conor Phelan
+        - Erik Björklund
+        - Francesc Puchal Salat
+        - Helen Engelhardt
+        - Jack Swallow
+        - Jasper Singh
+        - Longxiang Liu
+        - May Rainbird
+        - Peixi Cong
+        - Robert Weatherup
+        - Seonghyun Kim
+        - Sevinç Yağmur Bekler
+        - Sirui Li
+        - Soumyajit Maitra
+        - Trevor Binford
+        - Will Skinner
+        - Yifan Bai
     validations:
       required: true
+
+  - type: checkboxes
+    id: fields_to_update
+    attributes:
+      label: Which fields do you want to update?
+      description: Tick the fields you're changing. Only ticked fields will be updated.
+      options:
+        - label: Role
+        - label: Tagline
+        - label: Email
+        - label: Year Joined
+        - label: Profile Photo
+        - label: Research Interests
+        - label: Projects
+        - label: Biography
 
   - type: dropdown
     id: role
     attributes:
       label: Role
+      description: Leave as "None" if not updating
       options:
+        - None
         - pi
         - postdoc
         - phd
         - masters
         - visitor
-    validations:
-      required: true
 
   - type: input
     id: tagline
     attributes:
       label: Tagline
-      description: Short description shown under your name
       placeholder: e.g. DPhil Student, Wolfson College
-    validations:
-      required: true
 
   - type: input
     id: email
@@ -54,21 +85,20 @@ body:
     id: photo
     attributes:
       label: Profile Photo
-      description: Drag and drop a photo here. GitHub will upload it and insert a URL.
+      description: Drag and drop a new photo here.
       placeholder: Drag and drop an image file here
 
   - type: textarea
     id: research_interests
     attributes:
       label: Research Interests
-      description: A paragraph describing your research interests
       placeholder: Describe your research interests...
 
   - type: checkboxes
     id: projects
     attributes:
       label: Projects
-      description: Select all projects you are involved in
+      description: Select all projects (this will replace the current list)
       options:
         - label: Electrocatalysis
         - label: Electrolyte Solvation
@@ -81,5 +111,5 @@ body:
     id: biography
     attributes:
       label: Biography
-      description: Full biography in Markdown (appears as the main body of your page)
+      description: Full biography in Markdown (replaces the current body text)
       placeholder: Write your biography here...

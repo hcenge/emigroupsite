@@ -1,5 +1,6 @@
 name: Submit News Post
 description: Submit a news article for the group website
+title: "News: "
 labels: ["content-submission", "news"]
 body:
   - type: input

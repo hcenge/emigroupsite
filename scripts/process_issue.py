@@ -154,23 +154,23 @@ def process_news(fields):
     print(f"Created {dest}")
 
 
-def process_bio(fields):
-    """Create or update a bio from parsed issue fields."""
+def write_bio(dest, fm, body):
+    """Write a bio markdown file with front matter and body."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with open(dest, "w") as f:
+        f.write("---\n")
+        f.write(yaml.dump(fm, default_flow_style=False, allow_unicode=True))
+        f.write("---\n")
+        if body:
+            f.write(f"\n{body}\n")
+
+
+def process_new_bio(fields):
+    """Create a new bio from parsed issue fields."""
     name = fields.get("Full Name", "").strip()
     slug = slugify(name)
     dest = Path("content/people") / f"{slug}.md"
 
-    # Load existing front matter if updating
-    existing_fm = {}
-    existing_body = ""
-    if dest.exists():
-        text = dest.read_text()
-        match = re.match(r"^---\n(.+?)\n---\n?(.*)", text, re.DOTALL)
-        if match:
-            existing_fm = yaml.safe_load(match.group(1)) or {}
-            existing_body = match.group(2).strip()
-
-    # Gather submitted values
     role = fields.get("Role", "").strip()
     tagline = fields.get("Tagline", "").strip()
     email = fields.get("Email", "").strip()
@@ -191,13 +191,13 @@ def process_bio(fields):
     checked = parse_checkboxes(projects_text)
     project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
 
-    # Build front matter, merging with existing (non-empty submitted fields win)
-    fm = dict(existing_fm)
-    fm["title"] = name
+    fm = {"title": name}
     if role:
         fm["role"] = role
     if tagline:
         fm["tagline"] = tagline
+    if photo_path:
+        fm["photo"] = photo_path
     if email:
         fm["email"] = email
     if join_year:
@@ -205,27 +205,88 @@ def process_bio(fields):
             fm["join_year"] = int(join_year)
         except ValueError:
             fm["join_year"] = join_year
-    if photo_path:
-        fm["photo"] = photo_path
     if research_interests:
         fm["research_interests"] = research_interests + "\n"
     if project_slugs:
         fm["projects"] = project_slugs
     fm["showdate"] = False
 
-    # Use submitted biography body, or keep existing
-    body = biography if biography else existing_body
+    write_bio(dest, fm, biography)
+    print(f"Created {dest}")
 
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    with open(dest, "w") as f:
-        f.write("---\n")
-        f.write(yaml.dump(fm, default_flow_style=False, allow_unicode=True))
-        f.write("---\n")
-        if body:
-            f.write(f"\n{body}\n")
 
-    action = "Updated" if existing_fm else "Created"
-    print(f"{action} {dest}")
+def process_bio_update(fields):
+    """Update an existing bio, only overwriting fields the user ticked."""
+    name = fields.get("Person to Update", "").strip()
+    slug = slugify(name)
+    dest = Path("content/people") / f"{slug}.md"
+
+    if not dest.exists():
+        raise FileNotFoundError(f"No existing bio found at {dest}")
+
+    # Load existing content
+    text = dest.read_text()
+    match = re.match(r"^---\n(.+?)\n---\n?(.*)", text, re.DOTALL)
+    existing_fm = {}
+    existing_body = ""
+    if match:
+        existing_fm = yaml.safe_load(match.group(1)) or {}
+        existing_body = match.group(2).strip()
+
+    # Determine which fields the user wants to update
+    updating = set(parse_checkboxes(fields.get("Which fields do you want to update?", "")))
+
+    fm = dict(existing_fm)
+
+    if "Role" in updating:
+        role = fields.get("Role", "").strip()
+        if role and role != "None":
+            fm["role"] = role
+
+    if "Tagline" in updating:
+        tagline = fields.get("Tagline", "").strip()
+        if tagline:
+            fm["tagline"] = tagline
+
+    if "Email" in updating:
+        email = fields.get("Email", "").strip()
+        if email:
+            fm["email"] = email
+
+    if "Year Joined" in updating:
+        join_year = fields.get("Year Joined", "").strip()
+        if join_year:
+            try:
+                fm["join_year"] = int(join_year)
+            except ValueError:
+                fm["join_year"] = join_year
+
+    if "Profile Photo" in updating:
+        photo_text = fields.get("Profile Photo", "")
+        if photo_text:
+            downloaded = download_image(photo_text, "assets/images/people")
+            if downloaded:
+                fm["photo"] = f"/images/people/{downloaded.name}"
+
+    if "Research Interests" in updating:
+        research_interests = fields.get("Research Interests", "").strip()
+        if research_interests:
+            fm["research_interests"] = research_interests + "\n"
+
+    if "Projects" in updating:
+        checked = parse_checkboxes(fields.get("Projects", ""))
+        project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
+        if project_slugs:
+            fm["projects"] = project_slugs
+
+    body = existing_body
+    if "Biography" in updating:
+        biography = fields.get("Biography", "").strip()
+        if biography:
+            body = biography
+
+    write_bio(dest, fm, body)
+    print(f"Updated {dest}")
 
 
 def main():
@@ -240,8 +301,10 @@ def main():
 
     if "news" in labels:
         process_news(fields)
-    elif "bio" in labels:
-        process_bio(fields)
+    elif "new-bio" in labels:
+        process_new_bio(fields)
+    elif "bio-update" in labels:
+        process_bio_update(fields)
     else:
         print(f"Unknown submission type. Labels: {labels}")
 

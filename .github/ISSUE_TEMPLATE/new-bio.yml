@@ -1,0 +1,80 @@
+name: Add New Group Member
+description: Add a new person to the group website
+title: "New member: "
+labels: ["content-submission", "new-bio"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Full Name
+      placeholder: e.g. Helen Engelhardt
+    validations:
+      required: true
+
+  - type: dropdown
+    id: role
+    attributes:
+      label: Role
+      options:
+        - pi
+        - postdoc
+        - phd
+        - masters
+        - visitor
+    validations:
+      required: true
+
+  - type: input
+    id: tagline
+    attributes:
+      label: Tagline
+      description: Short description shown under your name
+      placeholder: e.g. DPhil Student, Wolfson College
+    validations:
+      required: true
+
+  - type: input
+    id: email
+    attributes:
+      label: Email
+      placeholder: e.g. name@materials.ox.ac.uk
+
+  - type: input
+    id: join_year
+    attributes:
+      label: Year Joined
+      placeholder: e.g. 2024
+
+  - type: textarea
+    id: photo
+    attributes:
+      label: Profile Photo
+      description: Drag and drop a photo here. GitHub will upload it and insert a URL.
+      placeholder: Drag and drop an image file here
+
+  - type: textarea
+    id: research_interests
+    attributes:
+      label: Research Interests
+      description: A paragraph describing your research interests
+      placeholder: Describe your research interests...
+
+  - type: checkboxes
+    id: projects
+    attributes:
+      label: Projects
+      description: Select all projects you are involved in
+      options:
+        - label: Electrocatalysis
+        - label: Electrolyte Solvation
+        - label: Electronic Structure
+        - label: Operando X-ray Techniques
+        - label: Rechargeable Batteries
+        - label: Thermocatalysis
+
+  - type: textarea
+    id: biography
+    attributes:
+      label: Biography
+      description: Full biography in Markdown (appears as the main body of your page)
+      placeholder: Write your biography here...
