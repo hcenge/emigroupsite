@@ -12,7 +12,6 @@
     (dict "key" "phd" "title" "DPhil Students")
     (dict "key" "masters" "title" "Master's Students")
     (dict "key" "visitor" "title" "Visitors")
-    (dict "title" "Alumni" "folder" "people/alumni")
   }}
 
   {{ range $groups }}
@@ -39,7 +38,7 @@
           <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">
             <h2 class="bbc-card__title bbc-card--pi__title">{{ $pi.Title }}</h2>
             {{ with $pi.Params.tagline }}<p class="bbc-people__pi-role">{{ . }}</p>{{ end }}
-            {{ with $pi.Params.email }}<p class="bbc-people__pi-contact">{{ . }}</p>{{ end }}
+            {{ with $pi.Params.email }}<p class="bbc-people__pi-contact">{{ partial "email.html" . }}</p>{{ end }}
             <div class="bbc-people__pi-bio bbc-stack bbc-stack--gap-sm">{{ $pi.Content }}</div>
             <span class="bbc-people__pi-link">View full profile →</span>
           </div>
@@ -84,47 +83,82 @@
   {{ end }}
   {{ end }}
 
-  {{ range $groups }}
-    {{ if isset . "folder" }}
-      {{ $scratch := newScratch }}
-      {{ with site.GetPage "section" .folder }}
-        {{ $scratch.Set "people" .RegularPages }}
-      {{ else }}
-        {{ $scratch.Set "people" (slice) }}
-      {{ end }}
-      {{ $people := $scratch.Get "people" }}
-      {{ if gt (len $people) 0 }}
-      <section class="bbc-people__group bbc-people__group--collapsible">
-        <button class="bbc-people__group-head bbc-people__group-head--toggle" onclick="toggleAlumni(this)">
-          <div class="bbc-people__group-head-content">
-            <h2>{{ .title }}</h2>
-            <span class="bbc-people__count">{{ len $people }}</span>
-          </div>
-          <span class="bbc-people__toggle-icon">▼</span>
-        </button>
-        <div class="bbc-people__grid bbc-people__grid--alumni bbc-people__grid--collapsed">
-          {{ range sort $people "Params.end_year" "desc" }}
-            {{ partial "person-card.html" . }}
-          {{ end }}
+  {{/* Alumni — role-grouped, collapsible, text-based */}}
+  {{ $alumniSection := site.GetPage "section" "people/alumni" }}
+  {{ with $alumniSection }}
+    {{ $allAlumni := .RegularPages }}
+    {{ if gt (len $allAlumni) 0 }}
+    <section class="bbc-people__group bbc-people__alumni">
+      <div class="bbc-people__group-head">
+        <h2>Alumni</h2>
+        <span class="bbc-people__count">{{ len $allAlumni }}</span>
+      </div>
+
+      {{ $alumniGroups := slice
+        (dict "key" "postdoc" "title" "Postdoctoral Researchers")
+        (dict "key" "phd" "title" "DPhil Students")
+        (dict "key" "masters" "title" "Master's and Part II Students")
+        (dict "key" "visitor" "title" "Visitors")
+      }}
+
+      {{ range $alumniGroups }}
+        {{ $members := where $allAlumni "Params.role" .key }}
+        {{ if gt (len $members) 0 }}
+        <div class="bbc-alumni-subsection">
+          <button class="bbc-alumni-subsection__head" data-key="alumni-{{ .key }}" onclick="toggleAlumni(this)">
+            <div class="bbc-people__group-head-content">
+              <h3>{{ .title }}</h3>
+              <span class="bbc-people__count">{{ len $members }}</span>
+            </div>
+            <span class="bbc-people__toggle-icon">▶</span>
+          </button>
+          <ul class="bbc-alumni-subsection__list bbc-people__grid--collapsed">
+            {{ range sort $members "Params.end_year" "desc" }}
+            <li class="bbc-alumni-entry">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.tagline }} — {{ . }}{{ end }}{{ with .Params.now }}<span class="bbc-alumni-entry__now">Now: {{ . }}</span>{{ end }}
+            </li>
+            {{ end }}
+          </ul>
         </div>
-      </section>
+        {{ end }}
       {{ end }}
+    </section>
     {{ end }}
   {{ end }}
 </section>
 
 <script>
 function toggleAlumni(button) {
-  const grid = button.nextElementSibling;
-  const icon = button.querySelector('.bbc-people__toggle-icon');
+  var list = button.nextElementSibling;
+  var icon = button.querySelector('.bbc-people__toggle-icon');
+  var key = button.getAttribute('data-key');
+  var collapsed = list.classList.contains('bbc-people__grid--collapsed');
 
-  if (grid.classList.contains('bbc-people__grid--collapsed')) {
-    grid.classList.remove('bbc-people__grid--collapsed');
-    icon.style.transform = 'rotate(180deg)';
+  if (collapsed) {
+    list.classList.remove('bbc-people__grid--collapsed');
+    icon.style.transform = 'rotate(90deg)';
   } else {
-    grid.classList.add('bbc-people__grid--collapsed');
+    list.classList.add('bbc-people__grid--collapsed');
     icon.style.transform = 'rotate(0deg)';
   }
+
+  if (key) {
+    try { localStorage.setItem(key, collapsed ? 'open' : 'closed'); } catch(e) {}
+  }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.bbc-alumni-subsection__head[data-key]').forEach(function(button) {
+    var key = button.getAttribute('data-key');
+    try {
+      if (localStorage.getItem(key) === 'open') {
+        var list = button.nextElementSibling;
+        var icon = button.querySelector('.bbc-people__toggle-icon');
+        list.classList.remove('bbc-people__grid--collapsed');
+        icon.style.transform = 'rotate(90deg)';
+      }
+    } catch(e) {}
+  });
+});
 </script>
 {{ end }}

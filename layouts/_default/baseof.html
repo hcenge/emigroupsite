@@ -216,6 +216,16 @@
           recalc();
         }
 
+        // Decode obfuscated emails
+        document.querySelectorAll('[data-e]').forEach(function(el) {
+          var email = atob(el.getAttribute('data-e'));
+          var a = document.createElement('a');
+          a.href = 'mailto:' + email;
+          a.textContent = email;
+          el.textContent = '';
+          el.appendChild(a);
+        });
+
         initCarousel({
           rootSelector: ".bbc-group-photos-carousel",
           trackSelector: ".bbc-group-photos-carousel__track",

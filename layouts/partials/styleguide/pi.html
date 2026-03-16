@@ -10,7 +10,7 @@
     <div class="bbc-card__body bbc-stack bbc-stack--gap-md bbc-card--pi__body">
       <h3 class="bbc-card__title bbc-card--pi__title">{{ $pi.name }}</h3>
       {{ with $pi.role }}<p class="bbc-people__pi-role">{{ . }}</p>{{ end }}
-      {{ with $pi.email }}<p class="bbc-people__pi-contact">{{ . }}</p>{{ end }}
+      {{ with $pi.email }}<p class="bbc-people__pi-contact">{{ partial "email.html" . }}</p>{{ end }}
       {{ with $pi.bio }}
       <div class="bbc-people__pi-bio bbc-stack bbc-stack--gap-sm">
         {{ range . }}<p>{{ . | safeHTML }}</p>{{ end }}
