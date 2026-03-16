@@ -11,13 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
+      - uses: actions/setup-python@v5
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install scholarly requests
 
       - name: Fetch publications
-        run: nix develop --command python scripts/fetch_publications.py
+        run: python scripts/fetch_publications.py
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
