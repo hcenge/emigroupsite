@@ -1,19 +1,18 @@
 ---
 title: "Jack Swallow"
 role: "visitor"
-tagline: "Post-doctoral Research Fellow, 2D electrocatalyst development"
-photo: "/images/people/jack-swallow.png"
-email: "jack.swallow@materials.ox.ac.uk"
+tagline: "Dame Kathleen Ollerenshaw Fellow, University of Manchester"
+photo: "/images/people/jack-swallow.jpeg"
+email: "jack.swallow@manchester.ac.uk"
 join_year: 2020
 research_interests: |
-    The focus of Jack's work is the understanding the growth and electronic structure of 2-dimensional transition metal dichalcogenides for application in electrocatalysis. Additionally, he is involved in developing novel characterization capabilities in x-ray spectroscopy.
+    As a visitor in the EMI group, Jack is implementing ab initio methods using density functional theory to build atomistic understanding into electrocatalytic and intercalation materials. This includes core-hole spectroscopy modelling, complementing the operando spectroscopies performed in the EMI group.
 projects:
   - rechargeable-batteries
-  - thermocatalysis
-  - electrolyte-solvation
+  - electrocatalysis
   - operando-xray-techniques
   - electronic-structure
 showdate: false
 ---
 
-Jack did his undergraduate and PhD at the University of Liverpool, studying in the department of physics. Here he focussed on understanding factors affecting the performance of wide band gap metal-oxide semiconductors and transparent conducting oxides. He is now employed as a PDRA in the group of Robert Weatherup, at the Materials department at Oxford.
+Dr Jack Swallow is a Dame Kathleen Ollerenshaw Fellow in the Department of Chemistry, University of Manchester. His group is based in the Photon Science Institute, working at the intersection between experimental and computational chemistry to understand and develop better materials for Li-ion batteries and catalysts for fuel generation.
