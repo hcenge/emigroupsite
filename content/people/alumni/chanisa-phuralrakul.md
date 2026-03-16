@@ -1,6 +1,6 @@
 ---
 title: "Chanisa Phuralrakul"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sept. 2021 - Jun. 2022), The Queen's College"
 photo: "/images/people/chanisa-phutrakul.jpg"
 email: ""

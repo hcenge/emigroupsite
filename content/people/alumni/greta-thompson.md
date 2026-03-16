@@ -1,6 +1,6 @@
 ---
 title: "Greta Thompson"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sept. 2020 - Jun. 2021), The Queen's College"
 photo: "/images/people/greta-thompson.jpg"
 email: ""

@@ -1,6 +1,6 @@
 ---
 title: "Renkai Zhang"
-role: "alumni"
+role: "masters"
 tagline: "Part II Student (Sep. 2024 - Jun. 2025), St Catherine's College"
 photo: "/images/people/renkai-zhang.png"
 email: ""

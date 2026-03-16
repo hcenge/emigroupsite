@@ -1,6 +1,6 @@
 ---
 title: "Thomas Bricknell"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sept. 2021 - Jun. 2022), St Edmund Hall"
 photo: "/images/people/thomas-bricknell.png"
 email: ""

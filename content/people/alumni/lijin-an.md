@@ -1,6 +1,6 @@
 ---
 title: "Lijin An"
-role: "alumni"
+role: "phd"
 tagline: "DPhil Student (Oct. 2021 - Sep. 2025), The Queen's College"
 photo: "/images/people/lijin-an.png"
 email: ""

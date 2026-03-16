@@ -1,14 +1,14 @@
 ---
 title: "Joshua Gibson"
-role: "alumni"
-tagline: "Post-doctoral Research Fellow (Nov. 2019 - May 2023), Lecturer in Physical Chemistry/Chemical Physics at University of Edinburgh"
+role: "postdoc"
+tagline: "Post-doctoral Research Fellow (Nov. 2019 - May 2023)"
 photo: "/images/people/joshua-gibson.png"
 email: ""
 research_interests: |
     Josh has an interest in utilising surface science and ultra-high vacuum (UHV) techniques to understand fundamental problems, in turn finding solutions to real world issues. He is currently working on developing UHV compatible electrochemical cells to allow the surfaces involved in battery science (such as the electrode – electrolyte interfaces) to be studied whilst the cell is being charged or discharged. Through developing new methods to study these buried layers an understanding of these surface processes can lead to better battery design, leading to more efficient electrical energy storage. His prior experience in X-ray based spectroscopies and in developing UHV compatible experiments is being utilised in this current project. Previously Josh has been involved in projects that have encompassed research topics including X-ray photoelectron spectroscopy, ionic liquids, electrochemical decomposition, small molecule capture, X-ray standing waves and molecular self-assembly.
 join_year: 2019-11
 end_year: 2023-05
-now: ""
+now: "Lecturer in Physical Chemistry/Chemical Physics at University of Edinburgh"
 showdate: false
 ---
 

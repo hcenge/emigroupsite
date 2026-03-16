@@ -1,6 +1,6 @@
 ---
 title: "Jessica Wen"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sep. 2020 - Jun. 2021), The Queen's College"
 photo: "/images/people/jess-wen.png"
 email: ""

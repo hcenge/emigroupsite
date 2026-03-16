@@ -1,6 +1,6 @@
 ---
 title: "Owen Lawton"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sept. 2022 - Jun. 2023), St Catherine's College"
 photo: "/images/people/owen-lawton.jpeg"
 email: ""

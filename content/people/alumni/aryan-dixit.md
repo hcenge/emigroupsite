@@ -1,8 +1,8 @@
 ---
 title: "Aryan Dixit"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sep. 2023 - Jun. 2024), Mansfield College"
-photo: "/images/people/aryan-dixit.png"
+photo: "/images/people/aryan-dixit.jpg"
 email: ""
 research_interests: |
     Aryan is studying cracking mechanisms in NMC cathodes of Li-ion batteries and is passionate about developing energy production and storage research.

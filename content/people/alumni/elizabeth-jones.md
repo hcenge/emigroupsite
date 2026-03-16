@@ -1,6 +1,6 @@
 ---
 title: "Elizabeth Jones"
-role: "alumni"
+role: "phd"
 tagline: "Clarendon DPhil Student (Oct. 2020 - Apr. 2024), Trinity College"
 photo: "/images/people/elizabeth-jones.jpg"
 email: ""

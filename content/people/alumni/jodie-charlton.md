@@ -1,6 +1,6 @@
 ---
 title: "Jodie Charlton"
-role: "alumni"
+role: "phd"
 tagline: "Diamond-iSIS Student (Oct. 2018 - Dec. 2023), The Queen's College"
 photo: "/images/people/jodie-charlton.png"
 email: ""
@@ -13,7 +13,7 @@ research_interests: |
 
 join_year: 2018-10
 end_year: 2023-12
-now: ""
+now: "Instrumentation Technician at Diamond Light Source"
 showdate: false
 ---
 

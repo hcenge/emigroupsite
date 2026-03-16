@@ -1,6 +1,6 @@
 ---
 title: "Roxanna Roskilly"
-role: "alumni"
+role: "masters"
 tagline: "Master's Student (Sept. 2022 - Jun. 2023), Mansfield College"
 photo: "/images/people/rosanna-roskilly.jpg"
 email: ""
