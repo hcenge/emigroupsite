@@ -458,7 +458,7 @@ a:focus {
 }
 
 .bbc-card--profile .bbc-card__media {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
 }
 
 .bbc-card--profile .bbc-card__body {
@@ -470,21 +470,74 @@ a:focus {
   font-size: 1.15rem;
 }
 
-/* Alumni grid - full width layout */
-.bbc-people__grid--alumni {
-  display: flex !important;
-  flex-direction: column;
-  gap: 0;
-  grid-template-columns: none !important;
+/* Collapsed state */
+.bbc-people__grid--collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Alumni subsections */
+.bbc-alumni-subsection {
+  margin-bottom: 1rem;
+}
+
+.bbc-alumni-subsection__head {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.bbc-alumni-subsection__head:hover h3 {
+  color: var(--bbc-main);
+}
+
+.bbc-alumni-subsection__head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.bbc-alumni-subsection__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   max-height: 5000px;
   overflow: hidden;
   transition: max-height 0.4s ease, opacity 0.3s ease;
 }
 
-/* Collapsed state */
-.bbc-people__grid--collapsed {
-  max-height: 0 !important;
-  opacity: 0;
+.bbc-alumni-entry {
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-alumni-entry a {
+  font-weight: 600;
+  color: var(--bbc-main);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bbc-alumni-entry a:hover {
+  color: var(--bbc-main);
+}
+
+.bbc-alumni-entry__now {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--bbc-dark-grey);
+  font-style: italic;
+  margin-top: 0.1rem;
 }
 
 /* Collapsible toggle button */
@@ -516,37 +569,6 @@ a:focus {
   color: var(--bbc-main);
   transition: transform 0.3s ease;
   flex-shrink: 0;
-}
-
-/* Alumni card - minimal style without photos */
-.bbc-card--alumni {
-  border: none;
-  border-top: 1px solid var(--bbc-grey);
-  border-bottom: 1px solid var(--bbc-grey);
-  border-radius: 0;
-  margin-bottom: -1px;
-  transition: border-color var(--bbc-transition), background-color var(--bbc-transition);
-}
-
-.bbc-card--alumni:hover {
-  border-top-color: var(--bbc-main);
-  border-bottom-color: var(--bbc-main);
-  background-color: var(--bbc-light-grey);
-  transform: none;
-  box-shadow: none;
-  z-index: 1;
-}
-
-.bbc-card--alumni .bbc-card__body {
-  padding: 1.25rem 0;
-}
-
-.bbc-card--alumni .bbc-card__title {
-  font-size: 1.05rem;
-}
-
-.bbc-card--alumni .bbc-card__subtitle {
-  font-size: 0.9rem;
 }
 
 .bbc-card--carousel .bbc-card__body {
@@ -842,7 +864,7 @@ a:focus {
 
 .bbc-people__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
 }
 
