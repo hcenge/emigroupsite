@@ -2,6 +2,7 @@
 title: "Test Member"
 role: "visitor"
 tagline: "visiting tester"
+photo: "/images/people/test-member.jpg"
 join_year: 2026
 research_interests: |
     interested in honey
