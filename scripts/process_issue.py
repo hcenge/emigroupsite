@@ -49,6 +49,14 @@ def slugify(text):
     return text.strip("-")
 
 
+CONTENT_TYPE_EXT = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/gif": ".gif",
+    "image/webp": ".webp",
+}
+
+
 def download_image(text, dest_dir, filename):
     """Extract first image URL from text, download it with the given filename.
 
@@ -56,7 +64,8 @@ def download_image(text, dest_dir, filename):
         ![image](https://github.com/user-attachments/assets/...)
     or a bare URL.
 
-    The filename should not include an extension — it will be derived from the URL.
+    The filename should not include an extension — it will be derived from the
+    response Content-Type header (with the URL as a fallback).
     """
     # Match markdown image syntax or bare GitHub user-attachments URL
     patterns = [
@@ -74,15 +83,28 @@ def download_image(text, dest_dir, filename):
     if not url:
         return None
 
-    # Determine file extension from URL or default to .jpg
-    ext_match = re.search(r"\.(jpe?g|png|gif|webp)", url, re.IGNORECASE)
-    ext = ext_match.group(0).lower() if ext_match else ".jpg"
-
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    dest_path = dest_dir / f"{filename}{ext}"
-    urllib.request.urlretrieve(url, dest_path)
+    # Build request with auth token when available (needed for private repos)
+    req = urllib.request.Request(url)
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if token:
+        req.add_header("Authorization", f"token {token}")
+
+    # Download and determine extension from Content-Type header
+    with urllib.request.urlopen(req) as resp:
+        content_type = resp.headers.get("Content-Type", "")
+        ext = CONTENT_TYPE_EXT.get(content_type.split(";")[0].strip())
+        if not ext:
+            # Fall back to URL-based detection
+            ext_match = re.search(r"\.(jpe?g|png|gif|webp)", url, re.IGNORECASE)
+            ext = ext_match.group(0).lower() if ext_match else ".jpg"
+
+        dest_path = dest_dir / f"{filename}{ext}"
+        with open(dest_path, "wb") as f:
+            f.write(resp.read())
+
     return dest_path
 
 
