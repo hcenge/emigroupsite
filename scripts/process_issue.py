@@ -69,9 +69,9 @@ def download_image(text, dest_dir, filename):
     """
     # Match markdown image syntax or bare GitHub user-attachments URL
     patterns = [
-        r"!\[.*?\]\((https://.*?)\)",
-        r"(https://github\.com/user-attachments/assets/[^\s)]+)",
-        r"(https://github\.com/.*?/assets/[^\s)]+)",
+        r"!\[.*?\]\((https://[^\s)\"]+)\)",
+        r"(https://github\.com/user-attachments/assets/[^\s)\"<>]+)",
+        r"(https://github\.com/.*?/assets/[^\s)\"<>]+)",
     ]
     url = None
     for pattern in patterns:
@@ -86,13 +86,10 @@ def download_image(text, dest_dir, filename):
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Download with auth token when available (needed for private repos)
-    headers = {}
-    token = os.environ.get("GITHUB_TOKEN", "")
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
-
-    resp = requests.get(url, headers=headers, timeout=30)
+    # GitHub user-attachment URLs are publicly accessible and redirect to
+    # pre-signed S3 URLs. Sending an Authorization header can conflict with
+    # the S3 signed URL auth, so we download without credentials.
+    resp = requests.get(url, timeout=30)
     resp.raise_for_status()
 
     # Determine extension from Content-Type header
