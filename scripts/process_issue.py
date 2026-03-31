@@ -81,7 +81,9 @@ def download_image(text, dest_dir, filename):
             break
 
     if not url:
+        print(f"  No image URL found in text: {text!r}")
         return None
+    print(f"  Downloading image from: {url}")
 
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
