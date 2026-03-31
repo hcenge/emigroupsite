@@ -40,6 +40,8 @@ jobs:
             Automated PR from issue #${{ github.event.issue.number }}.
 
             Please review the generated content before merging.
+
+            Closes #${{ github.event.issue.number }}
           add-paths: |
             content/**
             assets/images/**
