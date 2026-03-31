@@ -4,9 +4,9 @@
 import os
 import re
 import unicodedata
-import urllib.request
 from pathlib import Path
 
+import requests
 import yaml
 
 
@@ -86,24 +86,25 @@ def download_image(text, dest_dir, filename):
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build request with auth token when available (needed for private repos)
-    req = urllib.request.Request(url)
+    # Download with auth token when available (needed for private repos)
+    headers = {}
     token = os.environ.get("GITHUB_TOKEN", "")
     if token:
-        req.add_header("Authorization", f"token {token}")
+        headers["Authorization"] = f"Bearer {token}"
 
-    # Download and determine extension from Content-Type header
-    with urllib.request.urlopen(req) as resp:
-        content_type = resp.headers.get("Content-Type", "")
-        ext = CONTENT_TYPE_EXT.get(content_type.split(";")[0].strip())
-        if not ext:
-            # Fall back to URL-based detection
-            ext_match = re.search(r"\.(jpe?g|png|gif|webp)", url, re.IGNORECASE)
-            ext = ext_match.group(0).lower() if ext_match else ".jpg"
+    resp = requests.get(url, headers=headers, timeout=30)
+    resp.raise_for_status()
 
-        dest_path = dest_dir / f"{filename}{ext}"
-        with open(dest_path, "wb") as f:
-            f.write(resp.read())
+    # Determine extension from Content-Type header
+    content_type = resp.headers.get("Content-Type", "")
+    ext = CONTENT_TYPE_EXT.get(content_type.split(";")[0].strip())
+    if not ext:
+        # Fall back to URL-based detection
+        ext_match = re.search(r"\.(jpe?g|png|gif|webp)", url, re.IGNORECASE)
+        ext = ext_match.group(0).lower() if ext_match else ".jpg"
+
+    dest_path = dest_dir / f"{filename}{ext}"
+    dest_path.write_bytes(resp.content)
 
     return dest_path
 
