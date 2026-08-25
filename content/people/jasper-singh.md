@@ -1,15 +1,18 @@
 ---
 title: "Jasper Singh"
-role: "phd"
-tagline: "DPhil Student, St Edmund Hall"
+role: "postdoc"
+tagline: "Post-doctoral Research Fellow, Rechargeable Battery Interfaces"
 photo: "/images/people/jasper-singh.png"
-email: "jasper.singh@materials.ox.ac.uk"
-join_year: 2022
+email: "Jasper.singh@seh.ox.ac.uk"
+join_year: 2026
 research_interests: |
-    Jasper’s primary research interests lie in applying a combination of spectroscopic techniques to further understand the unique properties exhibited at the electrode-electrolyte interface in Li-Ion batteries. He hopes to explore the electrochemistry and fundamental reaction mechanisms occurring at the surface of Li electrodes. Jasper intends to use both in-situ and ex-situ techniques to assemble a detailed understanding of the different phenomena that influence the interface of these batteries. Jasper’s previous research tackled the discipline of energy from a different standpoint, working alongside the Bugg Group at the University of Warwick, he investigated different strains of bacteria that could convert brown coal into green fuel. 
+    Jasper's research combines spectroscopy and molecular simulation to understand the electrode–electrolyte interface in lithium-ion batteries. His work focuses on aqueous electrolytes, which are non-flammable and cheaper to manufacture but limited by a narrow electrochemical stability window. He uses in-situ and ex-situ techniques (NMR, Raman, IR, XAS and XPS) alongside classical molecular dynamics, electrical double layer simulations and continuum theory to link electrolyte formulation to the chemistry that develops at the electrode surface. He is particularly interested in the role of diluents: their effect on solvation structure and the contribution of their sacrificial breakdown to interphase formation.
 projects:
+  - electrolyte-solvation
   - rechargeable-batteries
 showdate: false
 ---
 
-Jasper joined the Weatherup group in October 2021 to investigate the electrode-electrolyte interface in Li-Ion batteries. He is currently a first year DPhil student in the Department of Materials at St Edmund Hall, University of Oxford. Jasper received First Class honours in his bachelors degree in Chemistry from the University of Warwick prior to this (2018-2021). He grew up in London and his sporting interests include rugby, football, and swimming. Jasper was part of the University of Warwick Rugby Football Club senior executive team (2019-2021) and is now a member of the St Edmund Hall Rugby Football Club. 
+Jasper joined the Weatherup group in October 2021 to investigate the electrode–electrolyte interface in lithium-ion batteries and completed his DPhil in the Department of Materials at St Edmund Hall, University of Oxford. He is now a postdoctoral researcher in the group. He spent six months as a Drayton Research Fellow in the Bazant Group at MIT's Department of Chemical Engineering, working on molecular simulation of concentrated aqueous electrolytes, supported by awards from the Drayton Fellowship, SCI, IOM3 and St Edmund Hall. Jasper received First Class honours in his bachelor’s degree in chemistry from the University of Warwick (2018–2021), where his research investigated bacterial strains capable of converting brown coal into green fuel.
+
+His sporting interests include rugby, football, and swimming. Jasper represented the Oxford University Blues in 2024/25 and served on the St Edmund Hall RFC committee throughout his DPhil.
