@@ -14,7 +14,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   minifyOutput = true
   [minify.tdewolff]
     [minify.tdewolff.css]
-      keepCSS2 = true
+      version = 2
       precision = 2
     [minify.tdewolff.html]
       keepQuotes = false
