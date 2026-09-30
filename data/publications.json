@@ -13,11 +13,12 @@
   {
     "authors": "Daniel M Markiewitz, Michael McEldrew, Conor ME Phelan, Qianlu Zheng, Jasper Singh, Robert S Weatherup, Rosa M Espinosa-Marzal, Martin Z Bazant, Zachary AH Goodwin",
     "conference": "",
-    "doi": null,
-    "journal": "ChemRXiv",
+    "date": "2026-01-01",
+    "doi": "10.1039/d6fd00035e",
+    "journal": "Faraday Discussions",
     "title": "Thermodynamic effects of solid electrolyte interphase formation from solvation and ionic association in water-in-salt electrolytes",
     "type": "journal-article",
-    "url": "https://arxiv.org/abs/2602.23875",
+    "url": "https://doi.org/10.1039/d6fd00035e",
     "year": "2026"
   },
   {
@@ -34,11 +35,12 @@
   {
     "authors": "Heng Wang, Rui Wang, Christopher O'Keefe, Erik Björklund, Daniela Proprentner, Joe Stallard, Hwee Jien Tan, Wesley Dose, Louis Piper, Robert Weatherup, Angkur Shaikeea, Clare Grey, Michael De Volder",
     "conference": "",
-    "doi": null,
-    "journal": "",
+    "date": "2026-06-29",
+    "doi": "10.1038/s41560-026-02087-6",
+    "journal": "Nature Energy",
     "title": "Research data supporting\" The Interplay between Stack Pressure, Mechanical Expansion and Degradation Pathways in Lithium-ion Batteries\"",
     "type": "journal-article",
-    "url": "https://www.repository.cam.ac.uk/items/8af8e3b0-46df-4c4d-87bc-b11960595480",
+    "url": "https://doi.org/10.1038/s41560-026-02087-6",
     "year": "2026"
   },
   {
