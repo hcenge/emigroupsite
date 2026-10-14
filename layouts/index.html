@@ -54,7 +54,7 @@
           <h2 class="bbc-home-news__title">Latest News</h2>
           <a href="/news/" class="bbc-home-news__view-all">All news →</a>
         </div>
-        {{ partial "news-columns.html" (dict "pages" . "limit" 4) }}
+        {{ partial "news-sections.html" (dict "pages" . "limit" 4) }}
       </section>
       {{ end }}
 

@@ -2287,15 +2287,13 @@ a:focus {
   text-decoration: none;
 }
 
-/* News split into two columns: general news and beamtimes */
-.bbc-newscols {
+/* News and beamtimes as stacked sections */
+.bbc-newsrows {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.5rem;
-  align-items: start;
 }
 
-.bbc-newscols__title {
+.bbc-newsrows__title {
   margin: 0 0 1rem;
   font-size: 1.4rem;
   font-weight: 700;
@@ -2303,22 +2301,27 @@ a:focus {
   border-bottom: 3px solid var(--bbc-main);
 }
 
-.bbc-newscols__empty {
+.bbc-newsrows__empty {
   color: var(--bbc-dark-grey);
 }
 
-.bbc-newscols .bbc-newslist__heading {
+.bbc-newsrows .bbc-newslist__heading {
   font-size: 1rem;
 }
 
-.bbc-home-news .bbc-newscols__title {
+.bbc-home-news .bbc-newsrows__title {
   font-size: 1.15rem;
 }
 
-@media (max-width: 900px) {
-  .bbc-newscols {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+/* Many beamtimes per year: flow them into two columns on wide screens */
+@media (min-width: 900px) {
+  .bbc-newslist__items--dated {
+    columns: 2;
+    column-gap: 2.5rem;
+  }
+
+  .bbc-newslist__items--dated .bbc-newslist__item {
+    break-inside: avoid;
   }
 }
 
@@ -2339,4 +2342,20 @@ a:focus {
 
 .bbc-newslist__people a {
   color: inherit;
+}
+
+.bbc-newslist__pillars {
+  display: inline-flex;
+  gap: 0.15rem;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.bbc-newslist__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: -0.25rem 0 1rem;
+  font-size: 0.9rem;
+  color: var(--bbc-dark-grey);
 }

@@ -1,14 +1,14 @@
 {{- /*
-  Two columns: general news (markdown posts) and beamtimes (data/beamtimes.yaml).
+  News (markdown posts) then beamtimes (data/beamtimes.yaml), one section above the other.
   Posts tagged "beamtime" are full write-ups reached from their beamtime entry, so they're left out of News.
   Context: dict "pages" <news pages> "limit" <int, 0 = all; flat list with inline dates when set>.
 */ -}}
 {{- $limit := .limit | default 0 -}}
 {{- $other := complement (where .pages "Params.tags" "intersect" (slice "beamtime")) .pages -}}
 {{- $beamtimes := partial "beamtimes-sorted.html" . -}}
-<div class="bbc-newscols">
-  <section class="bbc-newscols__col">
-    <h2 class="bbc-newscols__title">News</h2>
+<div class="bbc-newsrows">
+  <section class="bbc-newsrows__section">
+    <h2 class="bbc-newsrows__title">News</h2>
     {{- with $other }}
       {{- if $limit }}
       <ul class="bbc-newslist__items">
@@ -18,11 +18,16 @@
       {{ partial "news-list.html" (dict "pages" .) }}
       {{- end }}
     {{- else }}
-    <p class="bbc-newscols__empty">Nothing yet.</p>
+    <p class="bbc-newsrows__empty">Nothing yet.</p>
     {{- end }}
   </section>
-  <section class="bbc-newscols__col">
-    <h2 class="bbc-newscols__title">Beamtimes</h2>
+  <section class="bbc-newsrows__section">
+    <h2 class="bbc-newsrows__title">Beamtimes</h2>
+    {{- if not $limit }}
+    <p class="bbc-newslist__legend">
+      {{- range site.Home.Params.pillars }}<span><span aria-hidden="true">{{ .icon }}</span> {{ .title }}</span>{{ end -}}
+    </p>
+    {{- end }}
     {{- if $limit }}
     <ul class="bbc-newslist__items">
       {{- range first $limit $beamtimes }}{{ partial "beamtime-item.html" (dict "bt" . "showDate" true) }}{{ end }}

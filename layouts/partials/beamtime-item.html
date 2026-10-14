@@ -1,4 +1,4 @@
-{{- /* One beamtime line from data/beamtimes.yaml. Context: dict "bt" <entry> "showDate" <bool: show year for year-only dates too>. */ -}}
+{{- /* One beamtime line from data/beamtimes.yaml, with optional people and pillar emoji. Context: dict "bt" <entry> "showDate" <bool: show year for year-only dates too>. */ -}}
 {{- $bt := .bt -}}
 {{- $date := string $bt.date -}}
 {{- $label := cond (ne $bt.beamline nil) (printf "%s, %s" $bt.beamline $bt.facility) $bt.facility -}}
@@ -23,4 +23,5 @@
     </span>
     {{- end }}
   </span>
+  {{- partial "pillar-tags.html" $bt.pillars }}
 </li>

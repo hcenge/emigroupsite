@@ -1,11 +1,13 @@
-# Beamtimes the group has been on. One entry per beamtime; the news page's Beamtimes
-# column and homepage are built from this list.
+# Beamtimes the group has been on. One entry per beamtime; the Beamtimes section of the
+# news page and homepage is built from this list.
 #
 #   date:      "YYYY-MM-DD", "YYYY-MM" or "YYYY" (quoted). Use as much as is known.
 #   facility:  Diamond Light Source, ESRF, ALBA, SOLEIL, ...
 #   beamline:  e.g. B07-B, I09, ID26. Leave out if unknown.
 #   people:    optional. Page names from content/people (e.g. helen-engelhardt) become links;
 #              anything else (e.g. an external collaborator's name) is shown as plain text.
+#   pillars:   optional, any of: energy-storage, catalysis, operando (the homepage pillars,
+#              shown as their emoji). List all that apply, e.g. [catalysis, operando].
 #   note:      optional short description, e.g. "Operando solid electrolyte".
 #   post:      optional. Filename (without .md) of a news post with the full write-up.
 #   proposal:  optional, for our records only (not shown on the site).
@@ -21,6 +23,7 @@
   facility: Diamond Light Source
   beamline: B07-B
   people: [soumyajit-maitra, helen-engelhardt, catherine-kohler, will-skinner]
+  pillars: [catalysis, operando]
   post: 2026-10-14-operando-catalysis-beamtime-at-b07-dls
 - date: "2026-09"
   facility: Diamond Light Source

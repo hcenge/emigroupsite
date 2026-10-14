@@ -10,6 +10,7 @@
     {{ $p.Title }}
     {{- end -}}
   </span>
+  {{- partial "pillar-tags.html" $p.Params.pillars }}
   {{- $terms := slice }}{{ range $p.GetTerms "tags" }}{{ if ne .Data.Term $hideTag }}{{ $terms = $terms | append . }}{{ end }}{{ end }}
   {{- with $terms }}
   <span class="bbc-newslist__tags">
