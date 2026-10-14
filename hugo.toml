@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://emi.materials.ox.ac.uk/'
 languageCode = 'en-us'
 title = 'Weatherup Group'
 staticDir = ['static']

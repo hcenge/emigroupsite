@@ -1,0 +1,8 @@
+{{- /* Returns a 1200px-wide JPEG resource for link previews and the RSS feed, or nil. */ -}}
+{{- $img := false -}}
+{{- with .Params.image -}}
+  {{- with resources.Get (strings.TrimPrefix "/" .) -}}
+    {{- $img = .Resize "1200x jpg q85" -}}
+  {{- end -}}
+{{- end -}}
+{{- return $img -}}
