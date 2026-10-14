@@ -2313,17 +2313,13 @@ a:focus {
   margin: 0 0 2.5rem;
 }
 
-/* Many beamtimes per year: flow them into two columns on wide screens */
+/* Many beamtimes per year: two per row on wide screens, filled left to right so they read in date order */
 @media (min-width: 900px) {
   .bbc-newslist__items--dated,
   .bbc-newslist__items--flow {
-    columns: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 2.5rem;
-  }
-
-  .bbc-newslist__items--dated .bbc-newslist__item,
-  .bbc-newslist__items--flow .bbc-newslist__item {
-    break-inside: avoid;
   }
 }
 
