@@ -35,6 +35,16 @@
       </div>
       {{ end }}
 
+      {{ with site.Data.beamtimes }}
+      <section class="bbc-home-news bbc-home-news--beamtimes">
+        <div class="bbc-home-news__header">
+          <h2 class="bbc-home-news__title">Recent Beamtimes</h2>
+          <a href="/news/#beamtimes" class="bbc-home-news__view-all">All beamtimes →</a>
+        </div>
+        {{ partial "beamtimes-section.html" (dict "limit" 6) }}
+      </section>
+      {{ end }}
+
       {{ .Content }}
 
       {{ with .Params.cta }}
@@ -48,42 +58,15 @@
       {{ end }}
 
       {{ $newsPages := (where .Site.RegularPages "Section" "news").ByDate.Reverse }}
-      {{ if gt (len $newsPages) 0 }}
-      <div class="bbc-news-carousel">
-        <div class="bbc-news-carousel__header">
-          <h2 class="bbc-news-carousel__title">Latest News</h2>
-          <a href="/news/" class="bbc-news-carousel__view-all">View All News →</a>
+      {{/* Beamtime write-ups show under "Recent Beamtimes", so only other news counts here */}}
+      {{ with complement (where $newsPages "Params.tags" "intersect" (slice "beamtime")) $newsPages }}
+      <section class="bbc-home-news">
+        <div class="bbc-home-news__header">
+          <h2 class="bbc-home-news__title">Latest News</h2>
+          <a href="/news/" class="bbc-home-news__view-all">All news →</a>
         </div>
-        <div class="bbc-news-carousel__container">
-          <div class="bbc-news-carousel__track">
-            {{ range first 5 $newsPages }}
-            <div class="bbc-news-carousel__item">
-              <article class="bbc-card bbc-card--carousel">
-                <a class="bbc-card__link" href="{{ .RelPermalink }}">
-                  {{ with .Params.image }}
-                  <figure class="bbc-card__media">
-                    {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
-                  </figure>
-                  {{ end }}
-                  <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
-                    <h3 class="bbc-card__title">{{ .Title }}</h3>
-                    {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-                    <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
-                      <time class="bbc-card__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-                    </span>
-                  </div>
-                </a>
-              </article>
-            </div>
-            {{ end }}
-          </div>
-        </div>
-        <div class="bbc-news-carousel__controls">
-          <button class="bbc-carousel-button bbc-news-carousel__button bbc-news-carousel__button--prev" aria-label="Previous">‹</button>
-          <button class="bbc-carousel-button bbc-news-carousel__button bbc-news-carousel__button--next" aria-label="Next">›</button>
-        </div>
-        <div class="bbc-news-carousel__dots"></div>
-      </div>
+        {{ partial "news-section.html" (dict "pages" . "limit" 4) }}
+      </section>
       {{ end }}
 
 

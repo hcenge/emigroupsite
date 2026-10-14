@@ -1,13 +1,20 @@
-name: Submit News Post
-description: Submit a news article for the group website
+name: Submit News
+description: Add a news item to the group website
 title: "News: "
 labels: ["content-submission", "news"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        News shows as a one-line list, newest first, like "Sherry defends her DPhil thesis, congratulations!".
+        Only fill in **Full Post** if you want the line to link to a longer article.
+
   - type: input
     id: title
     attributes:
-      label: Article Title
-      placeholder: e.g. Beamtime at Diamond Light Source
+      label: News Item
+      description: The one line shown in the news list
+      placeholder: e.g. Soumyajit, Helen, Catie and Will had an operando catalysis beamtime at B07, Diamond Light Source
     validations:
       required: true
 
@@ -15,32 +22,34 @@ body:
     id: date
     attributes:
       label: Date
-      description: Publication date in YYYY-MM-DD format
+      description: Date in YYYY-MM-DD format. Items are grouped by month.
       placeholder: "2025-06-15"
     validations:
       required: true
 
   - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Optional, comma separated. Use "beamtime" to put the item in the Beamtimes column.
+      placeholder: beamtime
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Full Post
+      description: Optional. Write in Markdown. If filled in, the news line links to a page with this text.
+      placeholder: Leave empty for a one-line item
+
+  - type: input
     id: summary
     attributes:
       label: Summary
-      description: A short one-line summary shown in article listings
-      placeholder: Brief summary of the article
-    validations:
-      required: true
+      description: Optional. One sentence used when the full post is shared on social media.
 
   - type: textarea
     id: image
     attributes:
       label: Featured Image
-      description: Drag and drop an image here (optional). GitHub will upload it and insert a URL.
+      description: Optional, only shown on the full post. Drag and drop an image here.
       placeholder: Drag and drop an image file here
-
-  - type: textarea
-    id: content
-    attributes:
-      label: Article Content
-      description: Write the article body in Markdown
-      placeholder: Write your article here...
-    validations:
-      required: true

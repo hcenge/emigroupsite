@@ -1,4 +1,11 @@
 {{ define "title" }}{{ .Title }}{{ end }}
+{{ define "head" }}
+{{- /* One-liners have no page of their own: send visitors to their line in the news list. */ -}}
+{{- if not (partial "news-has-body.html" .) }}
+<meta http-equiv="refresh" content="0; url={{ .Parent.RelPermalink }}#{{ .File.ContentBaseName }}">
+<meta name="robots" content="noindex">
+{{- end }}
+{{ end }}
 {{ define "main" }}
 <article class="bbc-article">
   <header class="bbc-article__header">
@@ -6,6 +13,11 @@
       <h1>{{ .Title }}</h1>
       <p class="bbc-article__meta">
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+        {{- with .GetTerms "tags" }}
+        <span class="bbc-newslist__tags">
+          {{- range . }}<a class="bbc-newslist__tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end -}}
+        </span>
+        {{- end }}
       </p>
     </div>
   </header>
@@ -19,5 +31,7 @@
   <div class="bbc-article__body">
     {{ .Content }}
   </div>
+
+  <p class="bbc-article__back"><a href="{{ .Parent.RelPermalink }}">← All news</a></p>
 </article>
 {{ end }}

@@ -1,0 +1,15 @@
+{{- /* All beamtimes from data/beamtimes.yaml, newest first, under year headings. */ -}}
+{{- $all := partial "beamtimes-sorted.html" . -}}
+{{- $years := slice -}}
+{{- range $all }}{{ $years = $years | append (substr (string .date) 0 4) }}{{ end -}}
+<div class="bbc-newslist">
+  {{- range $years | uniq }}
+  {{- $year := . }}
+  <section class="bbc-newslist__month">
+    <h3 class="bbc-newslist__heading">{{ $year }}</h3>
+    <ul class="bbc-newslist__items bbc-newslist__items--dated">
+      {{- range $all }}{{ if hasPrefix (string .date) $year }}{{ partial "beamtime-item.html" (dict "bt" .) }}{{ end }}{{ end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>

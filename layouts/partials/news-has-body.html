@@ -1,0 +1,2 @@
+{{- /* True when a news item has text beyond its one-line title, i.e. a full post worth linking to. */ -}}
+{{- return (ne (strings.TrimSpace .RawContent) "") -}}
