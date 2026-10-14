@@ -2309,18 +2309,20 @@ a:focus {
   font-size: 1rem;
 }
 
-.bbc-home-news .bbc-newsrows__title {
-  font-size: 1.15rem;
+.bbc-home-news--beamtimes {
+  margin: 0 0 2.5rem;
 }
 
 /* Many beamtimes per year: flow them into two columns on wide screens */
 @media (min-width: 900px) {
-  .bbc-newslist__items--dated {
+  .bbc-newslist__items--dated,
+  .bbc-newslist__items--flow {
     columns: 2;
     column-gap: 2.5rem;
   }
 
-  .bbc-newslist__items--dated .bbc-newslist__item {
+  .bbc-newslist__items--dated .bbc-newslist__item,
+  .bbc-newslist__items--flow .bbc-newslist__item {
     break-inside: avoid;
   }
 }

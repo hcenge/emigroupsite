@@ -8,6 +8,15 @@
   </div>
   {{ end }}
 
-  {{ partial "news-sections.html" (dict "pages" .Pages) }}
+  <div class="bbc-newsrows">
+    <section class="bbc-newsrows__section">
+      <h2 class="bbc-newsrows__title">News</h2>
+      {{ partial "news-section.html" (dict "pages" .Pages) }}
+    </section>
+    <section class="bbc-newsrows__section" id="beamtimes">
+      <h2 class="bbc-newsrows__title">Beamtimes</h2>
+      {{ partial "beamtimes-section.html" (dict) }}
+    </section>
+  </div>
 </section>
 {{ end }}
