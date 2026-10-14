@@ -38,7 +38,7 @@
       {{ with site.Data.beamtimes }}
       <section class="bbc-home-news bbc-home-news--beamtimes">
         <div class="bbc-home-news__header">
-          <h2 class="bbc-home-news__title">Fresh from the Beamline</h2>
+          <h2 class="bbc-home-news__title">Recent Beamtimes</h2>
           <a href="/news/#beamtimes" class="bbc-home-news__view-all">All beamtimes →</a>
         </div>
         {{ partial "beamtimes-section.html" (dict "limit" 6) }}
@@ -58,7 +58,7 @@
       {{ end }}
 
       {{ $newsPages := (where .Site.RegularPages "Section" "news").ByDate.Reverse }}
-      {{/* Beamtime write-ups show under "Fresh from the Beamline", so only other news counts here */}}
+      {{/* Beamtime write-ups show under "Recent Beamtimes", so only other news counts here */}}
       {{ with complement (where $newsPages "Params.tags" "intersect" (slice "beamtime")) $newsPages }}
       <section class="bbc-home-news">
         <div class="bbc-home-news__header">
