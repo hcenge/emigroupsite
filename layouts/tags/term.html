@@ -3,6 +3,6 @@
 <section class="bbc-research">
   <h1 class="bbc-heading">News: {{ .LinkTitle }}</h1>
   {{ partial "news-tag-filter.html" (dict "current" .) }}
-  {{ partial "news-list.html" (where .Pages "Section" "news") }}
+  {{ partial "news-list.html" (dict "pages" (where .Pages "Section" "news")) }}
 </section>
 {{ end }}

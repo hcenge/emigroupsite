@@ -1,10 +1,11 @@
-{{- /* Bertozzi-style news list grouped under month headings. Context: a collection of news pages. */ -}}
+{{- /* News list grouped under month headings. Context: dict "pages" <news pages> "hideTag" <tag to omit from chips, optional>. */ -}}
+{{- $hideTag := .hideTag -}}
 <div class="bbc-newslist">
-  {{- range .GroupByDate "January 2006" }}
+  {{- range .pages.ByDate.Reverse.GroupByDate "January 2006" }}
   <section class="bbc-newslist__month">
-    <h2 class="bbc-newslist__heading">{{ .Key }}</h2>
+    <h3 class="bbc-newslist__heading">{{ .Key }}</h3>
     <ul class="bbc-newslist__items">
-      {{- range .Pages }}{{ partial "news-item.html" (dict "page" .) }}{{ end }}
+      {{- range .Pages }}{{ partial "news-item.html" (dict "page" . "hideTag" $hideTag) }}{{ end }}
     </ul>
   </section>
   {{- end }}

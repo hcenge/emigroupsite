@@ -31,7 +31,7 @@ body:
     id: tags
     attributes:
       label: Tags
-      description: Optional, comma separated, e.g. beamtime
+      description: Optional, comma separated. Use "beamtime" to put the item in the Beamtimes column.
       placeholder: beamtime
 
   - type: textarea

@@ -8,7 +8,6 @@
   </div>
   {{ end }}
 
-  {{ partial "news-tag-filter.html" (dict "current" nil) }}
-  {{ partial "news-list.html" .Pages }}
+  {{ partial "news-columns.html" (dict "pages" .Pages) }}
 </section>
 {{ end }}

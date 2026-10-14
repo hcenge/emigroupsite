@@ -1,0 +1,27 @@
+{{- /*
+  Two news columns: general news and beamtimes (pages tagged "beamtime").
+  Context: dict "pages" <news pages> "limit" <int, 0 = all; flat list with inline dates when set>.
+*/ -}}
+{{- $tag := "beamtime" -}}
+{{- $limit := .limit | default 0 -}}
+{{- $beamtimes := where .pages "Params.tags" "intersect" (slice $tag) -}}
+{{- $other := complement $beamtimes .pages -}}
+<div class="bbc-newscols">
+  {{- range slice (dict "title" "News" "pages" $other) (dict "title" "Beamtimes" "pages" $beamtimes "hideTag" $tag) }}
+  {{- $col := . }}
+  <section class="bbc-newscols__col">
+    <h2 class="bbc-newscols__title">{{ .title }}</h2>
+    {{- with .pages }}
+      {{- if $limit }}
+      <ul class="bbc-newslist__items">
+        {{- range first $limit . }}{{ partial "news-item.html" (dict "page" . "showDate" true "hideTag" $col.hideTag) }}{{ end }}
+      </ul>
+      {{- else }}
+      {{ partial "news-list.html" (dict "pages" . "hideTag" $col.hideTag) }}
+      {{- end }}
+    {{- else }}
+    <p class="bbc-newscols__empty">Nothing yet.</p>
+    {{- end }}
+  </section>
+  {{- end }}
+</div>

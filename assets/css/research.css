@@ -2286,3 +2286,38 @@ a:focus {
   font-weight: 600;
   text-decoration: none;
 }
+
+/* News split into two columns: general news and beamtimes */
+.bbc-newscols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.bbc-newscols__title {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--bbc-main);
+}
+
+.bbc-newscols__empty {
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-newscols .bbc-newslist__heading {
+  font-size: 1rem;
+}
+
+.bbc-home-news .bbc-newscols__title {
+  font-size: 1.15rem;
+}
+
+@media (max-width: 900px) {
+  .bbc-newscols {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
