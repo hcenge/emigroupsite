@@ -1,8 +1,9 @@
 ---
-title: "Operando Catalysis Beamtime at B07, DLS"
+title: "Operando catalysis beamtime at B07, Diamond Light Source"
 date: "2026-10-14T00:00:00Z"
 summary: "Recent operando Catalysis Beamtime at B07, DLS"
 image: "/images/news/operando-catalysis-beamtime-at-b07-dls.jpg"
+tags: ["beamtime"]
 ---
 
 At the end of September, [Soumyajit Maitra]({{< relref "people/soumyajit-maitra" >}}) had his operando catalysis beamtime at B07-B, Diamond Light Source. [Helen Engelhardt]({{< relref "people/helen-engelhardt" >}}), [Catie Kohler]({{< relref "people/catherine-kohler" >}}) and [Dr Will Skinner]({{< relref "people/will-skinner" >}}) joined the B07 beamtime and there were guest appearances from [Dr Connor Sherwin]({{< relref "people/connor-sherwin" >}}) and [Dr Jack Swallow]({{< relref "people/jack-swallow" >}}) who were also at Diamond for an operando catalysis beamtime at I20.

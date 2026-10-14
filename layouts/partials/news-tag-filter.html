@@ -1,0 +1,10 @@
+{{- /* Tag chips linking to each tag's news list. Context: dict "current" <term page or nil>. */ -}}
+{{- $current := .current -}}
+{{- with site.Taxonomies.tags }}
+<nav class="bbc-newslist__filter" aria-label="Filter news by tag">
+  <a class="bbc-newslist__tag{{ if not $current }} bbc-newslist__tag--active{{ end }}" href="{{ (site.GetPage "/news").RelPermalink }}">All</a>
+  {{- range .ByCount }}
+  <a class="bbc-newslist__tag{{ if and $current (eq $current.RelPermalink .Page.RelPermalink) }} bbc-newslist__tag--active{{ end }}" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>
+  {{- end }}
+</nav>
+{{- end }}

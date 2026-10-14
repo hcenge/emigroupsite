@@ -1,0 +1,11 @@
+{{- /* Bertozzi-style news list grouped under month headings. Context: a collection of news pages. */ -}}
+<div class="bbc-newslist">
+  {{- range .GroupByDate "January 2006" }}
+  <section class="bbc-newslist__month">
+    <h2 class="bbc-newslist__heading">{{ .Key }}</h2>
+    <ul class="bbc-newslist__items">
+      {{- range .Pages }}{{ partial "news-item.html" (dict "page" .) }}{{ end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
