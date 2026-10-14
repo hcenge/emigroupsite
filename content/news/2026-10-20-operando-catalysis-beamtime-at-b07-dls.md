@@ -5,7 +5,7 @@ summary: "Recent operando Catalysis Beamtime at B07, DLS"
 image: "/images/news/operando-catalysis-beamtime-at-b07-dls.jpg"
 ---
 
-At the end of September, Soumyajit Maitra had his operando catalysis beamtime at B07-B, Diamond Light Source. Helen Engelhardt, Catie Kohler and Dr Will Skinner joined the B07 beamtime and there were guest appearances from Dr Connor Sherwin and Dr Jack Swallow who were also at Diamond for an operando catalysis beamtime at I20.
+At the end of September, [Soumyajit Maitra]({{< relref "people/soumyajit-maitra" >}}) had his operando catalysis beamtime at B07-B, Diamond Light Source. [Helen Engelhardt]({{< relref "people/helen-engelhardt" >}}), [Catie Kohler]({{< relref "people/catherine-kohler" >}}) and [Dr Will Skinner]({{< relref "people/will-skinner" >}}) joined the B07 beamtime and there were guest appearances from [Dr Connor Sherwin]({{< relref "people/connor-sherwin" >}}) and [Dr Jack Swallow]({{< relref "people/jack-swallow" >}}) who were also at Diamond for an operando catalysis beamtime at I20.
 
 They used soft X-ray absorption spectroscopy to follow the Co L-edge and O K-edge of a series of cobalt-based catalysts under applied potential in alkaline electrolyte. The aim was to understand how their oxidation state and electronic structure change under operation. Additionally, how anionic redox can facilitate oxygen evolution. The experiment was carried out using Santosh Kumar Biradar's (B07 beamline scientist) operando cell, which was specially designed for operando measurements at the beamline. 
 
