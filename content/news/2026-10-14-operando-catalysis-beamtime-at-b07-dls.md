@@ -1,6 +1,6 @@
 ---
 title: "Operando Catalysis Beamtime at B07, DLS"
-date: "2026-10-20T00:00:00Z"
+date: "2026-10-14T00:00:00Z"
 summary: "Recent operando Catalysis Beamtime at B07, DLS"
 image: "/images/news/operando-catalysis-beamtime-at-b07-dls.jpg"
 ---
