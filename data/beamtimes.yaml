@@ -1,0 +1,244 @@
+# Beamtimes the group has been on. One entry per beamtime; the news page's Beamtimes
+# column and homepage are built from this list.
+#
+#   date:      "YYYY-MM-DD", "YYYY-MM" or "YYYY" (quoted). Use as much as is known.
+#   facility:  Diamond Light Source, ESRF, ALBA, SOLEIL, ...
+#   beamline:  e.g. B07-B, I09, ID26. Leave out if unknown.
+#   people:    optional. Page names from content/people (e.g. helen-engelhardt) become links;
+#              anything else (e.g. an external collaborator's name) is shown as plain text.
+#   note:      optional short description, e.g. "Operando solid electrolyte".
+#   post:      optional. Filename (without .md) of a news post with the full write-up.
+#   proposal:  optional, for our records only (not shown on the site).
+#
+# Entries marked "check:" were transcribed from OneDrive folder names and need confirming.
+
+# ---------------------------------------------------------------- 2026
+- date: "2026-09-13"
+  facility: Diamond Light Source
+  beamline: I09
+  note: Standing wave, rapid access
+- date: "2026-09"
+  facility: Diamond Light Source
+  beamline: B07-B
+  people: [soumyajit-maitra, helen-engelhardt, catherine-kohler, will-skinner]
+  post: 2026-10-14-operando-catalysis-beamtime-at-b07-dls
+- date: "2026-09"
+  facility: Diamond Light Source
+  beamline: I20
+  people: [connor-sherwin, jack-swallow]
+- date: "2026-07"
+  facility: ESRF
+  beamline: BM23
+- date: "2026-06-18"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2026-04"
+  facility: ALBA
+  people: [sevinc-yagmur-bekler]
+- date: "2026-03"
+  facility: ALBA
+- date: "2026-02-21"
+  facility: Diamond Light Source
+  beamline: B07-B
+  proposal: SI44366-1
+- date: "2026-01-30"
+  facility: Diamond Light Source
+  beamline: B18
+
+# ---------------------------------------------------------------- 2025
+- date: "2025-12-05"
+  facility: Diamond Light Source
+  beamline: B07-B
+  proposal: SI41026
+- date: "2025-12"
+  facility: ALBA
+- date: "2025-11"
+  facility: ESRF
+  beamline: BM23
+- date: "2025-11"
+  facility: ESRF
+  beamline: ID26
+- date: "2025-10-11"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2025-10"
+  facility: ALBA
+- date: "2025-10"
+  facility: SOLEIL
+  beamline: PLEIADES
+- date: "2025-08-06"
+  facility: Diamond Light Source
+  beamline: B07-C
+  proposal: SI39504
+- date: "2025-04"
+  facility: ESRF
+  beamline: ID26
+- date: "2025-04"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2025-02"
+  facility: ESRF
+  beamline: ID20
+
+# ---------------------------------------------------------------- 2024
+- date: "2024-11-22"
+  facility: Diamond Light Source
+  beamline: B07-B
+  proposal: SI38592-1
+- date: "2024-11-22"
+  facility: Diamond Light Source
+  beamline: B18
+- date: "2024-11"
+  facility: ESRF
+  beamline: ID26
+- date: "2024-10-07"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2024-10"
+  facility: ALBA
+- date: "2024-07"
+  facility: ESRF
+  beamline: ID20
+- date: "2024-07"
+  facility: ALBA
+- date: "2024-07"
+  facility: Diamond Light Source
+  beamline: B07-C
+  proposal: SI36206-1
+  # check: folders "B07-JulAug-24-SI36206-1" and "B07-SI36206-1" assumed to be one beamtime
+- date: "2024-06-21"
+  facility: Diamond Light Source
+  beamline: B18
+- date: "2024-04-12"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2024-03-05"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2024-02-14"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2024-01-24"
+  facility: Diamond Light Source
+  beamline: B07-C
+- date: "2024-01"
+  facility: Diamond Light Source
+  beamline: B18
+
+# ---------------------------------------------------------------- 2023
+- date: "2023-11-15"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2023-10"
+  facility: ALBA
+- date: "2023-09"
+  facility: Diamond Light Source
+  beamline: B07-C
+  # check: folder "B07_Sep2023_Baran"; add people if known
+- date: "2023-07-19"
+  facility: Diamond Light Source
+  beamline: B07-C
+- date: "2023-07-12"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2023-04"
+  facility: ESRF
+  beamline: ID20
+- date: "2023-04"
+  facility: ALBA
+- date: "2023-03"
+  facility: Diamond Light Source
+  beamline: I09
+  proposal: SI31828-1
+- date: "2023-01-20"
+  facility: Diamond Light Source
+  beamline: B07-B
+
+# ---------------------------------------------------------------- 2022
+- date: "2022-09-21"
+  facility: Diamond Light Source
+  beamline: B07-C
+- date: "2022-07-14"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2022-05-25"
+  facility: Diamond Light Source
+  beamline: B07-C
+  proposal: SI30405-1
+- date: "2022-04-06"
+  facility: Diamond Light Source
+  beamline: B07-B
+
+# ---------------------------------------------------------------- 2021
+- date: "2021-12-04"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2021-10"
+  facility: Diamond Light Source
+  beamline: B07-B
+- date: "2021-09"
+  facility: ALBA
+- date: "2021-07-14"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2021-05-17"
+  facility: Diamond Light Source
+  beamline: I09
+  note: Operando solid electrolyte
+- date: "2021-04-14"
+  facility: Diamond Light Source
+  beamline: B07-C
+  # check: folders "2021_04_14_DLS_B07_Beamtime Files" and "2021_04_DLS_B07c" assumed to be one beamtime
+- date: "2021-02-24"
+  facility: Diamond Light Source
+  beamline: I09
+
+# ---------------------------------------------------------------- 2020
+- date: "2020-02"
+  facility: Diamond Light Source
+  beamline: B07-C
+  proposal: SI24318-1
+
+# ---------------------------------------------------------------- 2019
+- date: "2019-10"
+  facility: ALBA
+- date: "2019-10"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2019-09-18"
+  facility: Diamond Light Source
+  beamline: B07-C
+  # check: folders "..._Hofmann (20190918-20190921)" and "2019_09_DLS_B07c_WS2" assumed to be one beamtime
+- date: "2019-07"
+  facility: Diamond Light Source
+  beamline: B07-C
+  note: Carbonate growth on NMC
+- date: "2019-07"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2019-06"
+  facility: Diamond Light Source
+  beamline: I09
+- date: "2019-05"
+  facility: Diamond Light Source
+  beamline: B07-C
+  proposal: SI22090
+- date: "2019-02"
+  facility: Diamond Light Source
+  beamline: B07-C
+
+# ---------------------------------------------------------------- 2015–2018
+# check: were these before the group moved to Oxford? Remove if they shouldn't be listed.
+- date: "2018-04"
+  facility: ALBA
+  # check: folders "Alba 2018", "Alba 2018-II" and "Alba April 2018" may overlap
+- date: "2018"
+  facility: ALBA
+- date: "2017"
+  facility: ALBA
+- date: "2016"
+  facility: ALBA
+- date: "2015"
+  facility: ALBA
+
+# Not added yet (no date in folder name): Diamond B07-B proposals SI36903-1 and SI36918-1.

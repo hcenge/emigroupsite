@@ -2321,3 +2321,22 @@ a:focus {
     gap: 1.5rem;
   }
 }
+
+/* Beamtime lines: short month column inside year groups, people underneath */
+.bbc-newslist__items--dated .bbc-newslist__date {
+  flex-basis: 2.5rem;
+}
+
+.bbc-newslist__note {
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-newslist__people {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--bbc-dark-grey);
+}
+
+.bbc-newslist__people a {
+  color: inherit;
+}

@@ -1,27 +1,34 @@
 {{- /*
-  Two news columns: general news and beamtimes (pages tagged "beamtime").
+  Two columns: general news (markdown posts) and beamtimes (data/beamtimes.yaml).
+  Posts tagged "beamtime" are full write-ups reached from their beamtime entry, so they're left out of News.
   Context: dict "pages" <news pages> "limit" <int, 0 = all; flat list with inline dates when set>.
 */ -}}
-{{- $tag := "beamtime" -}}
 {{- $limit := .limit | default 0 -}}
-{{- $beamtimes := where .pages "Params.tags" "intersect" (slice $tag) -}}
-{{- $other := complement $beamtimes .pages -}}
+{{- $other := complement (where .pages "Params.tags" "intersect" (slice "beamtime")) .pages -}}
+{{- $beamtimes := partial "beamtimes-sorted.html" . -}}
 <div class="bbc-newscols">
-  {{- range slice (dict "title" "News" "pages" $other) (dict "title" "Beamtimes" "pages" $beamtimes "hideTag" $tag) }}
-  {{- $col := . }}
   <section class="bbc-newscols__col">
-    <h2 class="bbc-newscols__title">{{ .title }}</h2>
-    {{- with .pages }}
+    <h2 class="bbc-newscols__title">News</h2>
+    {{- with $other }}
       {{- if $limit }}
       <ul class="bbc-newslist__items">
-        {{- range first $limit . }}{{ partial "news-item.html" (dict "page" . "showDate" true "hideTag" $col.hideTag) }}{{ end }}
+        {{- range first $limit . }}{{ partial "news-item.html" (dict "page" . "showDate" true) }}{{ end }}
       </ul>
       {{- else }}
-      {{ partial "news-list.html" (dict "pages" . "hideTag" $col.hideTag) }}
+      {{ partial "news-list.html" (dict "pages" .) }}
       {{- end }}
     {{- else }}
     <p class="bbc-newscols__empty">Nothing yet.</p>
     {{- end }}
   </section>
-  {{- end }}
+  <section class="bbc-newscols__col">
+    <h2 class="bbc-newscols__title">Beamtimes</h2>
+    {{- if $limit }}
+    <ul class="bbc-newslist__items">
+      {{- range first $limit $beamtimes }}{{ partial "beamtime-item.html" (dict "bt" . "showDate" true) }}{{ end }}
+    </ul>
+    {{- else }}
+    {{ partial "beamtime-list.html" }}
+    {{- end }}
+  </section>
 </div>

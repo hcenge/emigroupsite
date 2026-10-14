@@ -1,0 +1,4 @@
+{{- /* data/beamtimes.yaml newest first. Sorted on a prefixed key: Hugo's sort compares "2018" as a number, which puts year-only dates out of order. */ -}}
+{{- $keyed := slice -}}
+{{- range site.Data.beamtimes | default slice }}{{ $keyed = $keyed | append (merge . (dict "sortkey" (printf "d%s" (string .date)))) }}{{ end -}}
+{{- return sort $keyed "sortkey" "desc" -}}
