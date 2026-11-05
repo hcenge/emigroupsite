@@ -1,0 +1,15 @@
+{{- /*
+  Emoji for the homepage pillars (content/_index.md) an item belongs to; an item can have several.
+  Context: list of pillar keys, i.e. the pillar title in lowercase with dashes, e.g. [catalysis, operando].
+*/ -}}
+{{- with . }}
+<span class="bbc-newslist__pillars">
+  {{- range . }}
+  {{- $key := . }}
+  {{- $pillar := false }}
+  {{- range site.Home.Params.pillars }}{{ if eq (urlize .title) $key }}{{ $pillar = . }}{{ end }}{{ end }}
+  {{- with $pillar }}<span class="bbc-newslist__pillar" title="{{ .title }}" role="img" aria-label="{{ .title }}">{{ .icon }}</span>
+  {{- else }}{{ warnf "unknown pillar %q (expected one of the pillar titles in content/_index.md, lowercase with dashes)" $key }}{{ end }}
+  {{- end -}}
+</span>
+{{- end }}

@@ -15,9 +15,12 @@
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end }}
     {{- range $pages }}
+    {{- /* One-liners have no page of their own, so link to their line in the news list. */ -}}
+    {{- $link := .Permalink -}}
+    {{- if not (partial "news-has-body.html" .) }}{{ $link = printf "%s#%s" .Parent.Permalink .File.ContentBaseName }}{{ end }}
     <item>
       <title>{{ .Title }}</title>
-      <link>{{ .Permalink }}</link>
+      <link>{{ $link }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid>{{ .Permalink }}</guid>
       <description>{{ .Params.summary | default .Summary | plainify | htmlUnescape | strings.TrimSpace }}</description>

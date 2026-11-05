@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Process GitHub issue form submissions into Hugo content files."""
 
+import json
 import os
 import re
 import unicodedata
@@ -149,19 +150,22 @@ def write_front_matter(f, items):
         elif isinstance(value, int):
             f.write(f"{key}: {value}\n")
         else:
-            f.write(f'{key}: "{value}"\n')
+            # JSON strings are valid YAML double-quoted scalars, so quotes in titles are escaped safely
+            f.write(f"{key}: {json.dumps(value, ensure_ascii=False)}\n")
     f.write("---\n")
 
 
 def process_news(fields):
     """Create a news post from parsed issue fields."""
-    title = fields.get("Article Title", "").strip()
+    title = fields.get("News Item", "").strip()
     date = fields.get("Date", "").strip()
     summary = fields.get("Summary", "").strip()
-    content = fields.get("Article Content", "").strip()
+    content = fields.get("Full Post", "").strip()
     image_text = fields.get("Featured Image", "")
+    tags = [t.strip().lower() for t in re.split(r"[,\n]", fields.get("Tags", "")) if t.strip()]
 
-    slug = slugify(title)
+    # News items are full sentences, so keep the filename short
+    slug = slugify(title)[:60].rsplit("-", 1)[0] if len(slugify(title)) > 60 else slugify(title)
     filename = f"{date}-{slug}.md"
 
     # Download image if provided
@@ -171,14 +175,17 @@ def process_news(fields):
         if downloaded:
             image_path = f"/images/news/{downloaded.name}"
 
-    # Build front matter in conventional order: title, date, summary, image, featured
+    # Build front matter in conventional order: title, date, summary, image, tags
     fm_items = [
         ("title", title),
         ("date", f"{date}T00:00:00Z"),
-        ("summary", summary),
     ]
+    if summary:
+        fm_items.append(("summary", summary))
     if image_path:
         fm_items.append(("image", image_path))
+    if tags:
+        fm_items.append(("tags", tags))
 
     dest = Path("content/news") / filename
     dest.parent.mkdir(parents=True, exist_ok=True)

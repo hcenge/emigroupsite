@@ -1,0 +1,18 @@
+{{- /*
+  News section (markdown posts). Posts tagged "beamtime" are full write-ups reached from their
+  beamtime entry, so they're left out here.
+  Context: dict "pages" <news pages> "limit" <int, 0 = all grouped by month; else latest N with dates>.
+*/ -}}
+{{- $limit := .limit | default 0 -}}
+{{- $other := complement (where .pages "Params.tags" "intersect" (slice "beamtime")) .pages -}}
+{{- with $other }}
+  {{- if $limit }}
+  <ul class="bbc-newslist__items">
+    {{- range first $limit . }}{{ partial "news-item.html" (dict "page" . "showDate" true) }}{{ end }}
+  </ul>
+  {{- else }}
+  {{ partial "news-list.html" (dict "pages" .) }}
+  {{- end }}
+{{- else }}
+<p class="bbc-newsrows__empty">Nothing yet.</p>
+{{- end }}

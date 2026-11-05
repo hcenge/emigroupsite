@@ -1,0 +1,12 @@
+{{- /* News list grouped under month headings. Context: dict "pages" <news pages> "hideTag" <tag to omit from chips, optional>. */ -}}
+{{- $hideTag := .hideTag -}}
+<div class="bbc-newslist">
+  {{- range .pages.ByDate.Reverse.GroupByDate "January 2006" }}
+  <section class="bbc-newslist__month">
+    <h3 class="bbc-newslist__heading">{{ .Key }}</h3>
+    <ul class="bbc-newslist__items">
+      {{- range .Pages }}{{ partial "news-item.html" (dict "page" . "hideTag" $hideTag) }}{{ end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>

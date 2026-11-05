@@ -8,69 +8,15 @@
   </div>
   {{ end }}
 
-  {{ $allPages := .Pages.ByDate.Reverse }}
-
-  <div class="bbc-grid bbc-grid--split bbc-grid--featured">
-    {{ with index $allPages 0 }}
-    <article class="bbc-card bbc-card--hero">
-      <a class="bbc-card__link" href="{{ .RelPermalink }}">
-        {{ with .Params.image }}
-        <figure class="bbc-card__media">
-          {{ partial "image.html" (dict "src" . "alt" (printf "%s hero image" $.Title) "preset" "hero") }}
-        </figure>
-        {{ end }}
-        <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
-          <h2 class="bbc-card__title">{{ .Title }}</h2>
-          {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-          <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
-            {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
-          </span>
-        </div>
-      </a>
-    </article>
-    {{ end }}
-
-    <div class="bbc-grid__column bbc-grid__column--aside">
-      {{ range first 2 (after 1 $allPages) }}
-      <article class="bbc-card bbc-card--aside">
-        <a class="bbc-card__link" href="{{ .RelPermalink }}">
-          {{ with .Params.image }}
-          <figure class="bbc-card__media">
-            {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
-          </figure>
-          {{ end }}
-          <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
-            <h3 class="bbc-card__title">{{ .Title }}</h3>
-            {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
-              {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
-            </span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
-
-    <div class="bbc-grid__column bbc-grid__column--stack">
-      {{ range after 3 $allPages }}
-      <article class="bbc-card bbc-card--compact">
-        <a class="bbc-card__link" href="{{ .RelPermalink }}">
-          {{ with .Params.image }}
-          <figure class="bbc-card__media">
-            {{ partial "image.html" (dict "src" . "alt" (printf "%s illustration" $.Title) "preset" "card") }}
-          </figure>
-          {{ end }}
-          <div class="bbc-card__body bbc-stack bbc-stack--gap-sm">
-            <h4 class="bbc-card__title">{{ .Title }}</h4>
-            {{ with .Params.summary }}<p class="bbc-card__summary">{{ . }}</p>{{ end }}
-            <span class="bbc-card__meta bbc-flex-row bbc-flex-row--wrap bbc-flex-row--gap-sm">
-              {{ with .Date }}<time class="bbc-card__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time>{{ end }}
-            </span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
+  <div class="bbc-newsrows">
+    <section class="bbc-newsrows__section">
+      <h2 class="bbc-newsrows__title">News</h2>
+      {{ partial "news-section.html" (dict "pages" .Pages) }}
+    </section>
+    <section class="bbc-newsrows__section" id="beamtimes">
+      <h2 class="bbc-newsrows__title">Beamtimes</h2>
+      {{ partial "beamtimes-section.html" (dict) }}
+    </section>
   </div>
 </section>
 {{ end }}

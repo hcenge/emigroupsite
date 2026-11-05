@@ -1,0 +1,27 @@
+{{- /* One beamtime line from data/beamtimes.yaml, with optional people and pillar emoji. Context: dict "bt" <entry> "showDate" <bool: show year for year-only dates too>. */ -}}
+{{- $bt := .bt -}}
+{{- $date := string $bt.date -}}
+{{- $label := cond (ne $bt.beamline nil) (printf "%s, %s" $bt.beamline $bt.facility) $bt.facility -}}
+{{- $post := false -}}
+{{- with $bt.post }}{{ $post = site.GetPage (printf "/news/%s" .) }}{{ if not $post }}{{ warnf "beamtimes.yaml: post %q not found" . }}{{ end }}{{ end -}}
+<li class="bbc-newslist__item">
+  {{- if gt (len $date) 4 }}
+  <time class="bbc-newslist__date" datetime="{{ $date }}">{{ (time.AsTime (cond (eq (len $date) 7) (printf "%s-01" $date) $date)).Format (cond .showDate "Jan 2006" "Jan") }}</time>
+  {{- else if .showDate }}
+  <time class="bbc-newslist__date" datetime="{{ $date }}">{{ $date }}</time>
+  {{- end }}
+  <span class="bbc-newslist__text">
+    {{- if and $post (partial "news-has-body.html" $post) }}<a href="{{ $post.RelPermalink }}">{{ $label }}</a> <span class="bbc-newslist__more" aria-hidden="true">→</span>{{ else }}{{ $label }}{{ end -}}
+    {{- with $bt.note }}<span class="bbc-newslist__note"> · {{ . }}</span>{{ end -}}
+    {{- with $bt.people }}
+    <span class="bbc-newslist__people">
+      {{- range $i, $name := . -}}
+        {{- if $i }}, {{ end -}}
+        {{- $person := or (site.GetPage (printf "/people/%s" $name)) (site.GetPage (printf "/people/alumni/%s" $name)) -}}
+        {{- with $person }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}{{ $name }}{{ end -}}
+      {{- end -}}
+    </span>
+    {{- end }}
+  </span>
+  {{- partial "pillar-tags.html" $bt.pillars }}
+</li>

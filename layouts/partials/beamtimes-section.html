@@ -1,0 +1,15 @@
+{{- /*
+  Beamtimes from data/beamtimes.yaml.
+  Context: dict "limit" <int, 0 = all grouped by year with a pillar legend; else latest N with dates>.
+*/ -}}
+{{- $limit := .limit | default 0 -}}
+{{- if $limit }}
+<ul class="bbc-newslist__items bbc-newslist__items--flow">
+  {{- range first $limit (partial "beamtimes-sorted.html" .) }}{{ partial "beamtime-item.html" (dict "bt" . "showDate" true) }}{{ end }}
+</ul>
+{{- else }}
+<p class="bbc-newslist__legend">
+  {{- range site.Home.Params.pillars }}<span><span aria-hidden="true">{{ .icon }}</span> {{ .title }}</span>{{ end -}}
+</p>
+{{ partial "beamtime-list.html" }}
+{{- end }}

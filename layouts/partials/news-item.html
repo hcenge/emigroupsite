@@ -1,0 +1,20 @@
+{{- /* One news line. Context: dict "page" <news page> "showDate" <bool, inline month for ungrouped lists> "hideTag" <tag to omit, optional>. */ -}}
+{{- $p := .page -}}
+{{- $hideTag := .hideTag -}}
+<li class="bbc-newslist__item" id="{{ $p.File.ContentBaseName }}">
+  {{- if .showDate }}<time class="bbc-newslist__date" datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2006" }}</time>{{ end }}
+  <span class="bbc-newslist__text">
+    {{- if partial "news-has-body.html" $p -}}
+    <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a> <span class="bbc-newslist__more" aria-hidden="true">→</span>
+    {{- else -}}
+    {{ $p.Title }}
+    {{- end -}}
+  </span>
+  {{- partial "pillar-tags.html" $p.Params.pillars }}
+  {{- $terms := slice }}{{ range $p.GetTerms "tags" }}{{ if ne .Data.Term $hideTag }}{{ $terms = $terms | append . }}{{ end }}{{ end }}
+  {{- with $terms }}
+  <span class="bbc-newslist__tags">
+    {{- range . }}<a class="bbc-newslist__tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end -}}
+  </span>
+  {{- end }}
+</li>
