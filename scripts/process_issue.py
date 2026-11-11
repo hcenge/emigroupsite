@@ -246,7 +246,8 @@ def process_new_bio(fields):
     project_slugs = [PROJECT_SLUG_MAP[label] for label in checked if label in PROJECT_SLUG_MAP]
 
     fm = {"title": name}
-    if role:
+    # Unselected optional dropdowns come through as "None"
+    if role and role != "None":
         fm["role"] = role
     if tagline:
         fm["tagline"] = tagline
@@ -290,7 +291,7 @@ def process_bio_update(fields):
     fm = dict(existing_fm)
 
     role = fields.get("Role", "").strip()
-    if role and role != "No change":
+    if role and role not in ("No change", "None"):
         fm["role"] = role
 
     tagline = fields.get("Tagline", "").strip()

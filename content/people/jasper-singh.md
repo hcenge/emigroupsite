@@ -1,6 +1,6 @@
 ---
 title: "Jasper Singh"
-role: "None"
+role: "postdoc"
 tagline: "Post-doctoral Research Fellow, Rechargeable Battery Interfaces"
 photo: "/images/people/jasper-singh.png"
 email: "jaspersingh.mail@gmail.com"
