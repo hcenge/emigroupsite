@@ -16,7 +16,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install scholarly requests
+        run: pip install scholarly requests 'bibtexparser<2'
 
       - name: Fetch publications
         run: python scripts/fetch_publications.py
