@@ -153,6 +153,7 @@ _SI_PREFIXES = (
     "supporting information",
     "supplementary information",
     "data in support of",
+    "research data supporting",
 )
 
 
