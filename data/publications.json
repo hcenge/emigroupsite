@@ -1,5 +1,16 @@
 [
   {
+    "authors": "Heng Wang, Rui Wang, Christopher O'Keefe, Erik Björklund, Daniela Proprentner, Joe Stallard, Hwee Jien Tan, Wesley Dose, Louis Piper, Robert Weatherup, Angkur Shaikeea, Clare Grey, Michael De Volder",
+    "conference": "",
+    "date": "2026-06-29",
+    "doi": "10.1038/s41560-026-02087-6",
+    "journal": "Nature Energy",
+    "title": "Research data supporting\" The Interplay between Stack Pressure, Mechanical Expansion and Degradation Pathways in Lithium-ion Batteries\"",
+    "type": "journal-article",
+    "url": "https://doi.org/10.1038/s41560-026-02087-6",
+    "year": "2026"
+  },
+  {
     "authors": "Pedr Charlesworth, Robert A House, Peixi Cong, Robert S Weatherup, David EJ Armstrong, Chris Grovenor",
     "conference": "",
     "date": "2026-03-01",
@@ -30,17 +41,6 @@
     "title": "Synthesizing high-entropy alloy nanoparticles: general discussion",
     "type": "journal-article",
     "url": "https://doi.org/10.1039/d5fd90062j",
-    "year": "2026"
-  },
-  {
-    "authors": "Heng Wang, Rui Wang, Christopher O'Keefe, Erik Björklund, Daniela Proprentner, Joe Stallard, Hwee Jien Tan, Wesley Dose, Louis Piper, Robert Weatherup, Angkur Shaikeea, Clare Grey, Michael De Volder",
-    "conference": "",
-    "date": "2026-06-29",
-    "doi": "10.1038/s41560-026-02087-6",
-    "journal": "Nature Energy",
-    "title": "Research data supporting\" The Interplay between Stack Pressure, Mechanical Expansion and Degradation Pathways in Lithium-ion Batteries\"",
-    "type": "journal-article",
-    "url": "https://doi.org/10.1038/s41560-026-02087-6",
     "year": "2026"
   },
   {
