@@ -2,6 +2,7 @@
 title: "Liam Nagle-Cocco"
 role: "postdoc"
 tagline: "Post-doctoral Research Fellow, Rechargeable Battery Interfaces"
+photo: "/images/people/liam-nagle-cocco.png"
 email: "liam.nagle-cocco@materials.ox.ac.uk"
 join_year: 2026
 research_interests: |
