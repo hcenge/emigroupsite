@@ -1,5 +1,7 @@
 ---
 group_photos:
+  - date: "November 2026"
+    image: "/images/group_photos/group_photo_nov2026.png"
   - date: "November 2024"
     image: "/images/group_photos/group_photo_nov2024.png"
   - date: "October 2023"
