@@ -1,10 +1,12 @@
 ---
 title: "Erik Björklund"
 role: "postdoc"
-tagline: "Post-doctoral Research Fellow, Li-ion battery degradation interfaces"
+tagline: "Post-doctoral Research Fellow (Nov. 2019 - Jun. 2026)"
 photo: "/images/people/erik-bjorklund.jpeg"
-email: "erik.bjorklund@materials.ox.ac.uk"
-join_year: 2019
+email: ""
+join_year: 2019-11
+end_year: 2026-06
+now: "Postdoc in Materials Physics at Chalmers University of Technology"
 research_interests: |
   Erik has an interest in finding out how capacity fading in cells are affected by different cycling conditions and different cell chemistries. He mainly focuses on the chemistries that soon will be in use on the market. He has much experience in analysing the surfaces of the electrodes by XPS and XANES.
 
